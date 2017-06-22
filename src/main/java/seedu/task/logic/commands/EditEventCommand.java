@@ -14,7 +14,7 @@ import seedu.task.model.item.EventDuration;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.item.UniqueStockList.DuplicateTaskException;
 
 //@@author A0127570H
 /**

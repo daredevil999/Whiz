@@ -12,7 +12,7 @@ import seedu.task.model.ReadOnlyManager;
 import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueTaskList;
+import seedu.task.model.item.UniqueStockList;
 
 /**
  * An Immutable TaskBook that is serializable to XML format
@@ -46,8 +46,8 @@ public class XmlSerializableTaskBook implements ReadOnlyManager {
 
 
     @Override
-    public UniqueTaskList getUniqueTaskList() {
-        UniqueTaskList lists = new UniqueTaskList();
+    public UniqueStockList getUniqueTaskList() {
+        UniqueStockList lists = new UniqueStockList();
         for (XmlAdaptedTask t : tasks) {
             try {
                 lists.add(t.toModelType());

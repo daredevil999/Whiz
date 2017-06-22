@@ -3,7 +3,7 @@ package seedu.task.logic.commands;
 import seedu.task.model.ReadOnlyManager;
 import seedu.task.model.TaskBook;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueTaskList;
+import seedu.task.model.item.UniqueStockList;
 
 /**
  * @@author A0121608N
@@ -78,7 +78,7 @@ public class ClearCommand extends UndoableCommand {
             model.clearEvents();
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_EVENTS));
         }else if (clearType == Type.task && clearAll){ // clears all completed and uncompleted tasks
-            model.resetData(new TaskBook(new UniqueTaskList(), taskbook.getUniqueEventList()));
+            model.resetData(new TaskBook(new UniqueStockList(), taskbook.getUniqueEventList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS));
         }else if (clearType == Type.event && clearAll){ // clears all completed and uncompleted events
             model.resetData(new TaskBook(taskbook.getUniqueTaskList(), new UniqueEventList()));

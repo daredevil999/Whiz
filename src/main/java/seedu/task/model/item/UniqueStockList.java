@@ -16,7 +16,7 @@ import seedu.task.commons.util.CollectionUtil;
  * @see Stock#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Stock> {
+public class UniqueStockList implements Iterable<Stock> {
 
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
@@ -40,7 +40,7 @@ public class UniqueTaskList implements Iterable<Stock> {
     /**
      * Constructs empty TaskList.
      */
-    public UniqueTaskList() {}
+    public UniqueStockList() {}
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -118,9 +118,9 @@ public class UniqueTaskList implements Iterable<Stock> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTaskList // instanceof handles nulls
+                || (other instanceof UniqueStockList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+                ((UniqueStockList) other).internalList));
     }
 
     @Override

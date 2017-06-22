@@ -9,7 +9,7 @@ import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueTaskList;
+import seedu.task.model.item.UniqueStockList;
 
 /**
  * The API of the Model component.
@@ -22,7 +22,7 @@ public interface Model {
     ReadOnlyManager getTaskBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyStock target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyStock target) throws UniqueStockList.TaskNotFoundException;
 
     /** Deletes the given event. */
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
@@ -34,13 +34,13 @@ public interface Model {
     void clearEvents();
 
     /** Adds the given task */
-    void addTask(Stock task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Stock task) throws UniqueStockList.DuplicateTaskException;
     
     /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
     
     /** Edits the given task */
-    void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueTaskList.DuplicateTaskException;
+    void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateTaskException;
     
     /** Edits the given event */
     void editEvent(Event editEvent, ReadOnlyEvent targetEvent) throws UniqueEventList.DuplicateEventException;

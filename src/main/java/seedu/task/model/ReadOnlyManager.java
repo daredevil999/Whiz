@@ -6,14 +6,14 @@ import java.util.List;
 import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueTaskList;
+import seedu.task.model.item.UniqueStockList;
 
 /**
  * Unmodifiable view of a stock manager
  */
 public interface ReadOnlyManager {
 
-    UniqueTaskList getUniqueTaskList();
+    UniqueStockList getUniqueTaskList();
     UniqueEventList getUniqueEventList();
     /**
      * Returns an unmodifiable view of tasks list

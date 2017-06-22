@@ -22,8 +22,8 @@ import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueEventList.DuplicateEventException;
 import seedu.task.model.item.UniqueEventList.EventNotFoundException;
-import seedu.task.model.item.UniqueTaskList;
-import seedu.task.model.item.UniqueTaskList.TaskNotFoundException;
+import seedu.task.model.item.UniqueStockList;
+import seedu.task.model.item.UniqueStockList.TaskNotFoundException;
 
 
 /**
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0127570H
 
     @Override
-    public synchronized void addTask(Stock task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Stock task) throws UniqueStockList.DuplicateTaskException {
         taskBook.addTask(task);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateTaskBookChanged();
@@ -157,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
    
     @Override
-    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateTaskException {
         taskBook.editTask(editTask, targetTask);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateTaskBookChanged();   

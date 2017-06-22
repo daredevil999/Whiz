@@ -12,7 +12,7 @@ import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueTaskList;
+import seedu.task.model.item.UniqueStockList;
 
 /**
  * Wraps all data at the task-book level
@@ -20,11 +20,11 @@ import seedu.task.model.item.UniqueTaskList;
  */
 public class TaskBook implements ReadOnlyManager {
 
-    private final UniqueTaskList tasks;
+    private final UniqueStockList tasks;
     private final UniqueEventList events;
 
     {
-        tasks = new UniqueTaskList();
+        tasks = new UniqueStockList();
         events = new UniqueEventList();
     }
 
@@ -40,7 +40,7 @@ public class TaskBook implements ReadOnlyManager {
     /**
      * Tasks and Events are copied into this taskbook
      */
-    public TaskBook(UniqueTaskList tasks, UniqueEventList events) {
+    public TaskBook(UniqueStockList tasks, UniqueEventList events) {
         resetData(tasks.getInternalList(), events.getInternalList());
     }
 
@@ -92,7 +92,7 @@ public class TaskBook implements ReadOnlyManager {
     /**
      * Removes an event in the task book.
      *
-     * @throws UniqueTaskList.EventNotFoundException if specified event does not exist.
+     * @throws UniqueStockList.EventNotFoundException if specified event does not exist.
      */
     public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
         if (events.remove(key)) {
@@ -118,9 +118,9 @@ public class TaskBook implements ReadOnlyManager {
     /**
      * Adds a task to the task book.
      *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     * @throws UniqueStockList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(Stock p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Stock p) throws UniqueStockList.DuplicateTaskException {
         tasks.add(p);
     }
 
@@ -128,13 +128,13 @@ public class TaskBook implements ReadOnlyManager {
     /**
      * Removes a task in the task book.
      *
-     * @throws UniqueTaskList.TaskNotFoundException if specified task does not exist.
+     * @throws UniqueStockList.TaskNotFoundException if specified task does not exist.
      */
-    public boolean removeTask(ReadOnlyStock key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyStock key) throws UniqueStockList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+            throw new UniqueStockList.TaskNotFoundException();
         }
     }
 
@@ -149,9 +149,9 @@ public class TaskBook implements ReadOnlyManager {
     /**
      * Edits a task in the task book.
      *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     * @throws UniqueStockList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueTaskList.DuplicateTaskException {
+    public void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateTaskException {
         tasks.edit(editTask, targetTask);
     }
     //@@author 
@@ -170,7 +170,7 @@ public class TaskBook implements ReadOnlyManager {
     }
 
     @Override
-    public UniqueTaskList getUniqueTaskList() {
+    public UniqueStockList getUniqueTaskList() {
         return this.tasks;
     }
     

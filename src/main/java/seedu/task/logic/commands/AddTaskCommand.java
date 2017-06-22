@@ -12,7 +12,7 @@ import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
-import seedu.task.model.item.UniqueTaskList;
+import seedu.task.model.item.UniqueStockList;
 
 //@@author A0127570H
 /**
@@ -68,7 +68,7 @@ public class AddTaskCommand extends AddCommand {
 			UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
 			EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(toAdd, lastShownList.indexOf(toAdd)));
 			return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-		} catch (UniqueTaskList.DuplicateTaskException e) {
+		} catch (UniqueStockList.DuplicateTaskException e) {
 			return new CommandResult(MESSAGE_DUPLICATE_TASK);
 		}
 	}

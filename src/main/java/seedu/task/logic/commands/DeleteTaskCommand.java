@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
-import seedu.task.model.item.UniqueTaskList.TaskNotFoundException;
+import seedu.task.model.item.UniqueStockList.TaskNotFoundException;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;

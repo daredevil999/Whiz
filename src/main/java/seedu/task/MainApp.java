@@ -25,7 +25,7 @@ import seedu.task.logic.commands.SaveCommand;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyStockManager;
-import seedu.task.model.TaskBook;
+import seedu.task.model.StockManager;
 import seedu.task.model.UserPrefs;
 import seedu.task.storage.Storage;
 import seedu.task.storage.StorageManager;
@@ -85,13 +85,13 @@ public class MainApp extends Application {
             if(!taskBookOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty TaskBook");
             }
-            initialData = taskBookOptional.orElse(new TaskBook());
+            initialData = taskBookOptional.orElse(new StockManager());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
-            initialData = new TaskBook();
+            initialData = new StockManager();
         } catch (IOException  e) {
             logger.warning("Problem while reading from the file. . Will be starting with an empty TaskBook");
-            initialData = new TaskBook();
+            initialData = new StockManager();
         }
 
         return new ModelManager(initialData, userPrefs);

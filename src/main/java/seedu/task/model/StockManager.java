@@ -18,7 +18,7 @@ import seedu.task.model.item.UniqueStockList;
  * Wraps all data at the task-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskBook implements ReadOnlyStockManager {
+public class StockManager implements ReadOnlyStockManager {
 
     private final UniqueStockList tasks;
     private final UniqueEventList events;
@@ -28,24 +28,24 @@ public class TaskBook implements ReadOnlyStockManager {
         events = new UniqueEventList();
     }
 
-    public TaskBook() {}
+    public StockManager() {}
 
     /**
      * Tasks and Events are copied into this taskbook
      */
-    public TaskBook(ReadOnlyStockManager toBeCopied) {
+    public StockManager(ReadOnlyStockManager toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueEventList());
     }
 
     /**
      * Tasks and Events are copied into this taskbook
      */
-    public TaskBook(UniqueStockList tasks, UniqueEventList events) {
+    public StockManager(UniqueStockList tasks, UniqueEventList events) {
         resetData(tasks.getInternalList(), events.getInternalList());
     }
 
     public static ReadOnlyStockManager getEmptyTaskBook() {
-        return new TaskBook();
+        return new StockManager();
     }
 
 //// list overwrite operations
@@ -187,8 +187,8 @@ public class TaskBook implements ReadOnlyStockManager {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskBook // instanceof handles nulls
-                && this.tasks.equals(((TaskBook) other).tasks));
+                || (other instanceof StockManager // instanceof handles nulls
+                && this.tasks.equals(((StockManager) other).tasks));
     }
 
     @Override

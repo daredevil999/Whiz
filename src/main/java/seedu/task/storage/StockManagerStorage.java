@@ -7,7 +7,7 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyStockManager;
 
 /**
- * Represents a storage for {@link seedu.task.model.TaskBook}.
+ * Represents a storage for {@link seedu.task.model.StockManager}.
  */
 public interface StockManagerStorage {
 

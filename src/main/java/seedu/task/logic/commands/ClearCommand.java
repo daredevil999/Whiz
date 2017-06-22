@@ -1,7 +1,7 @@
 package seedu.task.logic.commands;
 
 import seedu.task.model.ReadOnlyStockManager;
-import seedu.task.model.TaskBook;
+import seedu.task.model.StockManager;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueStockList;
 
@@ -65,7 +65,7 @@ public class ClearCommand extends UndoableCommand {
         assert model != null;
         
         ReadOnlyStockManager taskbook = model.getTaskBook();
-        currentTaskBook = new TaskBook(model.getTaskBook());
+        currentTaskBook = new StockManager(model.getTaskBook());
         
         if(clearType == Type.all && !clearAll){ // clears completed tasks and events
             model.clearTasks();
@@ -78,13 +78,13 @@ public class ClearCommand extends UndoableCommand {
             model.clearEvents();
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_EVENTS));
         }else if (clearType == Type.task && clearAll){ // clears all completed and uncompleted tasks
-            model.resetData(new TaskBook(new UniqueStockList(), taskbook.getUniqueEventList()));
+            model.resetData(new StockManager(new UniqueStockList(), taskbook.getUniqueEventList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS));
         }else if (clearType == Type.event && clearAll){ // clears all completed and uncompleted events
-            model.resetData(new TaskBook(taskbook.getUniqueTaskList(), new UniqueEventList()));
+            model.resetData(new StockManager(taskbook.getUniqueTaskList(), new UniqueEventList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_EVENTS));
         }else { // clears all completed and uncompleted tasks and events, only possible path left
-            model.resetData(TaskBook.getEmptyTaskBook());
+            model.resetData(StockManager.getEmptyTaskBook());
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS_EVENTS));
         }
     }

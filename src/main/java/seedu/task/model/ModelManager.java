@@ -38,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	
 
-    private final TaskBook taskBook;
+    private final StockManager taskBook;
     private final FilteredList<Stock> filteredTasks;
     private final FilteredList<Event> filteredEvents;
 
@@ -46,24 +46,24 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given TaskBook
      * TaskBook and its variables should not be null
      */
-    public ModelManager(TaskBook src, UserPrefs userPrefs) {
+    public ModelManager(StockManager src, UserPrefs userPrefs) {
         super();
         assert src != null;
         assert userPrefs != null;
 
         logger.fine("Initializing with task book: " + src + " and user prefs " + userPrefs);
 
-        taskBook = new TaskBook(src);
+        taskBook = new StockManager(src);
         filteredTasks = new FilteredList<>(taskBook.getTasks());
         filteredEvents = new FilteredList<>(taskBook.getEvents());
     }
 
     public ModelManager() {
-        this(new TaskBook(), new UserPrefs());
+        this(new StockManager(), new UserPrefs());
     }
 
     public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
-        taskBook = new TaskBook(initialData);
+        taskBook = new StockManager(initialData);
         filteredTasks = new FilteredList<>(taskBook.getTasks());
         filteredEvents = new FilteredList<>(taskBook.getEvents());
     }

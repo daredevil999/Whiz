@@ -62,14 +62,14 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskBook(), new UserPrefs());
     }
 
-    public ModelManager(ReadOnlyManager initialData, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
         taskBook = new TaskBook(initialData);
         filteredTasks = new FilteredList<>(taskBook.getTasks());
         filteredEvents = new FilteredList<>(taskBook.getEvents());
     }
 
     @Override
-    public void resetData(ReadOnlyManager newData) {
+    public void resetData(ReadOnlyStockManager newData) {
         taskBook.resetData(newData);
         
         updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
@@ -78,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyManager getTaskBook() {
+    public ReadOnlyStockManager getTaskBook() {
         return taskBook;
     }
 

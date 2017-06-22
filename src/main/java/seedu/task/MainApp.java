@@ -24,7 +24,7 @@ import seedu.task.logic.LogicManager;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
-import seedu.task.model.ReadOnlyManager;
+import seedu.task.model.ReadOnlyStockManager;
 import seedu.task.model.TaskBook;
 import seedu.task.model.UserPrefs;
 import seedu.task.storage.Storage;
@@ -78,8 +78,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyManager> taskBookOptional;
-        ReadOnlyManager initialData;
+        Optional<ReadOnlyStockManager> taskBookOptional;
+        ReadOnlyStockManager initialData;
         try {
             taskBookOptional = storage.readTaskBook();
             if(!taskBookOptional.isPresent()){

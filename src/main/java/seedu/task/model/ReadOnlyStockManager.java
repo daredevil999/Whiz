@@ -11,7 +11,7 @@ import seedu.task.model.item.UniqueStockList;
 /**
  * Unmodifiable view of a stock manager
  */
-public interface ReadOnlyManager {
+public interface ReadOnlyStockManager {
 
     UniqueStockList getUniqueTaskList();
     UniqueEventList getUniqueEventList();

@@ -1,6 +1,6 @@
 package seedu.task.logic.commands;
 
-import seedu.task.model.ReadOnlyManager;
+import seedu.task.model.ReadOnlyStockManager;
 import seedu.task.model.TaskBook;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueStockList;
@@ -52,7 +52,7 @@ public class ClearCommand extends UndoableCommand {
     private final Type clearType;
     private final boolean clearAll;
     
-    private ReadOnlyManager currentTaskBook;
+    private ReadOnlyStockManager currentTaskBook;
 
     public ClearCommand(Type clearType, boolean clearAll) {
         this.clearType = clearType;
@@ -64,7 +64,7 @@ public class ClearCommand extends UndoableCommand {
     public CommandResult execute() {
         assert model != null;
         
-        ReadOnlyManager taskbook = model.getTaskBook();
+        ReadOnlyStockManager taskbook = model.getTaskBook();
         currentTaskBook = new TaskBook(model.getTaskBook());
         
         if(clearType == Type.all && !clearAll){ // clears completed tasks and events

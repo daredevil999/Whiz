@@ -16,10 +16,10 @@ import seedu.task.model.item.UniqueStockList;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyManager newData);
+    void resetData(ReadOnlyStockManager newData);
 
     /** Returns the TaskBook */
-    ReadOnlyManager getTaskBook();
+    ReadOnlyStockManager getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyStock target) throws UniqueStockList.TaskNotFoundException;

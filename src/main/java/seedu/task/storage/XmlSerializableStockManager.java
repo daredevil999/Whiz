@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.ReadOnlyManager;
+import seedu.task.model.ReadOnlyStockManager;
 import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.UniqueEventList;
@@ -18,7 +18,7 @@ import seedu.task.model.item.UniqueStockList;
  * An Immutable TaskBook that is serializable to XML format
  */
 @XmlRootElement(name = "taskbook")
-public class XmlSerializableTaskBook implements ReadOnlyManager {
+public class XmlSerializableStockManager implements ReadOnlyStockManager {
 
     @XmlElement
     private List<XmlAdaptedStock> tasks;
@@ -33,12 +33,12 @@ public class XmlSerializableTaskBook implements ReadOnlyManager {
     /**
      * Empty constructor required for marshalling
      */
-    public XmlSerializableTaskBook() {}
+    public XmlSerializableStockManager() {}
 
     /**
      * Conversion
      */
-    public XmlSerializableTaskBook(ReadOnlyManager src) {
+    public XmlSerializableStockManager(ReadOnlyStockManager src) {
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
         events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
     }

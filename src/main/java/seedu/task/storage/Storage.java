@@ -11,7 +11,7 @@ import seedu.task.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends TaskBookStorage, UserPrefsStorage {
+public interface Storage extends StockManagerStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

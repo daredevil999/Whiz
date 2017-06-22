@@ -21,7 +21,7 @@ import seedu.task.model.item.UniqueStockList;
 public class XmlSerializableTaskBook implements ReadOnlyManager {
 
     @XmlElement
-    private List<XmlAdaptedTask> tasks;
+    private List<XmlAdaptedStock> tasks;
     @XmlElement
     private List<XmlAdaptedEvent> events;
 
@@ -39,7 +39,7 @@ public class XmlSerializableTaskBook implements ReadOnlyManager {
      * Conversion
      */
     public XmlSerializableTaskBook(ReadOnlyManager src) {
-        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
         events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
     }
 
@@ -48,7 +48,7 @@ public class XmlSerializableTaskBook implements ReadOnlyManager {
     @Override
     public UniqueStockList getUniqueTaskList() {
         UniqueStockList lists = new UniqueStockList();
-        for (XmlAdaptedTask t : tasks) {
+        for (XmlAdaptedStock t : tasks) {
             try {
                 lists.add(t.toModelType());
             } catch (IllegalValueException e) {

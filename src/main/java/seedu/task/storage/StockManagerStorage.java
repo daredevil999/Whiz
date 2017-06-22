@@ -9,7 +9,7 @@ import seedu.task.model.ReadOnlyManager;
 /**
  * Represents a storage for {@link seedu.task.model.TaskBook}.
  */
-public interface TaskBookStorage {
+public interface StockManagerStorage {
 
 	/**
 	 * Returns the file path of the data file.

@@ -15,7 +15,7 @@ import seedu.task.model.ReadOnlyManager;
  * A class to access TaskBook data stored as an xml file on the hard disk.
  *
  */
-public class XmlTaskBookStorage implements TaskBookStorage {
+public class XmlTaskBookStorage implements StockManagerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlTaskBookStorage.class);
 

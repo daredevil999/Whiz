@@ -12,7 +12,7 @@ import seedu.task.model.item.Stock;
 /**
  * JAXB-friendly version of the Task.
  */
-public class XmlAdaptedTask {
+public class XmlAdaptedStock {
 	
 	@XmlElement(required = true)
 	private String name;
@@ -32,7 +32,7 @@ public class XmlAdaptedTask {
     /**
      * No-arg constructor for JAXB use.
      */
-    public XmlAdaptedTask() {}
+    public XmlAdaptedStock() {}
 
     //@@author A0127570H
     /**
@@ -40,7 +40,7 @@ public class XmlAdaptedTask {
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedTask(ReadOnlyStock source) {
+    public XmlAdaptedStock(ReadOnlyStock source) {
         name = source.getTask().fullName;
         description = source.getDescriptionValue();
         status = source.getTaskStatus();

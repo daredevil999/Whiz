@@ -1,0 +1,99 @@
+/*@@author A0144702N */
+
+/**Group 1 for events */
+.group11{
+	-fx-background-color: #ecf0f1;
+	-fx-fill:transparent; 
+	-fx-border-width: 4px;
+	-fx-text-fill: white;
+	-fx-border-width: 5px 0px 5px 0px;
+	-fx-border-color: #1abc9c ;
+}
+
+/**Group  10 for tasks undone */
+.group10 { 
+	-fx-background-color:#ecf0f1 ;
+	-fx-fill: #AC725E; 
+	-fx-border-width: 5px 0px 5px 0px;
+	-fx-border-color: #c0392b;
+	-fx-text-fill: #7f8c8d;
+}
+
+.anchor-pane{
+	-fx-background-color: #7f8c8d;
+}
+
+.event-panel-header {
+	-fx-font-family: 'Roboto Bold', Arial, sans-serif;
+	-fx-font-size:20px;
+	-fx-text-fill: #ecf0f1;
+	-fx-background-color:#c0392b;
+}
+
+.task-panel-header {
+	-fx-font-size:20px;
+	-fx-text-fill: #ecf0f1;
+	-fx-background-color:#1abc9c;
+	-fx-font-family: 'Roboto Bold', Arial, sans-serif;
+}
+
+
+.Agenda .Selected { 
+	-xfx-color: -fx-focused-base;
+	-fx-background-color: #f1c40f, -fx-outer-border, -fx-inner-border, #f1c40f;
+	-fx-background-insets: -1.4, 0, 1, 2;
+	-fx-background-radius: 10, 5, 4, 3;
+}
+
+.error {
+    -fx-background-color: red;
+}
+
+.status-complete {
+    -fx-border-color: #2ecc71 !important;
+  	-fx-border-width:2px;
+    -fx-background-image: url('/images/checked.png');
+    -fx-background-position: right center;
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: 25px;
+  	-fx-right-padding: 15px;
+}
+
+
+/* For today */
+.status-today {
+    -fx-background-image: url('/images/notice.png');
+    -fx-background-position: right center;
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: 25px;
+  	-fx-right-padding: 15px;
+}
+
+.status-overdue {
+	-fx-background-image: url('/images/overdue.png');
+    -fx-background-position: right center;
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-size: 25px;
+  	-fx-right-padding: 10px;
+  	-fx-border-color: #c0392b !important;
+  	-fx-border-width:2px;
+}
+
+.status-overdue .cell_big_label, .status-overdue .cell_index_label {
+    -fx-text-fill: #e74c3c;
+}
+
+
+.tag-selector {
+    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.tooltip-text {
+    -fx-text-fill: white;
+}
+
+
+

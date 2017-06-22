@@ -17,7 +17,7 @@ public class Task implements ReadOnlyTask {
     
     private Name name;
     private Description description;
-    private Deadline deadline;
+    private Date deadline;
     private Boolean isTaskCompleted;
 
     /**
@@ -26,7 +26,7 @@ public class Task implements ReadOnlyTask {
      * @throws IllegalValueException 
      */
     
-    public Task (Name name, Description description, Deadline deadline, boolean status) {
+    public Task (Name name, Description description, Date deadline, boolean status) {
         assert !CollectionUtil.isAnyNull(name,status);
         this.name = name;
         this.description = description;
@@ -54,7 +54,7 @@ public class Task implements ReadOnlyTask {
     }
     
    @Override
-    public Optional<Deadline> getDeadline() { 
+    public Optional<Date> getDeadline() { 
        return Optional.ofNullable(this.deadline);
     }
 

@@ -7,7 +7,7 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.item.Deadline;
+import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyTask;
@@ -43,9 +43,9 @@ public class AddTaskCommand extends AddCommand {
 	    } else if (deadline.isEmpty()) {
 	        this.toAdd = new Task(new Name(name), new Description(description), null, DEFAULT_STATUS);
 	    } else if (description.isEmpty()) {
-            this.toAdd = new Task(new Name(name), null, new Deadline(deadline), DEFAULT_STATUS);
+            this.toAdd = new Task(new Name(name), null, new Date(deadline), DEFAULT_STATUS);
         } else {
-            this.toAdd = new Task(new Name(name), new Description(description), new Deadline(deadline), DEFAULT_STATUS);
+            this.toAdd = new Task(new Name(name), new Description(description), new Date(deadline), DEFAULT_STATUS);
         }
 	}
 	

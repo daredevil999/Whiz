@@ -3,7 +3,7 @@ package seedu.task.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.item.Deadline;
+import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyTask;
@@ -56,7 +56,7 @@ public class XmlAdaptedTask {
 
         final Name name = new Name(this.name);
         final Description description = this.description.isEmpty()? null : new Description(this.description);
-        final Deadline deadline = this.deadline.isEmpty()? null : new Deadline(this.deadline);
+        final Date deadline = this.deadline.isEmpty()? null : new Date(this.deadline);
         final Boolean status = new Boolean(this.status);
         
         return new Task(name, description, deadline, status);

@@ -5,48 +5,40 @@ import java.time.LocalDateTime;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.StringUtil;
 
+public class Date implements Comparable<Date> {
 
-//@@author A0127570H
-/**
- * Represents a Task's deadline in the task book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
- * @author kian ming
- */
-
-public class Deadline implements Comparable<Deadline> {
-
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS = 
-    		"Task deadline can be in the following format: \n"
+    public static final String MESSAGE_DATE_CONSTRAINTS = 
+    		"Date can be in the following format: \n"
     		+ "DAY HH:MM[:SS], eg: Monday 12:00[:30]\n"
     		+ "M D Y, eg: Oct 12 2016\n"
     		+ "M/D/Y, eg: 01/30/16\n"
     		+ "RELATIVE_DAY TIME, tomorrow 4pm\n";
 
-    private LocalDateTime deadLine; 
+    private LocalDateTime date; 
 
     /**
      * Validates given deadline.
      *
      * @throws IllegalValueException if given deadline string is invalid.
      */
-    public Deadline(String deadlineArg) throws IllegalValueException{
+    public Date(String deadlineArg) throws IllegalValueException{
         assert deadlineArg != null;
         deadlineArg = deadlineArg.trim();          
         try {
-        	this.deadLine = StringUtil.parseStringToTime(deadlineArg);
+        	this.date = StringUtil.parseStringToTime(deadlineArg);
         } catch (IllegalValueException e) {
-        	throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+        	throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
     }
     
     public LocalDateTime getTime() {
-    	return this.deadLine;
+    	return this.date;
     }
 
 
     @Override
     public String toString() {
-        return this.deadLine.format(StringUtil.DATE_FORMATTER);
+        return this.date.format(StringUtil.DATE_FORMATTER);
     }
 
     @Override
@@ -70,8 +62,8 @@ public class Deadline implements Comparable<Deadline> {
 			return false;
 		}
 		
-		Deadline other = (Deadline) obj;
-		if (deadLine == null && (other.deadLine != null)) {
+		Date other = (Date) obj;
+		if (date == null && (other.date != null)) {
 			return false;
 		} else if (!this.toString().equals(other.toString())) /*Standardized String to compare for equality */ {
 			return false;
@@ -80,8 +72,8 @@ public class Deadline implements Comparable<Deadline> {
 	}
 
 	@Override
-	public int compareTo(Deadline o) {
-		return this.deadLine.compareTo(o.deadLine);
+	public int compareTo(Date o) {
+		return this.date.compareTo(o.date);
 	}
 
     

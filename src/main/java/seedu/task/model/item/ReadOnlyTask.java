@@ -12,7 +12,7 @@ public interface ReadOnlyTask {
 
     Name getTask();
     Optional<Description> getDescription();
-    Optional<Deadline> getDeadline();
+    Optional<Date> getDeadline();
     Boolean getTaskStatus();
 
     /**

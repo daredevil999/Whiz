@@ -8,7 +8,7 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.item.Deadline;
+import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Flag;
 import seedu.task.model.item.Name;
@@ -33,7 +33,7 @@ public class EditTaskCommand extends EditCommand  {
     
     private Name newName;
     private Description newDescription;
-    private Deadline newDeadline;
+    private Date newDeadline;
     private boolean isDeadlineToBeRemoved;
     
     private Task editTask;
@@ -59,7 +59,7 @@ public class EditTaskCommand extends EditCommand  {
             newDescription = new Description(description);
         }
         if (!deadline.isEmpty() && !isDeadlineToBeRemoved) {
-            newDeadline = new Deadline(deadline);
+            newDeadline = new Date(deadline);
         }
     }
 

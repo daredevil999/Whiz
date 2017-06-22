@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 
 /**
  * API of the Logic component
@@ -19,7 +19,7 @@ public interface Logic {
     CommandResult execute(String commandText);
 
     /** Returns the filtered list of tasks */
-    ObservableList<ReadOnlyTask> getFilteredTaskList();
+    ObservableList<ReadOnlyStock> getFilteredTaskList();
     
     /** Returns the filtered list of events */
     ObservableList<ReadOnlyEvent> getFilteredEventList();
@@ -29,6 +29,6 @@ public interface Logic {
     List<ReadOnlyEvent> getAllEvents();
     
     /** Convenient method returns all the tasks*/
-    List<ReadOnlyTask> getAllTasks();
+    List<ReadOnlyStock> getAllTasks();
     
 }

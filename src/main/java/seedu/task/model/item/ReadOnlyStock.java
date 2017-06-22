@@ -8,21 +8,21 @@ import java.util.Optional;
  *      Details are present and not null, with the exception of Deadline field. 
  *      Field values are validated.
  */
-public interface ReadOnlyTask {
+public interface ReadOnlyStock {
 
     Name getTask();
     Optional<Description> getDescription();
-    Optional<Date> getDeadline();
+    Optional<Date> getPurchaseDate();
     Boolean getTaskStatus();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyTask other) {
+    default boolean isSameStateAs(ReadOnlyStock other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTask().equals(this.getTask()) // state checks here onwards
-                && other.getDeadline().equals(this.getDeadline())
+                && other.getPurchaseDate().equals(this.getPurchaseDate())
                 && other.getTaskStatus().equals(this.getTaskStatus())
                 && other.getDescription().equals(this.getDescription()));
     }
@@ -62,7 +62,7 @@ public interface ReadOnlyTask {
      * If null, empty string is returned
      */
     default String getDeadlineToString() {
-        return getDeadline().isPresent()? getDeadline().get().toString() : "";
+        return getPurchaseDate().isPresent()? getPurchaseDate().get().toString() : "";
     }
     
     /**
@@ -70,7 +70,7 @@ public interface ReadOnlyTask {
      * If null, empty string is returned
      */
     default String getFormalDeadlineToString() {
-        return getDeadline().isPresent()? " By: " + getDeadline().get().toString() : "";
+        return getPurchaseDate().isPresent()? " By: " + getPurchaseDate().get().toString() : "";
     }
     
     /**
@@ -78,7 +78,7 @@ public interface ReadOnlyTask {
      * If null, empty string is returned
      */
     default String getDeadlineValue() {
-        return getDeadline().isPresent()? getDeadline().get().toString() : "";
+        return getPurchaseDate().isPresent()? getPurchaseDate().get().toString() : "";
     }
     
     /**

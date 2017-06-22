@@ -3,7 +3,7 @@ package seedu.task.logic.commands;
 import java.util.logging.Logger;
 
 import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
@@ -26,7 +26,7 @@ public class MarkCommand extends UndoableCommand {
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
     
     private  int targetIndex;
-    private ReadOnlyTask taskToMark;
+    private ReadOnlyStock taskToMark;
     
     private final Logger logger = LogsCenter.getLogger(MarkCommand.class);
     
@@ -39,7 +39,7 @@ public class MarkCommand extends UndoableCommand {
         assert model != null;
         logger.info("-------[Executing MarkCommand] " + this.toString() );
         
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
 
         if (outOfBounds(lastShownList.size(),targetIndex)) {
             indicateAttemptToExecuteIncorrectCommand();

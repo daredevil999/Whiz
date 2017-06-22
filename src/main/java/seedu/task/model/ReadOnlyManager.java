@@ -4,7 +4,7 @@ package seedu.task.model;
 import java.util.List;
 
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueTaskList;
 
@@ -18,7 +18,7 @@ public interface ReadOnlyManager {
     /**
      * Returns an unmodifiable view of tasks list
      */
-    List<ReadOnlyTask> getTaskList();
+    List<ReadOnlyStock> getTaskList();
 
     /**
      * Returns an unmodifiable view of events list

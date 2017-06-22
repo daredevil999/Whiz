@@ -13,7 +13,7 @@ import seedu.task.logic.commands.UndoableCommand;
 import seedu.task.logic.parser.ParserManager;
 import seedu.task.model.Model;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.storage.Storage;
 
 /**
@@ -47,7 +47,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
+    public ObservableList<ReadOnlyStock> getFilteredTaskList() {
     	model.updateFilteredTaskListToShowWithStatus(Status.INCOMPLETED);
         return model.getFilteredTaskList();
     }
@@ -64,7 +64,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 	
     @Override
-	public List<ReadOnlyTask> getAllTasks() {
+	public List<ReadOnlyStock> getAllTasks() {
 		return model.getTaskBook().getTaskList();
 	}
     

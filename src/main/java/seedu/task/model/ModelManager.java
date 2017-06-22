@@ -17,8 +17,8 @@ import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.item.Event;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
-import seedu.task.model.item.Task;
+import seedu.task.model.item.ReadOnlyStock;
+import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueEventList.DuplicateEventException;
 import seedu.task.model.item.UniqueEventList.EventNotFoundException;
@@ -39,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 	
 
     private final TaskBook taskBook;
-    private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Stock> filteredTasks;
     private final FilteredList<Event> filteredEvents;
 
     /**
@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0121608N
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyStock target) throws TaskNotFoundException {
         taskBook.removeTask(target);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateTaskBookChanged();
@@ -107,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
         
         updateFilteredTaskListToShowWithStatus(COMPLETE_STATUS);
         while(!filteredTasks.isEmpty()){
-            ReadOnlyTask task = filteredTasks.get(0);
+            ReadOnlyStock task = filteredTasks.get(0);
             try {
                 taskBook.removeTask(task);
             } catch (TaskNotFoundException tnfe) {
@@ -134,7 +134,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void markTask(ReadOnlyTask target){
+    public synchronized void markTask(ReadOnlyStock target){
         taskBook.markTask(target);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateTaskBookChanged();
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0127570H
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Stock task) throws UniqueTaskList.DuplicateTaskException {
         taskBook.addTask(task);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateTaskBookChanged();
@@ -157,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
    
     @Override
-    public synchronized void editTask(Task editTask, ReadOnlyTask targetTask) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueTaskList.DuplicateTaskException {
         taskBook.editTask(editTask, targetTask);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateTaskBookChanged();   
@@ -176,9 +176,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0144702N
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-    	SortedList<Task> sortedTasks = new SortedList<>(filteredTasks);
-    	sortedTasks.setComparator(Task.getAscComparator());
+    public UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList() {
+    	SortedList<Stock> sortedTasks = new SortedList<>(filteredTasks);
+    	sortedTasks.setComparator(Stock.getAscComparator());
     	return new UnmodifiableObservableList<>(sortedTasks);
     }
    
@@ -239,7 +239,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask task);
+        boolean satisfies(ReadOnlyStock task);
         boolean satisfies(ReadOnlyEvent event);
         String toString();
     }
@@ -253,7 +253,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask task) {
+        public boolean satisfies(ReadOnlyStock task) {
         	qualifier.prepare(task);
             return qualifier.run();
         }
@@ -271,7 +271,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
 		boolean run();
-		void prepare(ReadOnlyTask task);
+		void prepare(ReadOnlyStock task);
 		void prepare(ReadOnlyEvent event);
         String toString();
     }
@@ -330,7 +330,7 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 
 		@Override
-		public void prepare(ReadOnlyTask task) {
+		public void prepare(ReadOnlyStock task) {
 			targetName = task.getTask().fullName;
     		targetDesc = task.getDescriptionValue();
 		}
@@ -370,7 +370,7 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 
 		@Override
-		public void prepare(ReadOnlyTask task) {
+		public void prepare(ReadOnlyStock task) {
 			targetStatus = task.getTaskStatus();
 		}
 

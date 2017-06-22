@@ -20,7 +20,7 @@ import seedu.task.commons.core.CalendarView;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.CalendarUnsyncException;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 
 //@@author A0144702N
 
@@ -50,7 +50,7 @@ public class CalendarPanel extends UiPart {
 	}
 
 	public static CalendarPanel load(Stage primaryStage, AnchorPane calendarPlaceHolder,
-			List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+			List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
 		CalendarPanel calendarPanel = new CalendarPanel();
 		calendarPanel.setupCalendar(primaryStage, calendarPlaceHolder);
 		calendarPanel.configure(eventList, taskList);
@@ -138,11 +138,11 @@ public class CalendarPanel extends UiPart {
 	 * @param eventList
 	 * @param taskList
 	 */
-	private void configure(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+	private void configure(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
 		setConnection(eventList, taskList);
 	}
 	
-	private void setConnection(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+	private void setConnection(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
 		agenda.appointments().clear();
 		agenda.selectedAppointments().clear();
 		setConnectionEvent(eventList);
@@ -154,9 +154,9 @@ public class CalendarPanel extends UiPart {
 			agenda.appointments().add(calHelper.convertFromEvent(event)));
 	}
 	
-	private void setConnectionTask(List<ReadOnlyTask> taskList) {
+	private void setConnectionTask(List<ReadOnlyStock> taskList) {
 		taskList.stream()
-			.filter(task -> task.getDeadline().isPresent() && !task.getTaskStatus().booleanValue())
+			.filter(task -> task.getPurchaseDate().isPresent() && !task.getTaskStatus().booleanValue())
 			.collect(Collectors.toList())
 			.forEach(task -> agenda.appointments().add(calHelper.convertFromTask(task)));
 	}
@@ -165,7 +165,7 @@ public class CalendarPanel extends UiPart {
 	 * Refresh data shown when eventlist in model modified
 	 * @param eventList
 	 */
-	public void refresh(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+	public void refresh(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
 		logger.info("Refreshing calendar...");
 		setConnection(eventList, taskList);
 	}
@@ -208,12 +208,12 @@ public class CalendarPanel extends UiPart {
 		agenda.selectedAppointments().add(targetAppoint);
 	}
 
-	public void select(ReadOnlyTask targetTask) throws CalendarUnsyncException {
+	public void select(ReadOnlyStock targetTask) throws CalendarUnsyncException {
 		if(isCompleted(targetTask) || isFloatingTask(targetTask)) {
 			return;
 		}
 		
-		LocalDateTime displayedDateTime = targetTask.getDeadline().get().getTime();
+		LocalDateTime displayedDateTime = targetTask.getPurchaseDate().get().getTime();
 		updateCalendarShownPeriod(displayedDateTime);
 		
 		Appointment targetAppoint = agenda.appointments().stream()
@@ -234,11 +234,11 @@ public class CalendarPanel extends UiPart {
 	}
 	
 
-	private boolean isFloatingTask(ReadOnlyTask targetTask) {
-		return !targetTask.getDeadline().isPresent();
+	private boolean isFloatingTask(ReadOnlyStock targetTask) {
+		return !targetTask.getPurchaseDate().isPresent();
 	}
 
-	private boolean isCompleted(ReadOnlyTask targetTask) {
+	private boolean isCompleted(ReadOnlyStock targetTask) {
 		return targetTask.getTaskStatus();
 	}
 	

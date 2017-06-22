@@ -23,7 +23,7 @@ import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -268,7 +268,7 @@ public class MainWindow extends UiPart {
         return this.calendarPanel;
     }
     
-	public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
+	public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
 		this.calendarPanel.refresh(eventList,taskList);
 	}
 

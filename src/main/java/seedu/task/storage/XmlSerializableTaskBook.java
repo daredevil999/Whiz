@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.ReadOnlyManager;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueTaskList;
 
@@ -59,7 +59,7 @@ public class XmlSerializableTaskBook implements ReadOnlyManager {
     }
 
     @Override
-    public List<ReadOnlyTask> getTaskList() {
+    public List<ReadOnlyStock> getTaskList() {
         return tasks.stream().map(p -> {
             try {
                 return p.toModelType();

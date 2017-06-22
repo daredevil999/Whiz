@@ -6,8 +6,8 @@ import seedu.task.commons.core.Status;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.item.Event;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
-import seedu.task.model.item.Task;
+import seedu.task.model.item.ReadOnlyStock;
+import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueTaskList;
 
@@ -22,7 +22,7 @@ public interface Model {
     ReadOnlyManager getTaskBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyStock target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Deletes the given event. */
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
@@ -34,22 +34,22 @@ public interface Model {
     void clearEvents();
 
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Stock task) throws UniqueTaskList.DuplicateTaskException;
     
     /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
     
     /** Edits the given task */
-    void editTask(Task editTask, ReadOnlyTask targetTask) throws UniqueTaskList.DuplicateTaskException;
+    void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueTaskList.DuplicateTaskException;
     
     /** Edits the given event */
     void editEvent(Event editEvent, ReadOnlyEvent targetEvent) throws UniqueEventList.DuplicateEventException;
     
     /** Marks the given task */
-    void markTask(ReadOnlyTask target);
+    void markTask(ReadOnlyStock target);
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList();
     
     /** Returns the filtered event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();

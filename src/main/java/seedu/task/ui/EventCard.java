@@ -7,7 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 //@@author A0144702N-reused
 public class EventCard extends UiPart {
     private static final String FXML = "EventListCard.fxml";

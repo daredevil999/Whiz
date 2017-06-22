@@ -10,8 +10,8 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
-import seedu.task.model.item.ReadOnlyTask;
-import seedu.task.model.item.Task;
+import seedu.task.model.item.ReadOnlyStock;
+import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueTaskList;
 
 //@@author A0127570H
@@ -28,7 +28,7 @@ public class AddTaskCommand extends AddCommand {
 	private static final Boolean DEFAULT_STATUS = false;
 	private final Logger logger = LogsCenter.getLogger(AddTaskCommand.class);
 
-	private final Task toAdd;
+	private final Stock toAdd;
 
 	/**
 	 * Convenience constructor using raw values.
@@ -39,18 +39,18 @@ public class AddTaskCommand extends AddCommand {
 	public AddTaskCommand(String name, String description, String deadline) throws IllegalValueException {
 	    
 	    if (description.isEmpty() && deadline.isEmpty()) {
-	        this.toAdd = new Task(new Name(name), null, null, DEFAULT_STATUS);
+	        this.toAdd = new Stock(new Name(name), null, null, DEFAULT_STATUS);
 	    } else if (deadline.isEmpty()) {
-	        this.toAdd = new Task(new Name(name), new Description(description), null, DEFAULT_STATUS);
+	        this.toAdd = new Stock(new Name(name), new Description(description), null, DEFAULT_STATUS);
 	    } else if (description.isEmpty()) {
-            this.toAdd = new Task(new Name(name), null, new Date(deadline), DEFAULT_STATUS);
+            this.toAdd = new Stock(new Name(name), null, new Date(deadline), DEFAULT_STATUS);
         } else {
-            this.toAdd = new Task(new Name(name), new Description(description), new Date(deadline), DEFAULT_STATUS);
+            this.toAdd = new Stock(new Name(name), new Description(description), new Date(deadline), DEFAULT_STATUS);
         }
 	}
 	
-	public AddTaskCommand(ReadOnlyTask t) {
-		this.toAdd = new Task(t);
+	public AddTaskCommand(ReadOnlyStock t) {
+		this.toAdd = new Stock(t);
 	}
 
 	/*
@@ -65,7 +65,7 @@ public class AddTaskCommand extends AddCommand {
 		try {
 			model.addTask(toAdd);
 			
-			UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+			UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
 			EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(toAdd, lastShownList.indexOf(toAdd)));
 			return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
 		} catch (UniqueTaskList.DuplicateTaskException e) {

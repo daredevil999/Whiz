@@ -2,8 +2,8 @@ package seedu.task.logic.commands;
 
 import java.util.logging.Logger;
 
-import seedu.task.model.item.ReadOnlyTask;
-import seedu.task.model.item.Task;
+import seedu.task.model.item.ReadOnlyStock;
+import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueTaskList.TaskNotFoundException;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
@@ -18,7 +18,7 @@ public class DeleteTaskCommand extends DeleteCommand {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    private ReadOnlyTask taskToDelete;
+    private ReadOnlyStock taskToDelete;
     
     private final Logger logger = LogsCenter.getLogger(DeleteTaskCommand.class);
     
@@ -27,7 +27,7 @@ public class DeleteTaskCommand extends DeleteCommand {
     }
 
 
-	public DeleteTaskCommand(Task taskToDelete) {
+	public DeleteTaskCommand(Stock taskToDelete) {
         this.taskToDelete = taskToDelete;
     }
 
@@ -37,7 +37,7 @@ public class DeleteTaskCommand extends DeleteCommand {
         assert model != null;
         
         if(taskToDelete == null){
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
         
             if (outOfBounds(lastShownList.size())) {
                 indicateAttemptToExecuteIncorrectCommand();

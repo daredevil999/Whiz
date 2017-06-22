@@ -13,10 +13,10 @@ import seedu.task.commons.util.CollectionUtil;
  *
  * Supports a minimal set of list operations.
  *
- * @see Task#equals(Object)
+ * @see Stock#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Task> {
+public class UniqueTaskList implements Iterable<Stock> {
 
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
@@ -35,7 +35,7 @@ public class UniqueTaskList implements Iterable<Task> {
     @SuppressWarnings("serial")
 	public static class TaskNotFoundException extends Exception {}
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Stock> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs empty TaskList.
@@ -45,7 +45,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
-    public boolean contains(ReadOnlyTask toCheck) {
+    public boolean contains(ReadOnlyStock toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -56,7 +56,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public void add(Stock toAdd) throws DuplicateTaskException {
     	assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -69,7 +69,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if the task to replaced is a duplicate of an existing task in the list.
      */
-    public void edit(Task toEdit, ReadOnlyTask targetTask) throws DuplicateTaskException {
+    public void edit(Stock toEdit, ReadOnlyStock targetTask) throws DuplicateTaskException {
         assert toEdit != null && targetTask != null;
         if (contains(toEdit)) {
             throw new DuplicateTaskException();
@@ -83,11 +83,11 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Marks a task in the list
      */
-    public void mark(ReadOnlyTask toMark){
+    public void mark(ReadOnlyStock toMark){
         assert toMark != null;
         
         int index = internalList.indexOf(toMark);
-        Task targetTask = internalList.get(index);
+        Stock targetTask = internalList.get(index);
         targetTask.toggleComplete();
         internalList.set(index, targetTask);
     }
@@ -97,7 +97,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyStock toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
@@ -106,12 +106,12 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-    public ObservableList<Task> getInternalList() {
+    public ObservableList<Stock> getInternalList() {
         return internalList;
     }
 
     @Override
-    public Iterator<Task> iterator() {
+    public Iterator<Stock> iterator() {
         return internalList.iterator();
     }
 

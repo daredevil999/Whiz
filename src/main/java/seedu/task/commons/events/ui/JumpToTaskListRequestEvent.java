@@ -1,7 +1,7 @@
 package seedu.task.commons.events.ui;
 
 import seedu.task.commons.events.BaseEvent;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 
 //@@author A0144702N
 /**
@@ -10,9 +10,9 @@ import seedu.task.model.item.ReadOnlyTask;
 public class JumpToTaskListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-    public final ReadOnlyTask targetTask;
+    public final ReadOnlyStock targetTask;
 
-    public JumpToTaskListRequestEvent(ReadOnlyTask task, int targetIndex) {
+    public JumpToTaskListRequestEvent(ReadOnlyStock task, int targetIndex) {
         this.targetIndex = targetIndex;
         this.targetTask = task;
     }

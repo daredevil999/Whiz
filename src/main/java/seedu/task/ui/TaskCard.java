@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import seedu.task.model.item.ReadOnlyTask;
+import seedu.task.model.item.ReadOnlyStock;
 
 
 public class TaskCard extends UiPart{
@@ -25,14 +25,14 @@ public class TaskCard extends UiPart{
     private Label deadline;
     
 
-    private ReadOnlyTask task;
+    private ReadOnlyStock task;
     private int displayedIndex;
 
     public TaskCard(){
 
     }
 
-    public static TaskCard load(ReadOnlyTask task, int displayedIndex){
+    public static TaskCard load(ReadOnlyStock task, int displayedIndex){
         TaskCard card = new TaskCard();
         card.task = task;
         card.displayedIndex = displayedIndex;
@@ -52,7 +52,7 @@ public class TaskCard extends UiPart{
 
 	private void initialiseDeadline() {
         deadline.setText(task.getDeadlineToString().trim());
-        if (task.getDeadline().isPresent()) {
+        if (task.getPurchaseDate().isPresent()) {
             deadline.setManaged(true);
         } else {
             deadline.setManaged(false);
@@ -83,16 +83,16 @@ public class TaskCard extends UiPart{
     //@@author
     
     //@@author A0144702N
-    private boolean isOverdue(ReadOnlyTask task) {
-		return task.getDeadline().isPresent() 
-				&& task.getDeadline().get().getTime().isBefore(LocalDateTime.now());
+    private boolean isOverdue(ReadOnlyStock task) {
+		return task.getPurchaseDate().isPresent() 
+				&& task.getPurchaseDate().get().getTime().isBefore(LocalDateTime.now());
 	}
 
-	private boolean isDueToday(ReadOnlyTask task) {
-		if(task.getTaskStatus() || !task.getDeadline().isPresent()) {
+	private boolean isDueToday(ReadOnlyStock task) {
+		if(task.getTaskStatus() || !task.getPurchaseDate().isPresent()) {
 			return false;
 		}
-		LocalDateTime taskDeadline = task.getDeadline().get().getTime();
+		LocalDateTime taskDeadline = task.getPurchaseDate().get().getTime();
 		return taskDeadline.getDayOfYear() == LocalDateTime.now().getDayOfYear();
 	}
 

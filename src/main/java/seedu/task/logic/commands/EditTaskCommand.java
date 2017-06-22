@@ -12,8 +12,8 @@ import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Flag;
 import seedu.task.model.item.Name;
-import seedu.task.model.item.ReadOnlyTask;
-import seedu.task.model.item.Task;
+import seedu.task.model.item.ReadOnlyStock;
+import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueTaskList;
 import seedu.task.model.item.UniqueTaskList.DuplicateTaskException;
 
@@ -36,8 +36,8 @@ public class EditTaskCommand extends EditCommand  {
     private Date newDeadline;
     private boolean isDeadlineToBeRemoved;
     
-    private Task editTask;
-    private ReadOnlyTask targetTask;
+    private Stock editTask;
+    private ReadOnlyStock targetTask;
     
     /**
      * Convenience constructor using raw values.
@@ -77,7 +77,7 @@ public class EditTaskCommand extends EditCommand  {
     public CommandResult execute() {
         logger.info("-------[Executing EditTaskCommand]");
         try {
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();        
+            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();        
             targetTask = lastShownList.get(getTargetIndex());
 
             editTask = editTask(targetTask);
@@ -108,7 +108,7 @@ public class EditTaskCommand extends EditCommand  {
      * @return task that has the fields according to edit requirements.
      * @throws IllegalValueException requesting to remove deadline for a floating target task
      */    
-    private Task editTask(ReadOnlyTask targetTask) throws IllegalValueException {
+    private Stock editTask(ReadOnlyStock targetTask) throws IllegalValueException {
         
         if (newName == null) {
             newName = targetTask.getTask();
@@ -116,19 +116,19 @@ public class EditTaskCommand extends EditCommand  {
         if (newDescription == null) {
             newDescription = targetTask.getDescription().orElse(null);
         }
-        if (isDeadlineToBeRemoved && !targetTask.getDeadline().isPresent()) {
+        if (isDeadlineToBeRemoved && !targetTask.getPurchaseDate().isPresent()) {
             throw new IllegalValueException(MESSAGE_INVALID_DEADLINE_REMOVAL);
         }
-        if (newDeadline == null && targetTask.getDeadline().isPresent() && !isDeadlineToBeRemoved) {
-            newDeadline = targetTask.getDeadline().get();
+        if (newDeadline == null && targetTask.getPurchaseDate().isPresent() && !isDeadlineToBeRemoved) {
+            newDeadline = targetTask.getPurchaseDate().get();
         }
-        return new Task (this.newName, this.newDescription, this.newDeadline, TASK_DEFAULT_STATUS);        
+        return new Stock (this.newName, this.newDescription, this.newDeadline, TASK_DEFAULT_STATUS);        
     }
 
 	@Override
 	public CommandResult undo() {
         try {
-            model.editTask((Task)targetTask, editTask);
+            model.editTask((Stock)targetTask, editTask);
             
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
         } catch (UniqueTaskList.DuplicateTaskException e) {

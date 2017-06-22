@@ -9,9 +9,9 @@ import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueTaskList;
 
 /**
- * Unmodifiable view of an task book
+ * Unmodifiable view of a stock manager
  */
-public interface ReadOnlyTaskBook {
+public interface ReadOnlyManager {
 
     UniqueTaskList getUniqueTaskList();
     UniqueEventList getUniqueEventList();

@@ -9,7 +9,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.StorageLocationChangedEvent;
-import seedu.task.model.ReadOnlyTaskBook;
+import seedu.task.model.ReadOnlyManager;
 import seedu.task.storage.JsonConfigStorage;
 import seedu.task.storage.Storage;
 
@@ -36,7 +36,7 @@ public class SaveCommand extends Command {
     
     private static Config config;
     private String newStorageFilePath, oldStorageFilePath;
-    private ReadOnlyTaskBook taskBookManager;
+    private ReadOnlyManager taskBookManager;
     private static JsonConfigStorage jsonConfigStorage;
     private static Storage storage;
     

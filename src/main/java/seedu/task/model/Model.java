@@ -16,10 +16,10 @@ import seedu.task.model.item.UniqueTaskList;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskBook newData);
+    void resetData(ReadOnlyManager newData);
 
     /** Returns the TaskBook */
-    ReadOnlyTaskBook getTaskBook();
+    ReadOnlyManager getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

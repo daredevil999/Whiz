@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
-import seedu.task.model.ReadOnlyTaskBook;
+import seedu.task.model.ReadOnlyManager;
 
 /**
  * A class to access TaskBook data stored as an xml file on the hard disk.
@@ -34,7 +34,7 @@ public class XmlTaskBookStorage implements TaskBookStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTaskBook> readTaskBook(String filePath) throws DataConversionException, FileNotFoundException {
+    public Optional<ReadOnlyManager> readTaskBook(String filePath) throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
         File taskBookFile = new File(filePath);
@@ -44,16 +44,16 @@ public class XmlTaskBookStorage implements TaskBookStorage {
             return Optional.empty();
         }
 
-        ReadOnlyTaskBook taskBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyManager taskBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
         return Optional.of(taskBookOptional);
     }
 
     /**
-     * Similar to {@link #saveTaskBook(ReadOnlyTaskBook)}
+     * Similar to {@link #saveTaskBook(ReadOnlyManager)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskBook(ReadOnlyTaskBook taskBook, String filePath) throws IOException {
+    public void saveTaskBook(ReadOnlyManager taskBook, String filePath) throws IOException {
         assert taskBook != null;
         assert filePath != null;
 
@@ -63,12 +63,12 @@ public class XmlTaskBookStorage implements TaskBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyManager> readTaskBook() throws DataConversionException, IOException {
         return readTaskBook(filePath);
     }
 
     @Override
-    public void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException {
+    public void saveTaskBook(ReadOnlyManager taskBook) throws IOException {
         saveTaskBook(taskBook, filePath);
     }
 }

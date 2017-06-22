@@ -1,14 +1,14 @@
 package seedu.task.commons.events.model;
 
 import seedu.task.commons.events.BaseEvent;
-import seedu.task.model.ReadOnlyTaskBook;
+import seedu.task.model.ReadOnlyManager;
 
 /** Indicates the TaskBook in the model has changed*/
 public class TaskBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyTaskBook data;
+    public final ReadOnlyManager data;
 
-    public TaskBookChangedEvent(ReadOnlyTaskBook data){
+    public TaskBookChangedEvent(ReadOnlyManager data){
         this.data = data;
     }
 

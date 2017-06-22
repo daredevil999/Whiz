@@ -18,7 +18,7 @@ import seedu.task.model.item.UniqueTaskList;
  * Wraps all data at the task-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskBook implements ReadOnlyTaskBook {
+public class TaskBook implements ReadOnlyManager {
 
     private final UniqueTaskList tasks;
     private final UniqueEventList events;
@@ -33,7 +33,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     /**
      * Tasks and Events are copied into this taskbook
      */
-    public TaskBook(ReadOnlyTaskBook toBeCopied) {
+    public TaskBook(ReadOnlyManager toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueEventList());
     }
 
@@ -44,7 +44,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         resetData(tasks.getInternalList(), events.getInternalList());
     }
 
-    public static ReadOnlyTaskBook getEmptyTaskBook() {
+    public static ReadOnlyManager getEmptyTaskBook() {
         return new TaskBook();
     }
 
@@ -72,7 +72,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         setEvents(newEvents.stream().map(Event::new).collect(Collectors.toList()));
     }
 
-    public void resetData(ReadOnlyTaskBook newData) {
+    public void resetData(ReadOnlyManager newData) {
         resetData(newData.getTaskList(), newData.getEventList());
     }
     //@@author

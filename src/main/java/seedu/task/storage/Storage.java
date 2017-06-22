@@ -6,7 +6,7 @@ import java.util.Optional;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.model.ReadOnlyTaskBook;
+import seedu.task.model.ReadOnlyManager;
 import seedu.task.model.UserPrefs;
 /**
  * API of the Storage component
@@ -23,10 +23,10 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
     String getTaskBookFilePath();
 
     @Override
-    Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException,IOException;
+    Optional<ReadOnlyManager> readTaskBook() throws DataConversionException,IOException;
 
     @Override
-    void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
+    void saveTaskBook(ReadOnlyManager taskBook) throws IOException;
 
     /**
      * Saves the current version of the Task Book to the hard disk.

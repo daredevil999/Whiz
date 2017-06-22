@@ -11,7 +11,7 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.model.ReadOnlyTaskBook;
+import seedu.task.model.ReadOnlyManager;
 import seedu.task.model.UserPrefs;
 /**
  * Manages storage of TaskBook data in local storage.
@@ -51,27 +51,27 @@ public class StorageManager extends ComponentManager implements Storage {
 
 	@Override
 	// read from project main directory 
-	public Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException {
+	public Optional<ReadOnlyManager> readTaskBook() throws DataConversionException, IOException {
 
 		return readTaskBook(taskBookStorage.getTaskBookFilePath());
 	}
 
 	@Override
 	//read from specified saved file path
-	public Optional<ReadOnlyTaskBook> readTaskBook(String filePath) throws DataConversionException, IOException {
+	public Optional<ReadOnlyManager> readTaskBook(String filePath) throws DataConversionException, IOException {
 		logger.fine("Attempting to read data from file: " + filePath);
 		return taskBookStorage.readTaskBook(filePath);
 	}
 
 	@Override
 	// save to project main directory
-	public void saveTaskBook(ReadOnlyTaskBook taskBookManager) throws IOException {
+	public void saveTaskBook(ReadOnlyManager taskBookManager) throws IOException {
 		saveTaskBook(taskBookManager, taskBookStorage.getTaskBookFilePath());
 	}
 
 	@Override
 	// save to specified file path
-	public void saveTaskBook(ReadOnlyTaskBook taskManager, String filePath) throws IOException {
+	public void saveTaskBook(ReadOnlyManager taskManager, String filePath) throws IOException {
 		logger.fine("Attempting to write to data file: " + filePath);
 		taskBookStorage.saveTaskBook(taskManager, filePath);
 	}

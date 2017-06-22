@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.model.ReadOnlyTaskBook;
+import seedu.task.model.ReadOnlyManager;
 
 /**
  * Represents a storage for {@link seedu.task.model.TaskBook}.
@@ -17,7 +17,7 @@ public interface TaskBookStorage {
 	String getTaskBookFilePath();
 
 	/**
-	 * Returns TaskBook data as a {@link ReadOnlyTaskBook}. Returns
+	 * Returns TaskBook data as a {@link ReadOnlyManager}. Returns
 	 * {@code Optional.empty()} if storage file is not found.
 	 * 
 	 * @throws DataConversionException
@@ -25,15 +25,15 @@ public interface TaskBookStorage {
 	 * @throws IOException
 	 *             if there was any problem when reading from the storage.
 	 */
-	Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
+	Optional<ReadOnlyManager> readTaskBook() throws DataConversionException, IOException;
 
 	/**
 	 * @see #getTaskManagerFilePath()
 	 */
-	Optional<ReadOnlyTaskBook> readTaskBook(String filePath) throws DataConversionException, IOException;
+	Optional<ReadOnlyManager> readTaskBook(String filePath) throws DataConversionException, IOException;
 
 	/**
-	 * Saves the given {@link ReadOnlyTaskBook} to the storage.
+	 * Saves the given {@link ReadOnlyManager} to the storage.
 	 * 
 	 * @param taskBook
 	 *            cannot be null.
@@ -41,13 +41,13 @@ public interface TaskBookStorage {
 	 *             if there was any problem writing to the file.
 	 */
 
-	void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
+	void saveTaskBook(ReadOnlyManager taskBook) throws IOException;
 
 	/**
-	 * @see #saveTaskManager(ReadOnlyTaskBook)
+	 * @see #saveTaskManager(ReadOnlyManager)
 	 */
 	
-	void saveTaskBook(ReadOnlyTaskBook taskBook, String filePath) throws IOException;
+	void saveTaskBook(ReadOnlyManager taskBook, String filePath) throws IOException;
 
 	
 }

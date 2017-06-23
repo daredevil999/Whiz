@@ -45,7 +45,7 @@ public class CalendarHelper extends AppointmentImplBase implements Appointment {
 
 	public Appointment convertFromTask(ReadOnlyStock task) {
 		Appointment item = new AppointmentImplLocal();
-		item.setSummary(task.getTask().fullName);
+		item.setSummary(task.getStockName().fullName);
 		item.setStartLocalDateTime(task.getPurchaseDate().get().getTime());
 		item.setEndLocalDateTime(item.getStartLocalDateTime().plusHours(DEFAULT_DURATION));
 		item.setDescription(task.getDescriptionValue());
@@ -68,7 +68,7 @@ public class CalendarHelper extends AppointmentImplBase implements Appointment {
 	 */
 	public static boolean compareWithTask(ReadOnlyStock targetTask, Appointment taskInCalendar) {
 		assert targetTask.getPurchaseDate().isPresent();
-		return taskInCalendar.getSummary().equals(targetTask.getTask().getNameValue())
+		return taskInCalendar.getSummary().equals(targetTask.getStockName().getNameValue())
 				&& taskInCalendar.getStartLocalDateTime().equals(targetTask.getPurchaseDate().get().getTime());
 	}
 

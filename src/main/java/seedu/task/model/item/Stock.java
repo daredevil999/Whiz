@@ -1,5 +1,6 @@
 package seedu.task.model.item;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
@@ -18,13 +19,9 @@ public class Stock implements ReadOnlyStock {
     private Name name;
     private Description description;
     private Date deadline;
+    //private ArrayList<StockPurchaseInstance> purchasedStocksList ;
     private Boolean isTaskCompleted;
 
-    /**
-     * Name of a task must be present and not null.
-     * Fields which are empty are to be null.
-     * @throws IllegalValueException 
-     */
     
     public Stock (Name name, Description description, Date deadline, boolean status) {
         assert !CollectionUtil.isAnyNull(name,status);
@@ -32,7 +29,6 @@ public class Stock implements ReadOnlyStock {
         this.description = description;
         this.deadline = deadline;
         this.isTaskCompleted = status;
-
     }
 
     /**
@@ -40,11 +36,11 @@ public class Stock implements ReadOnlyStock {
      * @throws IllegalValueException 
      */
     public Stock(ReadOnlyStock source) {
-            this(source.getTask(), source.getDescription().orElse(null), source.getPurchaseDate().orElse(null) , source.getTaskStatus());
+            this(source.getStockName(), source.getDescription().orElse(null), source.getPurchaseDate().orElse(null) , source.getTaskStatus());
     }
 
     @Override
-    public Name getTask() {
+    public Name getStockName() {
         return name;
     }
 
@@ -107,7 +103,7 @@ public class Stock implements ReadOnlyStock {
 		};
 		
 		//then by name
-		Comparator<Stock> byName = (t1, t2) -> t1.getTask().compareTo(t2.getTask());
+		Comparator<Stock> byName = (t1, t2) -> t1.getStockName().compareTo(t2.getStockName());
 		
 		return byDeadline.thenComparing(byName);
 	}
@@ -129,5 +125,6 @@ public class Stock implements ReadOnlyStock {
 		return this.getPurchaseDate().get().compareTo(o.getPurchaseDate().get())*(-1);
 		
 	}
+
 
 }

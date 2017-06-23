@@ -111,7 +111,7 @@ public class EditTaskCommand extends EditCommand  {
     private Stock editTask(ReadOnlyStock targetTask) throws IllegalValueException {
         
         if (newName == null) {
-            newName = targetTask.getTask();
+            newName = targetTask.getStockName();
         }
         if (newDescription == null) {
             newDescription = targetTask.getDescription().orElse(null);

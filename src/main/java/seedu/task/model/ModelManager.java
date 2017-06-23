@@ -331,7 +331,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		@Override
 		public void prepare(ReadOnlyStock task) {
-			targetName = task.getTask().fullName;
+			targetName = task.getStockName().fullName;
     		targetDesc = task.getDescriptionValue();
 		}
 

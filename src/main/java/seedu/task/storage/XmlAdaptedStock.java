@@ -41,7 +41,7 @@ public class XmlAdaptedStock {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedStock(ReadOnlyStock source) {
-        name = source.getTask().fullName;
+        name = source.getStockName().fullName;
         description = source.getDescriptionValue();
         status = source.getTaskStatus();
         deadline = source.getDeadlineValue();

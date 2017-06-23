@@ -1,5 +1,6 @@
 package seedu.task.model.item;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -10,9 +11,10 @@ import java.util.Optional;
  */
 public interface ReadOnlyStock {
 
-    Name getTask();
+    Name getStockName();
     Optional<Description> getDescription();
     Optional<Date> getPurchaseDate();
+    //Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList();
     Boolean getTaskStatus();
 
     /**
@@ -21,7 +23,7 @@ public interface ReadOnlyStock {
     default boolean isSameStateAs(ReadOnlyStock other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getTask().equals(this.getTask()) // state checks here onwards
+                && other.getStockName().equals(this.getStockName()) // state checks here onwards
                 && other.getPurchaseDate().equals(this.getPurchaseDate())
                 && other.getTaskStatus().equals(this.getTaskStatus())
                 && other.getDescription().equals(this.getDescription()));
@@ -33,7 +35,7 @@ public interface ReadOnlyStock {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ")
-                .append(getTask())
+                .append(getStockName())
                 .append(getFormalDescriptionToString())
                 .append(getFormalDeadlineToString())
                 .append(getTaskStatusToString());
@@ -100,7 +102,7 @@ public interface ReadOnlyStock {
      * Appends the name of a task with [DONE] if task is completed
      */
     default String getNameWithStatus() {
-        return getTaskStatus() ? getTask().toString() + " [DONE]" : getTask().toString();
+        return getTaskStatus() ? getStockName().toString() + " [DONE]" : getStockName().toString();
     }
 
 

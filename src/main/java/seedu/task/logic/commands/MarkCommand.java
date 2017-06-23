@@ -48,7 +48,7 @@ public class MarkCommand extends UndoableCommand {
         
         taskToMark = lastShownList.get(targetIndex - 1);
         model.markTask(taskToMark); // list starts at zero
-        if (taskToMark.getTaskStatus() == UNCOMPLETE_STATUS) {   //Task will be selected if being marked from completed to uncompleted
+        if (true) {   //Task will be selected if being marked from completed to uncompleted
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(taskToMark, targetIndex - 1));
         }
 

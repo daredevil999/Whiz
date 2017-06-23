@@ -19,10 +19,10 @@ public class TaskCard extends UiPart{
     private Label name;
     @FXML
     private Label index;
-    @FXML
-    private Label description;
-    @FXML
-    private Label deadline;
+//    @FXML
+//    private Label description;
+//    @FXML
+//    private Label deadline;
     
 
     private ReadOnlyStock task;
@@ -42,59 +42,56 @@ public class TaskCard extends UiPart{
     //@@author-A0127570H
     @FXML
     public void initialize() {
-        name.setText(task.getNameWithStatus());
-        index.setText(displayedIndex + ". ");
-        initialiseDescription();
-        initialiseDeadline();   
-        setStyleClass();
+        name.setText(task.getStockName().fullName);
+        index.setText(displayedIndex + ". "); 
+        //setStyleClass();
     }
-
-
-	private void initialiseDeadline() {
-        deadline.setText(task.getDeadlineToString().trim());
-        if (task.getPurchaseDate().isPresent()) {
-            deadline.setManaged(true);
-        } else {
-            deadline.setManaged(false);
-        }
-    }
-
-    private void initialiseDescription() {
-        description.setText(task.getDescriptionToString().trim());
-        if (task.getDescription().isPresent()) {
-            description.setManaged(true);
-        } else {
-            description.setManaged(false);
-        }
-    }
+//
+//	private void initialiseDeadline() {
+//        deadline.setText(task.getDeadlineToString().trim());
+//        if (task.getPurchaseDate().isPresent()) {
+//            deadline.setManaged(true);
+//        } else {
+//            deadline.setManaged(false);
+//        }
+//    }
+//
+//    private void initialiseDescription() {
+//        description.setText(task.getDescriptionToString().trim());
+//        if (task.getDescription().isPresent()) {
+//            description.setManaged(true);
+//        } else {
+//            description.setManaged(false);
+//        }
+//    }
 
     //Adds the lavender colour to the background if the task status is completed
-    private void setStyleClass() {
-    	//if status-complete
-        if (task.getTaskStatus()) {
-            cardPane.getStyleClass().add("status-complete");
-        } else if (isOverdue(task)) {
-        	cardPane.getStyleClass().add("status-overdue");
-        }else if(isDueToday(task)) {
-        	cardPane.getStyleClass().add("status-today");
-        } 
-
-    }
+//    private void setStyleClass() {
+//    	//if status-complete
+//        if (task.getTaskStatus()) {
+//            cardPane.getStyleClass().add("status-complete");
+//        } else if (isOverdue(task)) {
+//        	cardPane.getStyleClass().add("status-overdue");
+//        }else if(isDueToday(task)) {
+//        	cardPane.getStyleClass().add("status-today");
+//        } 
+//
+//    }
     //@@author
     
     //@@author A0144702N
-    private boolean isOverdue(ReadOnlyStock task) {
-		return task.getPurchaseDate().isPresent() 
-				&& task.getPurchaseDate().get().getTime().isBefore(LocalDateTime.now());
-	}
-
-	private boolean isDueToday(ReadOnlyStock task) {
-		if(task.getTaskStatus() || !task.getPurchaseDate().isPresent()) {
-			return false;
-		}
-		LocalDateTime taskDeadline = task.getPurchaseDate().get().getTime();
-		return taskDeadline.getDayOfYear() == LocalDateTime.now().getDayOfYear();
-	}
+//    private boolean isOverdue(ReadOnlyStock task) {
+//		return task.getPurchaseDate().isPresent() 
+//				&& task.getPurchaseDate().get().getTime().isBefore(LocalDateTime.now());
+//	}
+//
+//	private boolean isDueToday(ReadOnlyStock task) {
+//		if(task.getTaskStatus() || !task.getPurchaseDate().isPresent()) {
+//			return false;
+//		}
+//		LocalDateTime taskDeadline = task.getPurchaseDate().get().getTime();
+//		return taskDeadline.getDayOfYear() == LocalDateTime.now().getDayOfYear();
+//	}
 
 	public HBox getLayout() {
         return cardPane;

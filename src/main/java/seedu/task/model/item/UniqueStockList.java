@@ -88,7 +88,6 @@ public class UniqueStockList implements Iterable<Stock> {
         
         int index = internalList.indexOf(toMark);
         Stock targetTask = internalList.get(index);
-        targetTask.toggleComplete();
         internalList.set(index, targetTask);
     }
 

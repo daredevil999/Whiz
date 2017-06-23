@@ -113,16 +113,16 @@ public class EditTaskCommand extends EditCommand  {
         if (newName == null) {
             newName = targetTask.getStockName();
         }
-        if (newDescription == null) {
-            newDescription = targetTask.getDescription().orElse(null);
-        }
-        if (isDeadlineToBeRemoved && !targetTask.getPurchaseDate().isPresent()) {
-            throw new IllegalValueException(MESSAGE_INVALID_DEADLINE_REMOVAL);
-        }
-        if (newDeadline == null && targetTask.getPurchaseDate().isPresent() && !isDeadlineToBeRemoved) {
-            newDeadline = targetTask.getPurchaseDate().get();
-        }
-        return new Stock (this.newName, this.newDescription, this.newDeadline, TASK_DEFAULT_STATUS);        
+//        if (newDescription == null) {
+//            newDescription = targetTask.getDescription().orElse(null);
+//        }
+//        if (isDeadlineToBeRemoved && !targetTask.getPurchaseDate().isPresent()) {
+//            throw new IllegalValueException(MESSAGE_INVALID_DEADLINE_REMOVAL);
+//        }
+//        if (newDeadline == null && targetTask.getPurchaseDate().isPresent() && !isDeadlineToBeRemoved) {
+//            newDeadline = targetTask.getPurchaseDate().get();
+//        }
+        return new Stock (this.newName);        
     }
 
 	@Override

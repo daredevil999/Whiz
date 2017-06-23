@@ -156,7 +156,7 @@ public class CalendarPanel extends UiPart {
 	
 	private void setConnectionTask(List<ReadOnlyStock> taskList) {
 		taskList.stream()
-			.filter(task -> task.getPurchaseDate().isPresent() && !task.getTaskStatus().booleanValue())
+//			.filter(task -> task.getPurchaseDate().isPresent() && !task.getTaskStatus().booleanValue())
 			.collect(Collectors.toList())
 			.forEach(task -> agenda.appointments().add(calHelper.convertFromTask(task)));
 	}
@@ -213,7 +213,7 @@ public class CalendarPanel extends UiPart {
 			return;
 		}
 		
-		LocalDateTime displayedDateTime = targetTask.getPurchaseDate().get().getTime();
+		LocalDateTime displayedDateTime = LocalDateTime.now();
 		updateCalendarShownPeriod(displayedDateTime);
 		
 		Appointment targetAppoint = agenda.appointments().stream()
@@ -235,11 +235,11 @@ public class CalendarPanel extends UiPart {
 	
 
 	private boolean isFloatingTask(ReadOnlyStock targetTask) {
-		return !targetTask.getPurchaseDate().isPresent();
+		return true;
 	}
 
 	private boolean isCompleted(ReadOnlyStock targetTask) {
-		return targetTask.getTaskStatus();
+		return false;
 	}
 	
 	@Override

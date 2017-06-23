@@ -48,11 +48,8 @@ public class AddParser implements Parser {
         try {           
             getTokenizerValue(argsTokenizer);
             
-            if (startDuration.isPresent()) { //Only events have duration
-                return new AddEventCommand(name, description.orElse(""), startDuration.orElse(""), endDuration.orElse(""));
-            } else {
-                return new AddTaskCommand(name, description.orElse(""), deadline.orElse(""));             
-            }
+            return new AddTaskCommand(name);
+//            		description.orElse(""), deadline.orElse(""));             
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         } catch (EmptyValueException e) {

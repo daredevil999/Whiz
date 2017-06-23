@@ -178,7 +178,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList() {
     	SortedList<Stock> sortedTasks = new SortedList<>(filteredTasks);
-    	sortedTasks.setComparator(Stock.getAscComparator());
     	return new UnmodifiableObservableList<>(sortedTasks);
     }
    
@@ -332,7 +331,6 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public void prepare(ReadOnlyStock task) {
 			targetName = task.getStockName().fullName;
-    		targetDesc = task.getDescriptionValue();
 		}
 
 		@Override
@@ -371,7 +369,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		@Override
 		public void prepare(ReadOnlyStock task) {
-			targetStatus = task.getTaskStatus();
+			targetStatus = true;
 		}
 
 		@Override

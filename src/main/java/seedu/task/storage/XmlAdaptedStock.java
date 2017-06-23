@@ -16,15 +16,6 @@ public class XmlAdaptedStock {
 	
 	@XmlElement(required = true)
 	private String name;
-	
-	@XmlElement
-	private String description;
-	
-	@XmlElement
-	private Boolean status;
-	
-	@XmlElement
-	private String deadline;
 
 //    @XmlElement
 //    private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -42,9 +33,6 @@ public class XmlAdaptedStock {
      */
     public XmlAdaptedStock(ReadOnlyStock source) {
         name = source.getStockName().fullName;
-        description = source.getDescriptionValue();
-        status = source.getTaskStatus();
-        deadline = source.getDeadlineValue();
     }
 
     /**
@@ -55,10 +43,7 @@ public class XmlAdaptedStock {
     public Stock toModelType() throws IllegalValueException {
 
         final Name name = new Name(this.name);
-        final Description description = this.description.isEmpty()? null : new Description(this.description);
-        final Date deadline = this.deadline.isEmpty()? null : new Date(this.deadline);
-        final Boolean status = new Boolean(this.status);
         
-        return new Stock(name, description, deadline, status);
+        return new Stock(name);
     }
 }

@@ -25,7 +25,6 @@ public class AddTaskCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
 
-	private static final Boolean DEFAULT_STATUS = false;
 	private final Logger logger = LogsCenter.getLogger(AddTaskCommand.class);
 
 	private final Stock toAdd;
@@ -36,17 +35,9 @@ public class AddTaskCommand extends AddCommand {
 	 *             if any of the raw values are invalid
 	 */
 
-	public AddTaskCommand(String name, String description, String deadline) throws IllegalValueException {
+	public AddTaskCommand(String name) throws IllegalValueException {
 	    
-	    if (description.isEmpty() && deadline.isEmpty()) {
-	        this.toAdd = new Stock(new Name(name), null, null, DEFAULT_STATUS);
-	    } else if (deadline.isEmpty()) {
-	        this.toAdd = new Stock(new Name(name), new Description(description), null, DEFAULT_STATUS);
-	    } else if (description.isEmpty()) {
-            this.toAdd = new Stock(new Name(name), null, new Date(deadline), DEFAULT_STATUS);
-        } else {
-            this.toAdd = new Stock(new Name(name), new Description(description), new Date(deadline), DEFAULT_STATUS);
-        }
+		this.toAdd = new Stock(new Name(name));
 	}
 	
 	public AddTaskCommand(ReadOnlyStock t) {

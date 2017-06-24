@@ -59,10 +59,10 @@ public class Stock implements ReadOnlyStock {
     }
     
     public Price getAverageStockPurchasePrice () {
-    	double averagePrice = 0;
-    	int totalLots = getTotalStockPurchaseLots();
+    	int averagePrice = 0;
+    	int totalLots = this.getTotalStockPurchaseLots();
     	for (StockPurchaseInstance inst : purchasedStocksList) {
-    		averagePrice += (inst.purchasePrice.getPriceValue() * inst.purchaseLots);
+    		averagePrice += (inst.purchasePrice.getPriceValueInInt() * inst.purchaseLots);
     	}
     	averagePrice /= totalLots;
     	return new Price (averagePrice);

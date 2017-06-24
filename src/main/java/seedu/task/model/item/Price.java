@@ -1,15 +1,13 @@
 package seedu.task.model.item;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import seedu.task.commons.exceptions.IllegalValueException;
 
 public class Price {
 	 public static final String MESSAGE_PRICE_CONSTRAINTS = "Stock prices should contain 1-3 decimal places";
 	    public static final String PRICE_VALIDATION_REGEX = "[0-9]{1,13}(\\.[0-9]{1,3})?";
 
-	    public final double value;
+	    private final int decimalValue;
+	    private final int wholeValue;
 
 	    /**
 	     * Validates given price.
@@ -21,21 +19,21 @@ public class Price {
 	        if (!isValidPrice(value)) {
 	            throw new IllegalValueException(MESSAGE_PRICE_CONSTRAINTS);
 	        }
-	        double valueInDouble = Double.parseDouble(value);
-	        this.value = valueInDouble;
+	        String[] splitStr = value.split("\\.");
+	        if (splitStr.length == 1) {
+	        	this.decimalValue = 0;
+	        	this.wholeValue = Integer.parseInt(splitStr[0]);
+	        } else {
+	        	this.wholeValue = Integer.parseInt(splitStr[0]);
+	        	this.decimalValue = Integer.parseInt(splitStr[1]);
+	        }
 	    }
 	    
-	    public Price(double valInput) {
-	    	this.value = roundToDP(valInput,3);
+	    public Price(int value) {
+	    	int temp = value / 1000;
+	    	this.decimalValue = value - temp * 1000;
+	    	this.wholeValue = temp;
 	    }
-
-	    private double roundToDP(double valInput, int places) {
-	    	assert(places > 0);
-
-	        BigDecimal bd = new BigDecimal(value);
-	        bd = bd.setScale(places, RoundingMode.HALF_UP);
-	        return bd.doubleValue();
-		}
 
 		/**
 	     * Returns true if a given string is a valid task name.
@@ -44,25 +42,28 @@ public class Price {
 	        return test.matches(PRICE_VALIDATION_REGEX);
 	    }
 	    
-	    public double getPriceValue() {
-	    	return value;
+	    public double getPriceValueInDouble() { 
+	    	double output = wholeValue + ((double)decimalValue / 1000);
+	    	return output;
+	    }
+	    
+	    public int getPriceValueInInt() { 
+	    	int output = wholeValue * 1000 + decimalValue;
+	    	return output;
 	    }
 
 	    @Override
 	    public String toString() {
-	        return Double.toString(roundToDP(this.value,3));
+	    	double output = this.getPriceValueInDouble();
+	    	return Double.toString(output);
 	    }
 
 	    @Override
 	    public boolean equals(Object other) {
 	        return other == this // short circuit if same object
 	                || (other instanceof Price // instanceof handles nulls
-	                && this.value == ((Price) other).value); // state check
-	    }
-
-	    @Override
-	    public int hashCode() {
-	        return Double.hashCode(value);
+	                && this.wholeValue == ((Price) other).wholeValue
+	                && this.decimalValue == ((Price) other).decimalValue); // state check
 	    }
 
 }

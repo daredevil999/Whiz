@@ -62,6 +62,7 @@ public interface ReadOnlyStock {
             	builder.append(System.getProperty("line.separator"));
             	builder.append(" Instance " + index + ": ")
             			.append(inst.getAsText());
+            	index++;
             }
         }
     	return builder.toString();

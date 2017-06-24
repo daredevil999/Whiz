@@ -34,6 +34,10 @@ public class Date implements Comparable<Date> {
     public LocalDateTime getTime() {
     	return this.date;
     }
+    
+    public String getDate() {
+    	return this.date.toLocalDate().toString();
+    }
 
 
     @Override

@@ -26,12 +26,11 @@ public class StockPurchaseInstance {
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Purchase Date: ")
-        		.append(getPurchaseDate())
+        		.append(getPurchaseDate().getDate())
         		.append(" Purchase Price: ")
                 .append(getPurchasePrice())
                 .append(" Purchase Lots: ")
                 .append(getPurchaseLots());
-        
         return builder.toString();
     }
 

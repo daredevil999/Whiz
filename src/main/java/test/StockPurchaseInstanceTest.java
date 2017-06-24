@@ -14,11 +14,11 @@ public class StockPurchaseInstanceTest {
 	@Test
     public void stockPurchaseInstanceTest() throws IllegalValueException {
 		Price priceInput = new Price("23.056");
-		Date dateInput = new Date("23-6-17");
+		Date dateInput = new Date("6-23-17");
 		int lotsInput = 1200;
 		StockPurchaseInstance sp1 = new StockPurchaseInstance(dateInput, priceInput, lotsInput);
-        
-		assertEquals(sp1.toString(), "Blah");
+        String expected = " Purchase Date: 2017-06-23 Purchase Price: 23.056 Purchase Lots: 1200";
+		assertEquals(sp1.toString(), expected);
     }
 
 }

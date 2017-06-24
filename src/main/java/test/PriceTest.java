@@ -13,11 +13,16 @@ public class PriceTest {
     public void price_check() throws IllegalValueException {
         Price d1 = new Price("23.00");
         Price d2 = new Price("23");
-        Price d4 = new Price("23.12345");
+        
 
         assertEquals(d1,d2);
         assertEquals(d1,d1);
-        assertFalse(d1.equals(d4));
+        
+        try {
+        	Price d4 = new Price("23.12345");
+        } catch (IllegalValueException e) {
+        	assertEquals(e.getMessage(), Price.MESSAGE_PRICE_CONSTRAINTS);
+        }
         
     }
 

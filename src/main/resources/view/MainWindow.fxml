@@ -46,7 +46,7 @@
             <children>
               <AnchorPane styleClass="list-panel-head" VBox.vgrow="ALWAYS">
                 <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="event-panel-header" text="Tasks TO DO!" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="event-panel-header" text="My Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>
               </AnchorPane>
               <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />

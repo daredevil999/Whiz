@@ -3,12 +3,12 @@ package seedu.task.commons.events.model;
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.ReadOnlyStockManager;
 
-/** Indicates the TaskBook in the model has changed*/
-public class TaskBookChangedEvent extends BaseEvent {
+/** Indicates the Stock Manager in the model has changed*/
+public class StockManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyStockManager data;
 
-    public TaskBookChangedEvent(ReadOnlyStockManager data){
+    public StockManagerChangedEvent(ReadOnlyStockManager data){
         this.data = data;
     }
 

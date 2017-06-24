@@ -13,7 +13,7 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Status;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.model.StockManagerChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.item.Event;
 import seedu.task.model.item.ReadOnlyEvent;
@@ -84,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskBookChanged() {
-        raise(new TaskBookChangedEvent(taskBook));
+        raise(new StockManagerChangedEvent(taskBook));
     }
 
     //@@author A0121608N

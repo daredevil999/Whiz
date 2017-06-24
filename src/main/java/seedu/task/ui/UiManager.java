@@ -13,7 +13,7 @@ import seedu.task.MainApp;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.model.StockManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
@@ -142,7 +142,7 @@ public class UiManager extends ComponentManager implements Ui {
 	}
 	
 	@Subscribe
-	private void handleEventListUpdatedEvent(TaskBookChangedEvent event) {
+	private void handleEventListUpdatedEvent(StockManagerChangedEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
 //		mainWindow.updateCalendar(event.data.getEventList(), event.data.getTaskList());
 	}

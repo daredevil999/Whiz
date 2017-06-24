@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.model.StockManagerChangedEvent;
 import seedu.task.commons.events.storage.StorageLocationChangedEvent;
 import seedu.task.commons.util.FxViewUtil;
 
@@ -93,7 +93,7 @@ public class StatusBarFooter extends UiPart {
     }
 
     @Subscribe
-    public void handleTaskBookChangedEvent(TaskBookChangedEvent abce) {
+    public void handleTaskBookChangedEvent(StockManagerChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);

@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import seedu.task.model.item.ReadOnlyStock;
 
 
-public class TaskCard extends UiPart{
+public class PurchasedStockCard extends UiPart{
 
     private static final String FXML = "TaskListCard.fxml";
 
@@ -28,12 +28,12 @@ public class TaskCard extends UiPart{
     private ReadOnlyStock task;
     private int displayedIndex;
 
-    public TaskCard(){
+    public PurchasedStockCard(){
 
     }
 
-    public static TaskCard load(ReadOnlyStock task, int displayedIndex){
-        TaskCard card = new TaskCard();
+    public static PurchasedStockCard load(ReadOnlyStock task, int displayedIndex){
+        PurchasedStockCard card = new PurchasedStockCard();
         card.task = task;
         card.displayedIndex = displayedIndex;
         return UiPartLoader.loadUiPart(card);

@@ -20,18 +20,18 @@ import seedu.task.model.item.UniqueStockList;
  */
 public class StockManager implements ReadOnlyStockManager {
 
-    private final UniqueStockList tasks;
+    private final UniqueStockList myStocks;
     private final UniqueEventList events;
 
     {
-        tasks = new UniqueStockList();
+        myStocks = new UniqueStockList();
         events = new UniqueEventList();
     }
 
     public StockManager() {}
 
     /**
-     * Tasks and Events are copied into this taskbook
+     * Stocks are copied into this stock manager
      */
     public StockManager(ReadOnlyStockManager toBeCopied) {
         this(toBeCopied.getUniqueStockList(), toBeCopied.getUniqueEventList());
@@ -51,11 +51,11 @@ public class StockManager implements ReadOnlyStockManager {
 //// list overwrite operations
 
     public ObservableList<Stock> getTasks() {
-        return tasks.getInternalList();
+        return myStocks.getInternalList();
     }
 
     public void setTasks(List<Stock> tasks) {
-        this.tasks.getInternalList().setAll(tasks);
+        this.myStocks.getInternalList().setAll(tasks);
     }
 
     public ObservableList<Event> getEvents() {
@@ -121,7 +121,7 @@ public class StockManager implements ReadOnlyStockManager {
      * @throws UniqueStockList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Stock p) throws UniqueStockList.DuplicateTaskException {
-        tasks.add(p);
+        myStocks.add(p);
     }
 
     //@@author A0121608N
@@ -131,7 +131,7 @@ public class StockManager implements ReadOnlyStockManager {
      * @throws UniqueStockList.TaskNotFoundException if specified task does not exist.
      */
     public boolean removeTask(ReadOnlyStock key) throws UniqueStockList.TaskNotFoundException {
-        if (tasks.remove(key)) {
+        if (myStocks.remove(key)) {
             return true;
         } else {
             throw new UniqueStockList.TaskNotFoundException();
@@ -142,7 +142,7 @@ public class StockManager implements ReadOnlyStockManager {
      * Marks a task in the task book.
      */
     public void markTask(ReadOnlyStock key){
-        tasks.mark(key);
+        myStocks.mark(key);
 	}
     //@@author A0127570H
     
@@ -152,7 +152,7 @@ public class StockManager implements ReadOnlyStockManager {
      * @throws UniqueStockList.DuplicateTaskException if an equivalent task already exists.
      */
     public void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateTaskException {
-        tasks.edit(editTask, targetTask);
+        myStocks.edit(editTask, targetTask);
     }
     //@@author 
     
@@ -160,18 +160,18 @@ public class StockManager implements ReadOnlyStockManager {
 
     @Override
     public String toString() {
-        return tasks.getInternalList().size() + " tasks";
+        return myStocks.getInternalList().size() + " tasks";
         
     }
 
     @Override
     public List<ReadOnlyStock> getStockList() {
-        return Collections.unmodifiableList(tasks.getInternalList());
+        return Collections.unmodifiableList(myStocks.getInternalList());
     }
 
     @Override
     public UniqueStockList getUniqueStockList() {
-        return this.tasks;
+        return this.myStocks;
     }
     
     @Override
@@ -188,12 +188,12 @@ public class StockManager implements ReadOnlyStockManager {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StockManager // instanceof handles nulls
-                && this.tasks.equals(((StockManager) other).tasks));
+                && this.myStocks.equals(((StockManager) other).myStocks));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks);
+        return Objects.hash(myStocks);
     }
 }

@@ -10,7 +10,7 @@ public class StockPurchaseInstance {
 
     public StockPurchaseInstance(Date dateInput, Price priceInput, int lotsInput) throws IllegalValueException {
     	this.purchaseDate = dateInput;
-    	this. purchasePrice = priceInput;
+    	this.purchasePrice = priceInput;
         this.purchaseLots = lotsInput;
     }
     

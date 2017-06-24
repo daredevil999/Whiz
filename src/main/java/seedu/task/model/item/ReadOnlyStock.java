@@ -13,9 +13,10 @@ public interface ReadOnlyStock {
 
     Name getStockName();
     //Optional<Description> getDescription();
+    //Boolean getTaskStatus();
     //Optional<Date> getPurchaseDate();
     //Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList();
-    //Boolean getTaskStatus();
+    
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)

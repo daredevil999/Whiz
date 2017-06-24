@@ -1,5 +1,8 @@
 package seedu.task.model.item;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 
 public class Price {
@@ -21,8 +24,20 @@ public class Price {
 	        double valueInDouble = Double.parseDouble(value);
 	        this.value = valueInDouble;
 	    }
+	    
+	    public Price(double valInput) {
+	    	this.value = roundToDP(valInput,3);
+	    }
 
-	    /**
+	    private double roundToDP(double valInput, int places) {
+	    	assert(places > 0);
+
+	        BigDecimal bd = new BigDecimal(value);
+	        bd = bd.setScale(places, RoundingMode.HALF_UP);
+	        return bd.doubleValue();
+		}
+
+		/**
 	     * Returns true if a given string is a valid task name.
 	     */
 	    public static boolean isValidPrice(String test) {
@@ -35,7 +50,7 @@ public class Price {
 
 	    @Override
 	    public String toString() {
-	        return Double.toString(value);
+	        return Double.toString(roundToDP(this.value,3));
 	    }
 
 	    @Override

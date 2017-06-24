@@ -12,10 +12,11 @@ import java.util.Optional;
 public interface ReadOnlyStock {
 
     Name getStockName();
+    Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList();
+    
     //Optional<Description> getDescription();
     //Boolean getTaskStatus();
     //Optional<Date> getPurchaseDate();
-    //Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList();
     
 
     /**
@@ -32,17 +33,16 @@ public interface ReadOnlyStock {
     }
 
     /**
-     * Formats the task as text, showing all task details and status.
+     * Formats the stock as text, showing all stock details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ")
                 .append(getStockName())
+                .append(getStockPurchaseInstancesToString());
 //                .append(getFormalDescriptionToString())
 //                .append(getFormalDeadlineToString())
 //                .append(getTaskStatusToString())
-                ;
-        
         return builder.toString();
     }
     
@@ -53,6 +53,19 @@ public interface ReadOnlyStock {
 //    default String getDescriptionToString() {
 //        return getDescription().isPresent()? getDescription().get().toString() : "";
 //    }
+    
+    default String getStockPurchaseInstancesToString() {
+    	final StringBuilder builder = new StringBuilder();
+    	if (getStockPurchaseInstanceList().isPresent()) {
+        	int index = 1;
+            for (StockPurchaseInstance inst : getStockPurchaseInstanceList().get()) {
+            	builder.append(System.getProperty("line.separator"));
+            	builder.append(" Instance " + index + ": ")
+            			.append(inst.getAsText());
+            }
+        }
+    	return builder.toString();
+	}
     
     /**
      * Formats the description as formal text.

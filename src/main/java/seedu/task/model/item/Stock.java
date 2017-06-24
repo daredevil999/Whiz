@@ -17,12 +17,19 @@ import seedu.task.commons.util.CollectionUtil;
 public class Stock implements ReadOnlyStock {
     
     private Name name;
-    //private ArrayList<StockPurchaseInstance> purchasedStocksList ;
+    private ArrayList<StockPurchaseInstance> purchasedStocksList ;
 
     
     public Stock (Name name) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
+        this.purchasedStocksList = null;
+    }
+    
+    public Stock (Name name, ArrayList<StockPurchaseInstance> listInput) {
+    	assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.purchasedStocksList = listInput;
     }
 
     /**
@@ -30,14 +37,46 @@ public class Stock implements ReadOnlyStock {
      * @throws IllegalValueException 
      */
     public Stock(ReadOnlyStock source) {
-            this(source.getStockName());
+            this(source.getStockName(), source.getStockPurchaseInstanceList().orElse(null));
 //            		, source.getDescription().orElse(null), source.getPurchaseDate().orElse(null) , source.getTaskStatus());
     }
-
+    
+    public void addStockPurchaseInstance (StockPurchaseInstance input) {
+    	if (this.getStockPurchaseInstanceList().isPresent()) {
+    		purchasedStocksList.add(input);
+    	} else {
+    		this.purchasedStocksList = new ArrayList<StockPurchaseInstance>();
+    		purchasedStocksList.add(input);
+    	}
+    }
+    
+    public int getTotalStockPurchaseLots () {
+    	int totalLots = 0;
+    	for (StockPurchaseInstance inst : purchasedStocksList) {
+    		totalLots += inst.purchaseLots;
+    	}
+    	return totalLots;
+    }
+    
+    public Price getAverageStockPurchasePrice () {
+    	double averagePrice = 0;
+    	int totalLots = getTotalStockPurchaseLots();
+    	for (StockPurchaseInstance inst : purchasedStocksList) {
+    		averagePrice += (inst.purchasePrice.getPriceValue() * inst.purchaseLots);
+    	}
+    	averagePrice /= totalLots;
+    	return new Price (averagePrice);
+    }
+    
     @Override
     public Name getStockName() {
         return name;
     }
+
+	@Override
+	public Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList() {
+		return Optional.ofNullable(this.purchasedStocksList);
+	}
 
 //    @Override
 //    public Optional<Description> getDescription() {
@@ -75,6 +114,7 @@ public class Stock implements ReadOnlyStock {
     public String toString() {
         return getAsText();
     }
+
     
 //    //@@author A0144702N
 //	/**

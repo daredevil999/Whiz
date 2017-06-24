@@ -39,14 +39,14 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
      * Conversion
      */
     public XmlSerializableStockManager(ReadOnlyStockManager src) {
-        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
+        tasks.addAll(src.getStockList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
         events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
     }
 
 
 
     @Override
-    public UniqueStockList getUniqueTaskList() {
+    public UniqueStockList getUniqueStockList() {
         UniqueStockList lists = new UniqueStockList();
         for (XmlAdaptedStock t : tasks) {
             try {
@@ -59,7 +59,7 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
     }
 
     @Override
-    public List<ReadOnlyStock> getTaskList() {
+    public List<ReadOnlyStock> getStockList() {
         return tasks.stream().map(p -> {
             try {
                 return p.toModelType();

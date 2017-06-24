@@ -65,7 +65,7 @@ public class LogicManager extends ComponentManager implements Logic {
 	
     @Override
 	public List<ReadOnlyStock> getAllTasks() {
-		return model.getTaskBook().getTaskList();
+		return model.getTaskBook().getStockList();
 	}
     
     

@@ -13,12 +13,12 @@ import seedu.task.model.item.UniqueStockList;
  */
 public interface ReadOnlyStockManager {
 
-    UniqueStockList getUniqueTaskList();
+    UniqueStockList getUniqueStockList();
     UniqueEventList getUniqueEventList();
     /**
      * Returns an unmodifiable view of tasks list
      */
-    List<ReadOnlyStock> getTaskList();
+    List<ReadOnlyStock> getStockList();
 
     /**
      * Returns an unmodifiable view of events list

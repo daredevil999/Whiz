@@ -81,7 +81,7 @@ public class ClearCommand extends UndoableCommand {
             model.resetData(new StockManager(new UniqueStockList(), taskbook.getUniqueEventList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS));
         }else if (clearType == Type.event && clearAll){ // clears all completed and uncompleted events
-            model.resetData(new StockManager(taskbook.getUniqueTaskList(), new UniqueEventList()));
+            model.resetData(new StockManager(taskbook.getUniqueStockList(), new UniqueEventList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_EVENTS));
         }else { // clears all completed and uncompleted tasks and events, only possible path left
             model.resetData(StockManager.getEmptyTaskBook());

@@ -34,7 +34,7 @@ public class StockManager implements ReadOnlyStockManager {
      * Tasks and Events are copied into this taskbook
      */
     public StockManager(ReadOnlyStockManager toBeCopied) {
-        this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueEventList());
+        this(toBeCopied.getUniqueStockList(), toBeCopied.getUniqueEventList());
     }
 
     /**
@@ -73,7 +73,7 @@ public class StockManager implements ReadOnlyStockManager {
     }
 
     public void resetData(ReadOnlyStockManager newData) {
-        resetData(newData.getTaskList(), newData.getEventList());
+        resetData(newData.getStockList(), newData.getEventList());
     }
     //@@author
 
@@ -165,12 +165,12 @@ public class StockManager implements ReadOnlyStockManager {
     }
 
     @Override
-    public List<ReadOnlyStock> getTaskList() {
+    public List<ReadOnlyStock> getStockList() {
         return Collections.unmodifiableList(tasks.getInternalList());
     }
 
     @Override
-    public UniqueStockList getUniqueTaskList() {
+    public UniqueStockList getUniqueStockList() {
         return this.tasks;
     }
     

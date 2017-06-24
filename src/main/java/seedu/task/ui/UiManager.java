@@ -120,12 +120,12 @@ public class UiManager extends ComponentManager implements Ui {
 	private void handleJumpToTListRequestEvent(JumpToTaskListRequestEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
 		mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
-		try {
-			mainWindow.getCalendarPanel().select(event.targetTask);
-		} catch (CalendarUnsyncException e) {
-			logger.severe(StringUtil.getDetails(e));
-			showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
-		}
+//		try {
+//			mainWindow.getCalendarPanel().select(event.targetTask);
+//		} catch (CalendarUnsyncException e) {
+//			logger.severe(StringUtil.getDetails(e));
+//			showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
+//		}
 	}
 
 	//@@author A0144702N
@@ -133,23 +133,23 @@ public class UiManager extends ComponentManager implements Ui {
 	private void handleJumpToEListRequestEvent(JumpToEventListRequestEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
 		mainWindow.getEventListPanel().scrollTo(event.targetIndex);
-		try {
-			mainWindow.getCalendarPanel().select(event.targetEvent);
-		} catch (CalendarUnsyncException e) {
-			logger.severe(StringUtil.getDetails(e));
-			showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
-		}
+//		try {
+//			mainWindow.getCalendarPanel().select(event.targetEvent);
+//		} catch (CalendarUnsyncException e) {
+//			logger.severe(StringUtil.getDetails(e));
+//			showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
+//		}
 	}
 	
 	@Subscribe
 	private void handleEventListUpdatedEvent(TaskBookChangedEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
-		mainWindow.updateCalendar(event.data.getEventList(), event.data.getTaskList());
+//		mainWindow.updateCalendar(event.data.getEventList(), event.data.getTaskList());
 	}
 	
 	@Subscribe 
 	private void handleCalendarViewUpdatedEvent(UpdateCalendarEvent event){
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
-		mainWindow.updateCalendarView(event.getDisplayedDateTime(), event.getCalendarViewMode());
+//		mainWindow.updateCalendarView(event.getDisplayedDateTime(), event.getCalendarViewMode());
 	}
 }

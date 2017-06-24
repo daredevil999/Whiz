@@ -47,7 +47,7 @@ public class MainWindow extends UiPart {
     private CommandBox commandBox;
     private Config config;
     private UserPrefs userPrefs;
-    private CalendarPanel calendarPanel;
+    //private CalendarPanel calendarPanel;
 
     // Handles to elements of this Ui container
     private VBox rootLayout;
@@ -73,8 +73,8 @@ public class MainWindow extends UiPart {
     @FXML
     private AnchorPane statusbarPlaceholder;
     
-    @FXML
-    private AnchorPane calendarPlaceholder;
+//    @FXML
+//    private AnchorPane calendarPlaceholder;
 
     //@@author A0121608N
     // focus variables
@@ -164,7 +164,7 @@ public class MainWindow extends UiPart {
     //@@author A0121608N
     void fillInnerParts() {
         //AquaFx.style();
-    	calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder(), logic.getAllEvents(), logic.getAllTasks());
+//    	calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder(), logic.getAllEvents(), logic.getAllTasks());
     	eventListPanel = EventListPanel.load(primaryStage, getEventListPlaceholder(), logic.getFilteredEventList());
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
@@ -181,9 +181,9 @@ public class MainWindow extends UiPart {
     }
     //@@author
 
-    private AnchorPane getCalendarPlaceholder() {
-		return calendarPlaceholder;
-	}
+//    private AnchorPane getCalendarPlaceholder() {
+//		return calendarPlaceholder;
+//	}
 
 	private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -264,17 +264,17 @@ public class MainWindow extends UiPart {
         return this.eventListPanel;
     }
     
-    public CalendarPanel getCalendarPanel() {
-        return this.calendarPanel;
-    }
-    
-	public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
-		this.calendarPanel.refresh(eventList,taskList);
-	}
-
-	public void updateCalendarView(LocalDateTime displayedDateTime, CalendarView calendarViewMode) {
-		this.calendarPanel.updateCalendarMode(calendarViewMode);
-		this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
-	}
+//    public CalendarPanel getCalendarPanel() {
+//        return this.calendarPanel;
+//    }
+//    
+//	public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
+//		this.calendarPanel.refresh(eventList,taskList);
+//	}
+//
+//	public void updateCalendarView(LocalDateTime displayedDateTime, CalendarView calendarViewMode) {
+//		this.calendarPanel.updateCalendarMode(calendarViewMode);
+//		this.calendarPanel.updateCalendarShownPeriod(displayedDateTime);
+//	}
 
 }

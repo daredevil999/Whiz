@@ -33,14 +33,14 @@ public interface Model {
     /** Clears the list of completed tasks. */
     void clearEvents();
 
-    /** Adds the given task */
-    void addTask(Stock task) throws UniqueStockList.DuplicateTaskException;
+    /** Adds the given stock */
+    void addStock(Stock stock) throws UniqueStockList.DuplicateStockException;
     
     /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
     
     /** Edits the given task */
-    void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateTaskException;
+    void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateStockException;
     
     /** Edits the given event */
     void editEvent(Event editEvent, ReadOnlyEvent targetEvent) throws UniqueEventList.DuplicateEventException;
@@ -55,7 +55,7 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
 
     /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredTaskListToShowAll();
+    void updateFilteredStockListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void showFoundTaskList(Set<String> keywords, boolean isPowerFind);

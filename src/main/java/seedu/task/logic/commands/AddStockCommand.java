@@ -10,8 +10,10 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
+import seedu.task.model.item.Price;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
+import seedu.task.model.item.StockPurchaseInstance;
 import seedu.task.model.item.UniqueStockList;
 
 //@@author A0127570H
@@ -27,7 +29,8 @@ public class AddStockCommand extends AddCommand {
 
 	private final Logger logger = LogsCenter.getLogger(AddStockCommand.class);
 
-	private final Stock toAdd;
+	private final Stock toAddStock;
+	
 
 	/**
 	 * Convenience constructor using raw values.
@@ -35,13 +38,13 @@ public class AddStockCommand extends AddCommand {
 	 *             if any of the raw values are invalid
 	 */
 
-	public AddStockCommand(String name) throws IllegalValueException {
-	    
-		this.toAdd = new Stock(new Name(name));
+	public AddStockCommand(String name, String price, String date, String lots) throws IllegalValueException {
+		StockPurchaseInstance toAddInstance = new StockPurchaseInstance(new Date(date), new Price (price), Integer.parseInt(lots));
+		this.toAddStock = new Stock(new Name(name), toAddInstance);
 	}
 	
 	public AddStockCommand(ReadOnlyStock t) {
-		this.toAdd = new Stock(t);
+		this.toAddStock = new Stock(t);
 	}
 
 	/*
@@ -52,21 +55,21 @@ public class AddStockCommand extends AddCommand {
 	@Override
 	public CommandResult execute() {
 		assert model != null;
-		logger.info("-------[Executing AddTaskCommand] " + this.toString() );
+		logger.info("-------[Executing AddStockCommand] " + this.toString() );
 		try {
-			model.addTask(toAdd);
+			model.addStock(toAddStock);
 			
 			UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
-			EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(toAdd, lastShownList.indexOf(toAdd)));
-			return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-		} catch (UniqueStockList.DuplicateTaskException e) {
+			EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));
+			return new CommandResult(String.format(MESSAGE_SUCCESS, toAddStock));
+		} catch (UniqueStockList.DuplicateStockException e) {
 			return new CommandResult(MESSAGE_DUPLICATE_STOCK);
 		}
 	}
 
 	@Override
 	public CommandResult undo() {
-		DeleteTaskCommand reverseCommand = new DeleteTaskCommand(toAdd);
+		DeleteTaskCommand reverseCommand = new DeleteTaskCommand(toAddStock);
 		reverseCommand.setData(model);
 		
 		return reverseCommand.execute();
@@ -74,7 +77,7 @@ public class AddStockCommand extends AddCommand {
 	
 	@Override
 	public String toString() {
-		return COMMAND_WORD +" "+ this.toAdd.getAsText();
+		return COMMAND_WORD +" "+ this.toAddStock.getAsText();
 	}
 	
 	

@@ -31,6 +31,13 @@ public class Stock implements ReadOnlyStock {
         this.name = name;
         this.purchasedStocksList = listInput;
     }
+    
+    public Stock (Name name, StockPurchaseInstance input) {
+    	assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.purchasedStocksList = new ArrayList<>();
+        this.purchasedStocksList.add(input);
+    }
 
     /**
      * Copy constructor.

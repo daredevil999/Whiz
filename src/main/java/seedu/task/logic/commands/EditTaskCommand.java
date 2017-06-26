@@ -15,7 +15,7 @@ import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueStockList;
-import seedu.task.model.item.UniqueStockList.DuplicateTaskException;
+import seedu.task.model.item.UniqueStockList.DuplicateStockException;
 
 //@@author A0127570H
 /**
@@ -71,7 +71,7 @@ public class EditTaskCommand extends EditCommand  {
      * Gets the task to be edited based on the index.
      * Only fields to be edited will have values updated.
      * Newly edited task is to be selected for easy viewing
-     * @throws DuplicateTaskException 
+     * @throws DuplicateStockException 
      */
     @Override
     public CommandResult execute() {
@@ -88,7 +88,7 @@ public class EditTaskCommand extends EditCommand  {
             
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
 
-        } catch (UniqueStockList.DuplicateTaskException e) {
+        } catch (UniqueStockList.DuplicateStockException e) {
             logger.info("-------[Failed execution of EditTaskCommand]" + " Duplicate task");
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (IndexOutOfBoundsException ie) {
@@ -131,7 +131,7 @@ public class EditTaskCommand extends EditCommand  {
             model.editTask((Stock)targetTask, editTask);
             
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
-        } catch (UniqueStockList.DuplicateTaskException e) {
+        } catch (UniqueStockList.DuplicateStockException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
 	}

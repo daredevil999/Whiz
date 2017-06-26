@@ -74,7 +74,7 @@ public class SaveCommand extends Command {
         }
         
         saveToConfigJson();
-        model.updateFilteredTaskListToShowAll();
+        model.updateFilteredStockListToShowAll();
         model.updateFilteredEventListToShowAll();
         return new CommandResult(MESSAGE_SUCCESS);
     }

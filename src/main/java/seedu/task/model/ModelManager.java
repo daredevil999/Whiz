@@ -38,8 +38,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 	
 
-    private final StockManager taskBook;
-    private final FilteredList<Stock> filteredTasks;
+    private final StockManager stockManager;
+    private final FilteredList<Stock> filteredStocks;
     private final FilteredList<Event> filteredEvents;
 
     /**
@@ -53,9 +53,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with task book: " + src + " and user prefs " + userPrefs);
 
-        taskBook = new StockManager(src);
-        filteredTasks = new FilteredList<>(taskBook.getTasks());
-        filteredEvents = new FilteredList<>(taskBook.getEvents());
+        stockManager = new StockManager(src);
+        filteredStocks = new FilteredList<>(stockManager.getTasks());
+        filteredEvents = new FilteredList<>(stockManager.getEvents());
     }
 
     public ModelManager() {
@@ -63,59 +63,59 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
-        taskBook = new StockManager(initialData);
-        filteredTasks = new FilteredList<>(taskBook.getTasks());
-        filteredEvents = new FilteredList<>(taskBook.getEvents());
+        stockManager = new StockManager(initialData);
+        filteredStocks = new FilteredList<>(stockManager.getTasks());
+        filteredEvents = new FilteredList<>(stockManager.getEvents());
     }
 
     @Override
     public void resetData(ReadOnlyStockManager newData) {
-        taskBook.resetData(newData);
+        stockManager.resetData(newData);
         
         updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();
+        indicateStockManagerChanged();
     }
 
     @Override
     public ReadOnlyStockManager getTaskBook() {
-        return taskBook;
+        return stockManager;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskBookChanged() {
-        raise(new StockManagerChangedEvent(taskBook));
+    private void indicateStockManagerChanged() {
+        raise(new StockManagerChangedEvent(stockManager));
     }
 
     //@@author A0121608N
     @Override
     public synchronized void deleteTask(ReadOnlyStock target) throws TaskNotFoundException {
-        taskBook.removeTask(target);
+        stockManager.removeTask(target);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();
+        indicateStockManagerChanged();
     }
     
     @Override
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-        taskBook.removeEvent(target);
+        stockManager.removeEvent(target);
         updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();
+        indicateStockManagerChanged();
     }    
     
     @Override
     public synchronized void clearTasks() {
         
         updateFilteredTaskListToShowWithStatus(COMPLETE_STATUS);
-        while(!filteredTasks.isEmpty()){
-            ReadOnlyStock task = filteredTasks.get(0);
+        while(!filteredStocks.isEmpty()){
+            ReadOnlyStock task = filteredStocks.get(0);
             try {
-                taskBook.removeTask(task);
+                stockManager.removeTask(task);
             } catch (TaskNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";
             }
         }
-        updateFilteredTaskListToShowAll();
-        indicateTaskBookChanged();
+        updateFilteredStockListToShowAll();
+        indicateStockManagerChanged();
     }
     
     @Override
@@ -124,50 +124,50 @@ public class ModelManager extends ComponentManager implements Model {
         while(!filteredEvents.isEmpty()){
             ReadOnlyEvent event = filteredEvents.get(0);
             try {
-                taskBook.removeEvent(event);
+                stockManager.removeEvent(event);
             } catch (EventNotFoundException tnfe) {
                 assert false : "The target event cannot be missing";
             }
         }
         updateFilteredEventListToShowAll();
-        indicateTaskBookChanged();
+        indicateStockManagerChanged();
     }
 
     @Override
     public synchronized void markTask(ReadOnlyStock target){
-        taskBook.markTask(target);
+        stockManager.markTask(target);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();
+        indicateStockManagerChanged();
     }
     
     //@@author A0127570H
 
     @Override
-    public synchronized void addTask(Stock task) throws UniqueStockList.DuplicateTaskException {
-        taskBook.addTask(task);
-        updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();
+    public synchronized void addStock(Stock stock) throws UniqueStockList.DuplicateStockException {
+        stockManager.addStock(stock);
+        updateFilteredStockListToShowAll();
+        indicateStockManagerChanged();
     }
     
     @Override
     public synchronized void addEvent(Event event) throws DuplicateEventException {
-        taskBook.addEvent(event);
+        stockManager.addEvent(event);
         updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();
+        indicateStockManagerChanged();
     }
    
     @Override
-    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateTaskException {
-        taskBook.editTask(editTask, targetTask);
+    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateStockException {
+        stockManager.editTask(editTask, targetTask);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged();   
+        indicateStockManagerChanged();   
     }
     
     @Override
     public void editEvent(Event editEvent, ReadOnlyEvent targetEvent) throws UniqueEventList.DuplicateEventException {
-        taskBook.editEvent(editEvent, targetEvent);
+        stockManager.editEvent(editEvent, targetEvent);
         updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateTaskBookChanged(); 
+        indicateStockManagerChanged(); 
     }
     //@@author 
         
@@ -177,7 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0144702N
     @Override
     public UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList() {
-    	SortedList<Stock> sortedTasks = new SortedList<>(filteredTasks);
+    	SortedList<Stock> sortedTasks = new SortedList<>(filteredStocks);
     	return new UnmodifiableObservableList<>(sortedTasks);
     }
    
@@ -190,8 +190,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListToShowAll() {
-        filteredTasks.setPredicate(null);
+    public void updateFilteredStockListToShowAll() {
+        filteredStocks.setPredicate(null);
     }
 
     @Override
@@ -207,7 +207,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
 	public void updateFilteredTaskListToShowWithStatus(Status status) {
     	if(status == Status.ALL) {
-    		updateFilteredTaskListToShowAll();
+    		updateFilteredStockListToShowAll();
     	} else {
     		updateFilteredTaskList(new PredicateExpression(new StatusQualifier(status)));
     	}
@@ -228,7 +228,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
     
     private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+        filteredStocks.setPredicate(expression::satisfies);
     }
     
     private void updateFilteredEventList(Expression expression) {

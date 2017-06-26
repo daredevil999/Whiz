@@ -21,10 +21,9 @@ import seedu.task.logic.commands.IncorrectCommand;
 public class AddParser implements Parser {
     
     private String name;
-    private Optional <String> description;
-    private Optional <String> startDuration;
-    private Optional <String> endDuration;
-    private Optional <String> deadline;
+    private Optional <String> price;
+    private Optional <String> lots;
+    private Optional <String> date;
     
     public AddParser() {}
     
@@ -41,14 +40,14 @@ public class AddParser implements Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(descriptionPrefix, deadlinePrefix, 
-                durationStartPrefix, durationEndPrefix);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(pricePrefix, datePrefix, lotsPrefix);
         argsTokenizer.tokenize(args);
         
         try {           
             getTokenizerValue(argsTokenizer);
             
-            return new AddStockCommand(name);
+            return new AddStockCommand(name ,
+            		price.orElse(""), date.orElse(""),lots.orElse(""));
 //            		description.orElse(""), deadline.orElse(""));             
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -62,10 +61,9 @@ public class AddParser implements Parser {
      */
     private void getTokenizerValue(ArgumentTokenizer argsTokenizer) throws EmptyValueException {
         name = argsTokenizer.getPreamble().get();
-        description = argsTokenizer.getValue(descriptionPrefix);
-        startDuration = argsTokenizer.getValue(durationStartPrefix);
-        endDuration = argsTokenizer.getValue(durationEndPrefix);
-        deadline = argsTokenizer.getValue(deadlinePrefix);
+        price = argsTokenizer.getValue(pricePrefix);
+        date = argsTokenizer.getValue(datePrefix);
+        lots = argsTokenizer.getValue(lotsPrefix);
     } 
     
 }

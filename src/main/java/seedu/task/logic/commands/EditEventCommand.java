@@ -14,7 +14,7 @@ import seedu.task.model.item.EventDuration;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueStockList.DuplicateTaskException;
+import seedu.task.model.item.UniqueStockList.DuplicateStockException;
 
 //@@author A0127570H
 /**
@@ -66,7 +66,7 @@ public class EditEventCommand extends EditCommand {
 	/**
 	 * Executes the editing of the event
 	 * Newly edited event is to be selected for easy viewing
-	 * @throws DuplicateTaskException
+	 * @throws DuplicateStockException
 	 * @throws IllegalValueException Fields edited do not abide by restrictions
 	 * @throws IndexOutOfBoundsException Index provided is not valid
 	 */

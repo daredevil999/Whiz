@@ -22,8 +22,8 @@ public class UniqueStockList implements Iterable<Stock> {
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
     @SuppressWarnings("serial")
-	public static class DuplicateTaskException extends DuplicateDataException {
-        protected DuplicateTaskException() {
+	public static class DuplicateStockException extends DuplicateDataException {
+        protected DuplicateStockException() {
             super("Operation would result in duplicate tasks");
         }
     }
@@ -54,12 +54,12 @@ public class UniqueStockList implements Iterable<Stock> {
     /**
      * Adds a task to the list.
      *
-     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     * @throws DuplicateStockException if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(Stock toAdd) throws DuplicateTaskException {
+    public void add(Stock toAdd) throws DuplicateStockException {
     	assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateStockException();
         }
         internalList.add(toAdd);
     }
@@ -67,12 +67,12 @@ public class UniqueStockList implements Iterable<Stock> {
     /**
      * Replaces a task in the list with the edited task.
      *
-     * @throws DuplicateTaskException if the task to replaced is a duplicate of an existing task in the list.
+     * @throws DuplicateStockException if the task to replaced is a duplicate of an existing task in the list.
      */
-    public void edit(Stock toEdit, ReadOnlyStock targetTask) throws DuplicateTaskException {
+    public void edit(Stock toEdit, ReadOnlyStock targetTask) throws DuplicateStockException {
         assert toEdit != null && targetTask != null;
         if (contains(toEdit)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateStockException();
         }
         int index = internalList.indexOf(targetTask);
         internalList.set(index, toEdit);

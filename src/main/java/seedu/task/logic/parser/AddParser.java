@@ -8,7 +8,7 @@ import seedu.task.commons.exceptions.EmptyValueException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.AddEventCommand;
-import seedu.task.logic.commands.AddTaskCommand;
+import seedu.task.logic.commands.AddStockCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 
@@ -48,7 +48,7 @@ public class AddParser implements Parser {
         try {           
             getTokenizerValue(argsTokenizer);
             
-            return new AddTaskCommand(name);
+            return new AddStockCommand(name);
 //            		description.orElse(""), deadline.orElse(""));             
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

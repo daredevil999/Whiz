@@ -19,22 +19,26 @@ public class PurchasedStockCard extends UiPart{
     private Label name;
     @FXML
     private Label index;
+    @FXML
+    private Label averagePrice;
+    @FXML
+    private Label totalLots;
 //    @FXML
 //    private Label description;
 //    @FXML
 //    private Label deadline;
     
 
-    private ReadOnlyStock task;
+    private ReadOnlyStock stock;
     private int displayedIndex;
 
     public PurchasedStockCard(){
 
     }
 
-    public static PurchasedStockCard load(ReadOnlyStock task, int displayedIndex){
+    public static PurchasedStockCard load(ReadOnlyStock stock, int displayedIndex){
         PurchasedStockCard card = new PurchasedStockCard();
-        card.task = task;
+        card.stock = stock;
         card.displayedIndex = displayedIndex;
         return UiPartLoader.loadUiPart(card);
     }
@@ -42,11 +46,32 @@ public class PurchasedStockCard extends UiPart{
     //@@author-A0127570H
     @FXML
     public void initialize() {
-        name.setText(task.getStockName().fullName);
+        name.setText(stock.getStockName().fullName);
         index.setText(displayedIndex + ". "); 
+        initialiseStockPurchasePrice();
+        initialiseStockPurchaseLots();
         //setStyleClass();
     }
-//
+    
+    private void initialiseStockPurchasePrice() {	
+    	averagePrice.setText(stock.getAveragePriceToString().trim());  	
+    	if (stock.getStockPurchaseInstanceList().isPresent()) {
+    		averagePrice.setManaged(true);
+	    } else {
+	    	averagePrice.setManaged(false);
+	    }	
+	}
+    
+    private void initialiseStockPurchaseLots() {
+    	totalLots.setText(stock.getPurchasedLotsToString().trim());  	
+    	if (stock.getStockPurchaseInstanceList().isPresent()) {
+    		totalLots.setManaged(true);
+	    } else {
+	    	totalLots.setManaged(false);
+	    }	
+	}
+    
+
 //	private void initialiseDeadline() {
 //        deadline.setText(task.getDeadlineToString().trim());
 //        if (task.getPurchaseDate().isPresent()) {

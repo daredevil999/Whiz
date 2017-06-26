@@ -68,6 +68,54 @@ public interface ReadOnlyStock {
     	return builder.toString();
 	}
     
+	default String getAveragePriceToString() {
+	  if (getStockPurchaseInstanceList().isPresent()) {
+		  return " Price: " + this.getAverageStockPurchasePrice().toString(); 
+	  }
+	  else {
+		  return "";
+	  }
+	}
+	
+	default String getPurchasedLotsToString() {
+		  if (getStockPurchaseInstanceList().isPresent()) {
+			  return " Lots: " + this.getTotalStockPurchaseLots(); 
+		  }
+		  else {
+			  return "";
+		  }
+		}
+	
+    default int getTotalStockPurchaseLots () {
+    	int totalLots = 0;
+    	if (getStockPurchaseInstanceList().isPresent()) {
+    		ArrayList<StockPurchaseInstance> purchasedStocksList = getStockPurchaseInstanceList().get();
+    		for (StockPurchaseInstance inst : purchasedStocksList) {
+        		totalLots += inst.purchaseLots;
+        	}
+        	return totalLots;
+    	}
+    	else {
+    		return 0;
+    	}
+    }
+    
+    default Price getAverageStockPurchasePrice () {
+    	if (getStockPurchaseInstanceList().isPresent()) {
+    		ArrayList<StockPurchaseInstance> purchasedStocksList = getStockPurchaseInstanceList().get();
+    		int averagePrice = 0;
+        	int totalLots = this.getTotalStockPurchaseLots();
+        	for (StockPurchaseInstance inst : purchasedStocksList) {
+        		averagePrice += (inst.purchasePrice.getPriceValueInInt() * inst.purchaseLots);
+        	}
+        	averagePrice /= totalLots;
+        	return new Price (averagePrice);
+    	}
+    	else {
+    		return null;
+    	} 	
+    }
+    
     /**
      * Formats the description as formal text.
      * If null, empty string is returned

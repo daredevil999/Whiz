@@ -64,7 +64,7 @@ public class DeleteTaskCommand extends DeleteCommand {
 	
 	@Override
 	public CommandResult undo() {
-		AddTaskCommand reverseCommand = new AddTaskCommand(taskToDelete);
+		AddStockCommand reverseCommand = new AddStockCommand(taskToDelete);
 		reverseCommand.setData(model);
 		
 		return reverseCommand.execute();

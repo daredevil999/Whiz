@@ -20,12 +20,12 @@ import seedu.task.model.item.UniqueStockList;
  * @author kian ming
  */
 
-public class AddTaskCommand extends AddCommand {
+public class AddStockCommand extends AddCommand {
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
+    public static final String MESSAGE_SUCCESS = "New stock added: %1$s";
+	public static final String MESSAGE_DUPLICATE_STOCK = "This stock already exists in the stock manager";
 
-	private final Logger logger = LogsCenter.getLogger(AddTaskCommand.class);
+	private final Logger logger = LogsCenter.getLogger(AddStockCommand.class);
 
 	private final Stock toAdd;
 
@@ -35,12 +35,12 @@ public class AddTaskCommand extends AddCommand {
 	 *             if any of the raw values are invalid
 	 */
 
-	public AddTaskCommand(String name) throws IllegalValueException {
+	public AddStockCommand(String name) throws IllegalValueException {
 	    
 		this.toAdd = new Stock(new Name(name));
 	}
 	
-	public AddTaskCommand(ReadOnlyStock t) {
+	public AddStockCommand(ReadOnlyStock t) {
 		this.toAdd = new Stock(t);
 	}
 
@@ -60,7 +60,7 @@ public class AddTaskCommand extends AddCommand {
 			EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(toAdd, lastShownList.indexOf(toAdd)));
 			return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
 		} catch (UniqueStockList.DuplicateTaskException e) {
-			return new CommandResult(MESSAGE_DUPLICATE_TASK);
+			return new CommandResult(MESSAGE_DUPLICATE_STOCK);
 		}
 	}
 

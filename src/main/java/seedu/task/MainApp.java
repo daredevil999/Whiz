@@ -81,7 +81,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyStockManager> taskBookOptional;
         ReadOnlyStockManager initialData;
         try {
-            taskBookOptional = storage.readTaskBook();
+            taskBookOptional = storage.readStockManager();
             if(!taskBookOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty TaskBook");
             }

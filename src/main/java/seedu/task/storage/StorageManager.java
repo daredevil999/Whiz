@@ -14,19 +14,19 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyStockManager;
 import seedu.task.model.UserPrefs;
 /**
- * Manages storage of TaskBook data in local storage.
+ * Manages storage of stock manager data in local storage.
  * 
  */
 public class StorageManager extends ComponentManager implements Storage {
 
 	
 	private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-	private XmlStockManagerStorage taskBookStorage;
+	private XmlStockManagerStorage stockManagerStorage;
 	private JsonUserPrefStorage userPrefStorage;
 
-	public StorageManager(String taskBookFilePath, String userPrefsFilePath) {
+	public StorageManager(String stockManagerFilePath, String userPrefsFilePath) {
 		super();
-		this.taskBookStorage = new XmlStockManagerStorage(taskBookFilePath);
+		this.stockManagerStorage = new XmlStockManagerStorage(stockManagerFilePath);
 		this.userPrefStorage = new JsonUserPrefStorage(userPrefsFilePath);
 	}
 
@@ -42,47 +42,47 @@ public class StorageManager extends ComponentManager implements Storage {
 		userPrefStorage.saveUserPrefs(userPrefs);
 	}
 
-	// ================ TaskBook methods ==============================
+	// ================ Stock Manager methods ==============================
 
 	@Override
-	public String getTaskBookFilePath() {
-		return taskBookStorage.getTaskBookFilePath();
+	public String getStockManagerFilePath() {
+		return stockManagerStorage.getStockManagerFilePath();
 	}
 
 	@Override
 	// read from project main directory 
-	public Optional<ReadOnlyStockManager> readTaskBook() throws DataConversionException, IOException {
+	public Optional<ReadOnlyStockManager> readStockManager() throws DataConversionException, IOException {
 
-		return readTaskBook(taskBookStorage.getTaskBookFilePath());
+		return readStockManager(stockManagerStorage.getStockManagerFilePath());
 	}
 
 	@Override
 	//read from specified saved file path
-	public Optional<ReadOnlyStockManager> readTaskBook(String filePath) throws DataConversionException, IOException {
+	public Optional<ReadOnlyStockManager> readStockManager(String filePath) throws DataConversionException, IOException {
 		logger.fine("Attempting to read data from file: " + filePath);
-		return taskBookStorage.readTaskBook(filePath);
+		return stockManagerStorage.readStockManager(filePath);
 	}
 
 	@Override
 	// save to project main directory
-	public void saveTaskBook(ReadOnlyStockManager taskBookManager) throws IOException {
-		saveTaskBook(taskBookManager, taskBookStorage.getTaskBookFilePath());
+	public void saveStockManager(ReadOnlyStockManager stockManager) throws IOException {
+		saveStockManager(stockManager, stockManagerStorage.getStockManagerFilePath());
 	}
 
 	@Override
 	// save to specified file path
-	public void saveTaskBook(ReadOnlyStockManager taskManager, String filePath) throws IOException {
+	public void saveStockManager(ReadOnlyStockManager stockManager, String filePath) throws IOException {
 		logger.fine("Attempting to write to data file: " + filePath);
-		taskBookStorage.saveTaskBook(taskManager, filePath);
+		stockManagerStorage.saveStockManager(stockManager, filePath);
 	}
 
 	
 	@Override
 	@Subscribe
-	public void handleTaskBookChangedEvent(StockManagerChangedEvent event) {
+	public void handleStockManagerChangedEvent(StockManagerChangedEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
 		try {
-			saveTaskBook(event.data);
+			saveStockManager(event.data);
 		} catch (IOException e) {
 			raise(new DataSavingExceptionEvent(e));
 		}

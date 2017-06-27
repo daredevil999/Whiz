@@ -25,16 +25,16 @@ public class XmlStockManagerStorage implements StockManagerStorage {
         this.filePath = filePath;
     }
 
-    public String getTaskBookFilePath(){
+    public String getStockManagerFilePath(){
         return filePath;
     }
 
     /**
-     * Similar to {@link #readTaskBook()}
+     * Similar to {@link #readStockManager()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyStockManager> readTaskBook(String filePath) throws DataConversionException, FileNotFoundException {
+    public Optional<ReadOnlyStockManager> readStockManager(String filePath) throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
         File taskBookFile = new File(filePath);
@@ -50,10 +50,10 @@ public class XmlStockManagerStorage implements StockManagerStorage {
     }
 
     /**
-     * Similar to {@link #saveTaskBook(ReadOnlyStockManager)}
+     * Similar to {@link #saveStockManager(ReadOnlyStockManager)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskBook(ReadOnlyStockManager taskBook, String filePath) throws IOException {
+    public void saveStockManager(ReadOnlyStockManager taskBook, String filePath) throws IOException {
         assert taskBook != null;
         assert filePath != null;
 
@@ -63,12 +63,12 @@ public class XmlStockManagerStorage implements StockManagerStorage {
     }
 
     @Override
-    public Optional<ReadOnlyStockManager> readTaskBook() throws DataConversionException, IOException {
-        return readTaskBook(filePath);
+    public Optional<ReadOnlyStockManager> readStockManager() throws DataConversionException, IOException {
+        return readStockManager(filePath);
     }
 
     @Override
-    public void saveTaskBook(ReadOnlyStockManager taskBook) throws IOException {
-        saveTaskBook(taskBook, filePath);
+    public void saveStockManager(ReadOnlyStockManager taskBook) throws IOException {
+        saveStockManager(taskBook, filePath);
     }
 }

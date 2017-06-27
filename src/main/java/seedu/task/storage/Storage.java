@@ -20,20 +20,20 @@ public interface Storage extends StockManagerStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getTaskBookFilePath();
+    String getStockManagerFilePath();
 
     @Override
-    Optional<ReadOnlyStockManager> readTaskBook() throws DataConversionException,IOException;
+    Optional<ReadOnlyStockManager> readStockManager() throws DataConversionException,IOException;
 
     @Override
-    void saveTaskBook(ReadOnlyStockManager taskBook) throws IOException;
+    void saveStockManager(ReadOnlyStockManager stockManager) throws IOException;
 
     /**
      * Saves the current version of the Task Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTaskBookChangedEvent(StockManagerChangedEvent abce);
+    void handleStockManagerChangedEvent(StockManagerChangedEvent abce);
 
 	
 

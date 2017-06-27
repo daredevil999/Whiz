@@ -67,7 +67,7 @@ public class SaveCommand extends Command {
         config.setTaskBookFilePath(newStorageFilePath);
         indicateStorageLocationChanged();
         try {
-            storage.saveTaskBook(taskBookManager, newStorageFilePath);
+            storage.saveStockManager(taskBookManager, newStorageFilePath);
         } catch (IOException e) {
             handleInvalidFilePathException();
             return new CommandResult(MESSAGE_INVALID_PATH);
@@ -93,7 +93,7 @@ public class SaveCommand extends Command {
         indicateAttemptToExecuteIncorrectCommand();
         
         try {
-            storage.saveTaskBook(taskBookManager, newStorageFilePath);
+            storage.saveStockManager(taskBookManager, newStorageFilePath);
         } catch (IOException e) {
             logger.severe("Error saving task manager");
         }

@@ -3,7 +3,7 @@ package seedu.task.logic.commands;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
+import seedu.task.commons.events.ui.JumpToStockListRequestEvent;
 import seedu.task.model.item.ReadOnlyStock;
 
 //@author A0125534L
@@ -33,7 +33,7 @@ public class SelectTaskCommand extends SelectCommand {
 			return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 		}
 		ReadOnlyStock targetTask = model.getFilteredTaskList().get(targetIndex-1);
-		EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetTask, targetIndex - 1));
+		EventsCenter.getInstance().post(new JumpToStockListRequestEvent(targetTask, targetIndex - 1));
 		return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
 	}

@@ -2,7 +2,7 @@ package seedu.task.logic.commands;
 
 import java.util.logging.Logger;
 
-import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
+import seedu.task.commons.events.ui.JumpToStockListRequestEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
@@ -49,7 +49,7 @@ public class MarkCommand extends UndoableCommand {
         taskToMark = lastShownList.get(targetIndex - 1);
         model.markTask(taskToMark); // list starts at zero
         if (true) {   //Task will be selected if being marked from completed to uncompleted
-            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(taskToMark, targetIndex - 1));
+            EventsCenter.getInstance().post(new JumpToStockListRequestEvent(taskToMark, targetIndex - 1));
         }
 
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, targetIndex));

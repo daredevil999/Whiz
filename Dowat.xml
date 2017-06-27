@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<taskbook>
-    <tasks>
-        <name>dbs</name>
-    </tasks>
-</taskbook>
+<stockmanager>
+    <stocks>
+        <name>DBS</name>
+        <purchased>
+            <purchaseDate>27 Jun, 2017 10:04 PM</purchaseDate>
+            <purchasePrice>23.5</purchasePrice>
+            <purchaseLots>1000</purchaseLots>
+        </purchased>
+    </stocks>
+</stockmanager>

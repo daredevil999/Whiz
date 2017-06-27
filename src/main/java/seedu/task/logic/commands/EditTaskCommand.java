@@ -6,7 +6,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.ui.JumpToTaskListRequestEvent;
+import seedu.task.commons.events.ui.JumpToStockListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
@@ -82,7 +82,7 @@ public class EditTaskCommand extends EditCommand  {
 
             editTask = editTask(targetTask);
             model.editTask(editTask, targetTask);
-            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(editTask, getTargetIndex()));
+            EventsCenter.getInstance().post(new JumpToStockListRequestEvent(editTask, getTargetIndex()));
             
             logger.info("-------[Executed EditTaskCommand]" + this.toString());
             

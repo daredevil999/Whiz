@@ -6,12 +6,12 @@ import seedu.task.model.item.ReadOnlyStock;
 /**
  * Represents a selection change in the Task List Panel
  */
-public class TaskPanelSelectionChangedEvent extends BaseEvent {
+public class StockPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final ReadOnlyStock newSelection;
 
-    public TaskPanelSelectionChangedEvent(ReadOnlyStock newSelection){
+    public StockPanelSelectionChangedEvent(ReadOnlyStock newSelection){
         this.newSelection = newSelection;
     }
 

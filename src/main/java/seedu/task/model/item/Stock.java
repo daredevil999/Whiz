@@ -2,6 +2,7 @@ package seedu.task.model.item;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ import seedu.task.commons.util.CollectionUtil;
 public class Stock implements ReadOnlyStock {
     
     private Name name;
-    private ArrayList<StockPurchaseInstance> purchasedStocksList ;
+    private List<StockPurchaseInstance> purchasedStocksList ;
 
     
     public Stock (Name name) {
@@ -26,7 +27,7 @@ public class Stock implements ReadOnlyStock {
         this.purchasedStocksList = null;
     }
     
-    public Stock (Name name, ArrayList<StockPurchaseInstance> listInput) {
+    public Stock (Name name, List<StockPurchaseInstance> listInput) {
     	assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.purchasedStocksList = listInput;
@@ -81,7 +82,7 @@ public class Stock implements ReadOnlyStock {
     }
 
 	@Override
-	public Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList() {
+	public Optional<List<StockPurchaseInstance>> getStockPurchaseInstanceList() {
 		return Optional.ofNullable(this.purchasedStocksList);
 	}
 

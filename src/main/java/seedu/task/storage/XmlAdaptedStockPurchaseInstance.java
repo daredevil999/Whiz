@@ -4,11 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Date;
-import seedu.task.model.item.Description;
-import seedu.task.model.item.Name;
 import seedu.task.model.item.Price;
-import seedu.task.model.item.ReadOnlyStock;
-import seedu.task.model.item.Stock;
 import seedu.task.model.item.StockPurchaseInstance;
 
 /**

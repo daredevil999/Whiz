@@ -1,6 +1,7 @@
 package seedu.task.model.item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Optional;
 public interface ReadOnlyStock {
 
     Name getStockName();
-    Optional<ArrayList<StockPurchaseInstance>> getStockPurchaseInstanceList();
+    Optional<List<StockPurchaseInstance>> getStockPurchaseInstanceList();
     
     //Optional<Description> getDescription();
     //Boolean getTaskStatus();
@@ -84,12 +85,12 @@ public interface ReadOnlyStock {
 		  else {
 			  return "";
 		  }
-		}
+	}
 	
     default int getTotalStockPurchaseLots () {
     	int totalLots = 0;
     	if (getStockPurchaseInstanceList().isPresent()) {
-    		ArrayList<StockPurchaseInstance> purchasedStocksList = getStockPurchaseInstanceList().get();
+    		List<StockPurchaseInstance> purchasedStocksList = getStockPurchaseInstanceList().get();
     		for (StockPurchaseInstance inst : purchasedStocksList) {
         		totalLots += inst.purchaseLots;
         	}
@@ -102,7 +103,7 @@ public interface ReadOnlyStock {
     
     default Price getAverageStockPurchasePrice () {
     	if (getStockPurchaseInstanceList().isPresent()) {
-    		ArrayList<StockPurchaseInstance> purchasedStocksList = getStockPurchaseInstanceList().get();
+    		List<StockPurchaseInstance> purchasedStocksList = getStockPurchaseInstanceList().get();
     		int averagePrice = 0;
         	int totalLots = this.getTotalStockPurchaseLots();
         	for (StockPurchaseInstance inst : purchasedStocksList) {

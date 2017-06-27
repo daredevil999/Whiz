@@ -34,11 +34,11 @@ public class StockPurchaseInstance {
         return builder.toString();
     }
 
-	private int getPurchaseLots() {
+	public int getPurchaseLots() {
 		return purchaseLots;
 	}
 
-	private Price getPurchasePrice() {
+	public Price getPurchasePrice() {
 		return purchasePrice;
 	}
 }

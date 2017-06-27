@@ -10,7 +10,7 @@ import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
 
 /**
- * JAXB-friendly version of the Task.
+ * JAXB-friendly version of the Stock.
  */
 public class XmlAdaptedStock {
 	

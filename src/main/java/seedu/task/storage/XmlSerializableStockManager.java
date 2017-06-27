@@ -15,7 +15,7 @@ import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueStockList;
 
 /**
- * An Immutable TaskBook that is serializable to XML format
+ * An Immutable StockManager that is serializable to XML format
  */
 @XmlRootElement(name = "stockmanager")
 public class XmlSerializableStockManager implements ReadOnlyStockManager {

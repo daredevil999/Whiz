@@ -23,7 +23,7 @@ import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueEventList.DuplicateEventException;
 import seedu.task.model.item.UniqueEventList.EventNotFoundException;
 import seedu.task.model.item.UniqueStockList;
-import seedu.task.model.item.UniqueStockList.TaskNotFoundException;
+import seedu.task.model.item.UniqueStockList.StockNotFoundException;
 
 
 /**
@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0121608N
     @Override
-    public synchronized void deleteTask(ReadOnlyStock target) throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyStock target) throws StockNotFoundException {
         stockManager.removeTask(target);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateStockManagerChanged();
@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
             ReadOnlyStock task = filteredStocks.get(0);
             try {
                 stockManager.removeTask(task);
-            } catch (TaskNotFoundException tnfe) {
+            } catch (StockNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";
             }
         }
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0127570H
 
     @Override
-    public synchronized void addStock(Stock stock) throws UniqueStockList.DuplicateStockException {
+    public synchronized void addStock(Stock stock) {
         stockManager.addStock(stock);
         updateFilteredStockListToShowAll();
         indicateStockManagerChanged();
@@ -157,9 +157,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
    
     @Override
-    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateStockException {
+    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) {
         stockManager.editTask(editTask, targetTask);
-        updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
+        updateFilteredStockListToShowAll();
         indicateStockManagerChanged();   
     }
     

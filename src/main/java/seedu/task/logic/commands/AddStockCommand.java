@@ -56,15 +56,11 @@ public class AddStockCommand extends AddCommand {
 	public CommandResult execute() {
 		assert model != null;
 		logger.info("-------[Executing AddStockCommand] " + this.toString() );
-		try {
-			model.addStock(toAddStock);
+		model.addStock(toAddStock);
 			
-			UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
-			EventsCenter.getInstance().post(new JumpToStockListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));
-			return new CommandResult(String.format(MESSAGE_SUCCESS, toAddStock));
-		} catch (UniqueStockList.DuplicateStockException e) {
-			return new CommandResult(MESSAGE_DUPLICATE_STOCK);
-		}
+		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
+		EventsCenter.getInstance().post(new JumpToStockListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));
+		return new CommandResult(String.format(MESSAGE_SUCCESS, toAddStock.getPurchasedStockAsText()));
 	}
 
 	@Override

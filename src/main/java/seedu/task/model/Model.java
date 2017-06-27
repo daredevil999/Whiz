@@ -22,7 +22,7 @@ public interface Model {
     ReadOnlyStockManager getTaskBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyStock target) throws UniqueStockList.TaskNotFoundException;
+    void deleteTask(ReadOnlyStock target) throws UniqueStockList.StockNotFoundException;
 
     /** Deletes the given event. */
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
@@ -34,13 +34,13 @@ public interface Model {
     void clearEvents();
 
     /** Adds the given stock */
-    void addStock(Stock stock) throws UniqueStockList.DuplicateStockException;
+    void addStock(Stock stock);
     
     /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
     
     /** Edits the given task */
-    void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateStockException;
+    void editTask(Stock editTask, ReadOnlyStock targetTask);
     
     /** Edits the given event */
     void editEvent(Event editEvent, ReadOnlyEvent targetEvent) throws UniqueEventList.DuplicateEventException;

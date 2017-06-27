@@ -15,7 +15,6 @@ import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueStockList;
-import seedu.task.model.item.UniqueStockList.DuplicateStockException;
 
 //@@author A0127570H
 /**
@@ -88,9 +87,6 @@ public class EditTaskCommand extends EditCommand  {
             
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
 
-        } catch (UniqueStockList.DuplicateStockException e) {
-            logger.info("-------[Failed execution of EditTaskCommand]" + " Duplicate task");
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (IndexOutOfBoundsException ie) {
             indicateAttemptToExecuteIncorrectCommand();
             logger.info("-------[Failed execution of EditTaskCommand]" + " Index out of bound");
@@ -127,13 +123,9 @@ public class EditTaskCommand extends EditCommand  {
 
 	@Override
 	public CommandResult undo() {
-        try {
-            model.editTask((Stock)targetTask, editTask);
+        model.editTask((Stock)targetTask, editTask);
             
-            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
-        } catch (UniqueStockList.DuplicateStockException e) {
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
-        }
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
 	}
 	
 	@Override

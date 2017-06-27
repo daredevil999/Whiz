@@ -118,9 +118,8 @@ public class StockManager implements ReadOnlyStockManager {
     /**
      * Adds a stock to the stock manager.
      *
-     * @throws UniqueStockList.DuplicateStockException if an equivalent stock already exists.
      */
-    public void addStock(Stock p) throws UniqueStockList.DuplicateStockException {
+    public void addStock(Stock p) {
         myStocks.add(p);
     }
 
@@ -128,13 +127,13 @@ public class StockManager implements ReadOnlyStockManager {
     /**
      * Removes a task in the task book.
      *
-     * @throws UniqueStockList.TaskNotFoundException if specified task does not exist.
+     * @throws UniqueStockList.StockNotFoundException if specified task does not exist.
      */
-    public boolean removeTask(ReadOnlyStock key) throws UniqueStockList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyStock key) throws UniqueStockList.StockNotFoundException {
         if (myStocks.remove(key)) {
             return true;
         } else {
-            throw new UniqueStockList.TaskNotFoundException();
+            throw new UniqueStockList.StockNotFoundException();
         }
     }
 
@@ -149,9 +148,8 @@ public class StockManager implements ReadOnlyStockManager {
     /**
      * Edits a task in the task book.
      *
-     * @throws UniqueStockList.DuplicateStockException if an equivalent task already exists.
      */
-    public void editTask(Stock editTask, ReadOnlyStock targetTask) throws UniqueStockList.DuplicateStockException {
+    public void editTask(Stock editTask, ReadOnlyStock targetTask) {
         myStocks.edit(editTask, targetTask);
     }
     //@@author 

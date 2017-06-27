@@ -3,13 +3,15 @@ package seedu.task.model.item;
 import java.util.Collection;
 import java.util.Iterator;
 
+import com.google.common.base.Predicate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
 import seedu.task.commons.util.CollectionUtil;
 
 /**
- * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A list of stocks that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -19,61 +21,63 @@ import seedu.task.commons.util.CollectionUtil;
 public class UniqueStockList implements Iterable<Stock> {
 
     /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    @SuppressWarnings("serial")
-	public static class DuplicateStockException extends DuplicateDataException {
-        protected DuplicateStockException() {
-            super("Operation would result in duplicate tasks");
-        }
-    }
-
-    /**
      * Signals that an operation targeting a specified task in the list would fail because
      * there is no such matching task in the list.
      */
     @SuppressWarnings("serial")
-	public static class TaskNotFoundException extends Exception {}
+	public static class StockNotFoundException extends Exception {}
 
     private final ObservableList<Stock> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty TaskList.
+     * Constructs empty StockList.
      */
     public UniqueStockList() {}
 
     /**
-     * Returns true if the list contains an equivalent task as the given argument.
+     * Returns true if the list contains an equivalent stock as the given argument.
      */
     public boolean contains(ReadOnlyStock toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
+    
+    public int findStockIndexWithName (String inputName) {
+    	Predicate<Stock> predicate = c-> c.getStockName().getNameValue().equals(inputName);
+    	Stock  obj = internalList.stream().filter(predicate).findFirst().get();
+    	return internalList.indexOf(obj);
+    }
 
     //@@author A0127570H  
     /**
-     * Adds a task to the list.
-     *
-     * @throws DuplicateStockException if the task to add is a duplicate of an existing task in the list.
+     * Adds a stock to the list.
      */
-    public void add(Stock toAdd) throws DuplicateStockException {
+    public void add(Stock toAdd) {
     	assert toAdd != null;
         if (contains(toAdd)) {
-            throw new DuplicateStockException();
+            int targetIndex = findStockIndexWithName(toAdd.getStockName().fullName);
+            Stock newStock = internalList.get(targetIndex);
+            if (toAdd.getStockPurchaseInstanceList().isPresent()) {
+            	assert toAdd.getStockPurchaseInstanceList().get().size() == 1;
+            	StockPurchaseInstance newInstance = toAdd.getStockPurchaseInstanceList().get().get(0);
+            	newStock.addStockPurchaseInstance(newInstance);
+            	internalList.set(targetIndex, newStock);
+            }
+        } else {
+        	internalList.add(toAdd);
         }
-        internalList.add(toAdd);
     }
     
     /**
-     * Replaces a task in the list with the edited task.
+     * Replaces a stock in the list with the edited stock.
      *
      * @throws DuplicateStockException if the task to replaced is a duplicate of an existing task in the list.
      */
-    public void edit(Stock toEdit, ReadOnlyStock targetTask) throws DuplicateStockException {
+    public void edit(Stock toEdit, ReadOnlyStock targetTask) {
         assert toEdit != null && targetTask != null;
-        if (contains(toEdit)) {
-            throw new DuplicateStockException();
-        }
+//        if (contains(toEdit)) {
+//            throw new DuplicateStockException();
+//        }
         int index = internalList.indexOf(targetTask);
         internalList.set(index, toEdit);
     }
@@ -94,13 +98,13 @@ public class UniqueStockList implements Iterable<Stock> {
     /**
      * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws StockNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyStock toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyStock toRemove) throws StockNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
+            throw new StockNotFoundException();
         }
         return taskFoundAndDeleted;
     }

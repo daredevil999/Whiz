@@ -48,6 +48,32 @@ public interface ReadOnlyStock {
     }
     
     /**
+     * Formats the stock as text, showing all stock details.
+     */
+    default String getPurchasedStockAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(" Name: ")
+                .append(getStockName())
+                .append(getNewStockPurchaseInstanceToString());
+//                .append(getFormalDescriptionToString())
+//                .append(getFormalDeadlineToString())
+//                .append(getTaskStatusToString())
+        return builder.toString();
+    }
+    
+    default String getNewStockPurchaseInstanceToString() {
+    	final StringBuilder builder = new StringBuilder();
+    	if (getStockPurchaseInstanceList().isPresent()) {
+            for (StockPurchaseInstance inst : getStockPurchaseInstanceList().get()) {
+            	builder.append(System.getProperty("line.separator"));
+            	builder.append("New Instance " + ": ")
+            			.append(inst.getAsText());
+            }
+        }
+    	return builder.toString();
+	}
+    
+    /**
      * Formats the description as text.
      * If null, empty string is returned
      */
@@ -61,7 +87,7 @@ public interface ReadOnlyStock {
         	int index = 1;
             for (StockPurchaseInstance inst : getStockPurchaseInstanceList().get()) {
             	builder.append(System.getProperty("line.separator"));
-            	builder.append(" Instance " + index + ": ")
+            	builder.append("Instance " + index + ": ")
             			.append(inst.getAsText());
             	index++;
             }

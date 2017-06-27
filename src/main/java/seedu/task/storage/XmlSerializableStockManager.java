@@ -17,16 +17,16 @@ import seedu.task.model.item.UniqueStockList;
 /**
  * An Immutable TaskBook that is serializable to XML format
  */
-@XmlRootElement(name = "taskbook")
+@XmlRootElement(name = "stockmanager")
 public class XmlSerializableStockManager implements ReadOnlyStockManager {
 
     @XmlElement
-    private List<XmlAdaptedStock> tasks;
+    private List<XmlAdaptedStock> stocks;
     @XmlElement
     private List<XmlAdaptedEvent> events;
 
     {
-        tasks = new ArrayList<>();
+        stocks = new ArrayList<>();
         events = new ArrayList<>();
     }
 
@@ -39,7 +39,7 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
      * Conversion
      */
     public XmlSerializableStockManager(ReadOnlyStockManager src) {
-        tasks.addAll(src.getStockList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
+        stocks.addAll(src.getStockList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
         events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
     }
 
@@ -48,7 +48,7 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
     @Override
     public UniqueStockList getUniqueStockList() {
         UniqueStockList lists = new UniqueStockList();
-        for (XmlAdaptedStock t : tasks) {
+        for (XmlAdaptedStock t : stocks) {
             try {
                 lists.add(t.toModelType());
             } catch (IllegalValueException e) {
@@ -60,7 +60,7 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
 
     @Override
     public List<ReadOnlyStock> getStockList() {
-        return tasks.stream().map(p -> {
+        return stocks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

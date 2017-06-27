@@ -9,16 +9,16 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.XmlUtil;
 
 /**
- * Stores taskbook data in an XML file
+ * Stores stock manager data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given taskbook data to the specified file.
+     * Saves the given stock manager data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableStockManager taskBook)
+    public static void saveDataToFile(File file, XmlSerializableStockManager stockManager)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, taskBook);
+            XmlUtil.saveDataToFile(file, stockManager);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }

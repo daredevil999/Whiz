@@ -54,10 +54,10 @@ public class ListCommand extends Command {
 			model.updateFilteredEventListToShowWithStatus(status);
 			break;
 		case TASK:
-			model.updateFilteredTaskListToShowWithStatus(status);
+			model.updateFilteredStockListToShowAll();
 			break;
 		case BOTH:
-			model.updateFilteredTaskListToShowWithStatus(status);
+			model.updateFilteredStockListToShowAll();
 			model.updateFilteredEventListToShowWithStatus(status);
 			break;
 		default:

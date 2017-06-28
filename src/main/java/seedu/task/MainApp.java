@@ -50,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing TaskBook ]===========================");
+        logger.info("=============================[ Initializing StockManager ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
@@ -78,19 +78,19 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyStockManager> taskBookOptional;
+        Optional<ReadOnlyStockManager> stockManagerOptional;
         ReadOnlyStockManager initialData;
         try {
-            taskBookOptional = storage.readStockManager();
-            if(!taskBookOptional.isPresent()){
-                logger.info("Data file not found. Will be starting with an empty TaskBook");
+            stockManagerOptional = storage.readStockManager();
+            if(!stockManagerOptional.isPresent()){
+                logger.info("Data file not found. Will be starting with an empty StockManager");
             }
-            initialData = taskBookOptional.orElse(new StockManager());
+            initialData = stockManagerOptional.orElse(new StockManager());
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty StockManager");
             initialData = new StockManager();
         } catch (IOException  e) {
-            logger.warning("Problem while reading from the file. . Will be starting with an empty TaskBook");
+            logger.warning("Problem while reading from the file. . Will be starting with an empty StockManager");
             initialData = new StockManager();
         }
 

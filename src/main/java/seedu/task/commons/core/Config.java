@@ -11,11 +11,12 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Dowat";
+    private String appTitle = "Whiz";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskBookFilePath = "Dowat.xml";
-    private String taskBookName = "TypicalTaskBookName";
+    private String stockManagerFilePath = "Whiz.xml";
+    private String stockManagerName = "TypicalStockManagerName";
+    private String stockCodeFilePath = "StockCodesAndNames.txt";
 
 
     public Config() {
@@ -40,25 +41,29 @@ public class Config {
     public String getUserPrefsFilePath() {
         return userPrefsFilePath;
     }
+    
+    public String getStockCodeFilePath() {
+        return stockCodeFilePath;
+    }
 
     public void setUserPrefsFilePath(String userPrefsFilePath) {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
     public String getTaskBookFilePath() {
-        return taskBookFilePath;
+        return stockManagerFilePath;
     }
 
     public void setTaskBookFilePath(String taskBookFilePath) {
-        this.taskBookFilePath = taskBookFilePath;
+        this.stockManagerFilePath = taskBookFilePath;
     }
 
     public String getTaskBookName() {
-        return taskBookName;
+        return stockManagerName;
     }
 
     public void setTaskBookName(String taskBookName) {
-        this.taskBookName = taskBookName;
+        this.stockManagerName = taskBookName;
     }
 
     @Override
@@ -75,13 +80,13 @@ public class Config {
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(taskBookFilePath, o.taskBookFilePath)
-                && Objects.equals(taskBookName, o.taskBookName);
+                && Objects.equals(stockManagerFilePath, o.stockManagerFilePath)
+                && Objects.equals(stockManagerName, o.stockManagerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskBookFilePath, taskBookName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, stockManagerFilePath, stockManagerName);
     }
 
     @Override
@@ -90,8 +95,8 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
-        sb.append("\nLocal data file location : " + taskBookFilePath);
-        sb.append("\nTaskBook name : " + taskBookName);
+        sb.append("\nLocal data file location : " + stockManagerFilePath);
+        sb.append("\nTaskBook name : " + stockManagerName);
         return sb.toString();
     }
 

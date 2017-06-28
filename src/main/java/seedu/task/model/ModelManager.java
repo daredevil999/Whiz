@@ -2,6 +2,7 @@ package seedu.task.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,11 +37,10 @@ public class ModelManager extends ComponentManager implements Model {
     
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-	
-
     private final StockManager stockManager;
     private final FilteredList<Stock> filteredStocks;
     private final FilteredList<Event> filteredEvents;
+    private final HashMap<String, String> allStocksAndCodesMap;
 
     /**
      * Initializes a ModelManager with the given TaskBook
@@ -51,11 +51,12 @@ public class ModelManager extends ComponentManager implements Model {
         assert src != null;
         assert userPrefs != null;
 
-        logger.fine("Initializing with task book: " + src + " and user prefs " + userPrefs);
+        logger.fine("Initializing with stock manager: " + src + " and user prefs " + userPrefs);
 
         stockManager = new StockManager(src);
         filteredStocks = new FilteredList<>(stockManager.getTasks());
         filteredEvents = new FilteredList<>(stockManager.getEvents());
+        allStocksAndCodesMap = initStockCodeMap();
     }
 
     public ModelManager() {
@@ -66,9 +67,16 @@ public class ModelManager extends ComponentManager implements Model {
         stockManager = new StockManager(initialData);
         filteredStocks = new FilteredList<>(stockManager.getTasks());
         filteredEvents = new FilteredList<>(stockManager.getEvents());
+        allStocksAndCodesMap = initStockCodeMap();
     }
 
-    @Override
+    private HashMap<String, String> initStockCodeMap() {
+		HashMap<String,String> newMap = new HashMap<>();
+		
+		return newMap;
+	}
+
+	@Override
     public void resetData(ReadOnlyStockManager newData) {
         stockManager.resetData(newData);
         

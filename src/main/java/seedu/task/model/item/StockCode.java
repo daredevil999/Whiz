@@ -1,7 +1,5 @@
 package seedu.task.model.item;
 
-import java.util.ArrayList;
-
 import seedu.task.commons.exceptions.IllegalValueException;
 
 public class StockCode {

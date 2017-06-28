@@ -2,6 +2,7 @@ package seedu.task.model;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class StockManager implements ReadOnlyStockManager {
     }
 
     /**
-     * Tasks and Events are copied into this taskbook
+     * Tasks and Events are copied into this stock manager
      */
     public StockManager(UniqueStockList tasks, UniqueEventList events) {
         resetData(tasks.getInternalList(), events.getInternalList());

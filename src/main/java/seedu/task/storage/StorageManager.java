@@ -23,6 +23,7 @@ public class StorageManager extends ComponentManager implements Storage {
 	private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
 	private XmlStockManagerStorage stockManagerStorage;
 	private JsonUserPrefStorage userPrefStorage;
+	private TxtStockCodeStorage
 
 	public StorageManager(String stockManagerFilePath, String userPrefsFilePath) {
 		super();

@@ -29,7 +29,7 @@
 .cell_desc_label {
     -fx-font-size: 11px !important;
     -fx-text-fill: #2c3e50;
-    -fx-background-image: url('/images/desc.png');
+    -fx-background-image: url('/images/dollar.png');
     -fx-background-position: left center;
   	-fx-background-repeat: no-repeat;
   	 -fx-background-size: 15px;
@@ -38,7 +38,7 @@
 .cell_ddl_label {
     -fx-font-size: 11px !important;
     -fx-text-fill: #e67e22;
-    -fx-background-image: url('/images/calendar.png');
+    -fx-background-image: url('/images/lots.png');
     -fx-background-position: left center;
   	-fx-background-repeat: no-repeat;
   	 -fx-background-size: 15px;

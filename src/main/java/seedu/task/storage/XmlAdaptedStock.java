@@ -11,6 +11,7 @@ import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
+import seedu.task.model.item.StockCode;
 import seedu.task.model.item.StockPurchaseInstance;
 
 /**
@@ -20,6 +21,9 @@ public class XmlAdaptedStock {
 	
 	@XmlElement(required = true)
 	private String name;
+	
+	@XmlElement(required = true)
+	private String code;
 
     @XmlElement
     private List<XmlAdaptedStockPurchaseInstance> purchased = new ArrayList<>();
@@ -37,6 +41,7 @@ public class XmlAdaptedStock {
      */
     public XmlAdaptedStock(ReadOnlyStock source) {
         name = source.getStockName().fullName;
+        code = source.getStockCode().code;
         purchased = new ArrayList<>();
         if (source.getStockPurchaseInstanceList().isPresent()) {
         	for (StockPurchaseInstance inst : source.getStockPurchaseInstanceList().get()) {
@@ -53,10 +58,11 @@ public class XmlAdaptedStock {
     public Stock toModelType() throws IllegalValueException {
 
         final Name name = new Name(this.name);
+        final StockCode code = new StockCode(this.code);
         final List<StockPurchaseInstance> purchasedList = new ArrayList<>();
         for (XmlAdaptedStockPurchaseInstance inst : purchased) {
         	purchasedList.add(inst.toModelType());
         }       
-        return new Stock(name, purchasedList);
+        return new Stock(name, code, purchasedList);
     }
 }

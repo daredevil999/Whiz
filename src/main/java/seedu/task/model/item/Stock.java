@@ -2,12 +2,14 @@ package seedu.task.model.item;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
+import seedu.task.storage.TxtStockCodeStorage;
 
 /**
  * Represents a Task in the task book.
@@ -16,26 +18,29 @@ import seedu.task.commons.util.CollectionUtil;
  */
 
 public class Stock implements ReadOnlyStock {
-    
-    private Name name;
+	
+	private Name name;
+    private StockCode code;
     private List<StockPurchaseInstance> purchasedStocksList ;
-
     
-    public Stock (Name name) {
+    public Stock (Name name, StockCode code) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
+        this.code = code;
         this.purchasedStocksList = null;
     }
     
-    public Stock (Name name, List<StockPurchaseInstance> listInput) {
+    public Stock (Name name, StockCode code, List<StockPurchaseInstance> listInput) {
     	assert !CollectionUtil.isAnyNull(name);
         this.name = name;
+        this.code = code;
         this.purchasedStocksList = listInput;
     }
     
-    public Stock (Name name, StockPurchaseInstance input) {
+    public Stock (Name name, StockCode code, StockPurchaseInstance input) {
     	assert !CollectionUtil.isAnyNull(name);
         this.name = name;
+        this.code = code;
         this.purchasedStocksList = new ArrayList<>();
         this.purchasedStocksList.add(input);
     }
@@ -45,7 +50,7 @@ public class Stock implements ReadOnlyStock {
      * @throws IllegalValueException 
      */
     public Stock(ReadOnlyStock source) {
-            this(source.getStockName(), source.getStockPurchaseInstanceList().orElse(null));
+            this(source.getStockName(), source.getStockCode(), source.getStockPurchaseInstanceList().orElse(null));
 //            		, source.getDescription().orElse(null), source.getPurchaseDate().orElse(null) , source.getTaskStatus());
     }
     
@@ -84,6 +89,11 @@ public class Stock implements ReadOnlyStock {
 	@Override
 	public Optional<List<StockPurchaseInstance>> getStockPurchaseInstanceList() {
 		return Optional.ofNullable(this.purchasedStocksList);
+	}
+
+	@Override
+	public StockCode getStockCode() {
+		return code;
 	}
 
 //    @Override

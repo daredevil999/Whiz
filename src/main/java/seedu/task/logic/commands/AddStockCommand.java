@@ -13,14 +13,11 @@ import seedu.task.model.item.Name;
 import seedu.task.model.item.Price;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
+import seedu.task.model.item.StockCode;
 import seedu.task.model.item.StockPurchaseInstance;
 import seedu.task.model.item.UniqueStockList;
+import seedu.task.storage.TxtStockCodeStorage;
 
-//@@author A0127570H
-/**
- * Adds a task to the task book.
- * @author kian ming
- */
 
 public class AddStockCommand extends AddCommand {
 
@@ -40,7 +37,8 @@ public class AddStockCommand extends AddCommand {
 
 	public AddStockCommand(String name, String price, String date, String lots) throws IllegalValueException {
 		StockPurchaseInstance toAddInstance = new StockPurchaseInstance(new Date(date), new Price (price), Integer.parseInt(lots));
-		this.toAddStock = new Stock(new Name(name), toAddInstance);
+		String code = TxtStockCodeStorage.getStockCodeFromName(name);
+		this.toAddStock = new Stock(new Name(name), new StockCode(code), toAddInstance);
 	}
 	
 	public AddStockCommand(ReadOnlyStock t) {

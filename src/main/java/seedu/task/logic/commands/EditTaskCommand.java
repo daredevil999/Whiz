@@ -14,6 +14,7 @@ import seedu.task.model.item.Flag;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
+import seedu.task.model.item.StockCode;
 import seedu.task.model.item.UniqueStockList;
 
 //@@author A0127570H
@@ -33,6 +34,7 @@ public class EditTaskCommand extends EditCommand  {
     private Name newName;
     private Description newDescription;
     private Date newDeadline;
+    private StockCode newStockCode;
     private boolean isDeadlineToBeRemoved;
     
     private Stock editTask;
@@ -104,11 +106,14 @@ public class EditTaskCommand extends EditCommand  {
      * @return task that has the fields according to edit requirements.
      * @throws IllegalValueException requesting to remove deadline for a floating target task
      */    
-    private Stock editTask(ReadOnlyStock targetTask) throws IllegalValueException {
+    private Stock editTask(ReadOnlyStock targetStock) throws IllegalValueException {
         
         if (newName == null) {
-            newName = targetTask.getStockName();
+            newName = targetStock.getStockName();
         }
+        if (newStockCode == null) {
+            newStockCode = targetStock.getStockCode();
+        }        
 //        if (newDescription == null) {
 //            newDescription = targetTask.getDescription().orElse(null);
 //        }
@@ -118,7 +123,7 @@ public class EditTaskCommand extends EditCommand  {
 //        if (newDeadline == null && targetTask.getPurchaseDate().isPresent() && !isDeadlineToBeRemoved) {
 //            newDeadline = targetTask.getPurchaseDate().get();
 //        }
-        return new Stock (this.newName);        
+        return new Stock (this.newName, this.newStockCode);        
     }
 
 	@Override

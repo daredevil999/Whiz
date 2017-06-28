@@ -1,12 +1,12 @@
 package seedu.task.model.item;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.storage.TxtStockCodeStorage;
 
 public class StockCode {
 	
 	public static final String MESSAGE_STOCKCODE_CONSTRAINTS = "Stock codes should correspond to list of SGX codes";
-
-    public final String code;
+    public final String code; 
 
     public StockCode(String codeInput) throws IllegalValueException {
         assert codeInput != null;
@@ -21,13 +21,8 @@ public class StockCode {
      * Returns true if a given string is a valid stock code.
      */
     public static boolean isValidStockCode(String test) {
-        getAllStockCodes();
-    	return true;
+    	return TxtStockCodeStorage.isStockCodeValid(test);
     }
-    
-    private static void getAllStockCodes() {
-		// TODO Auto-generated method stub		
-	}
 
 	public String getStockCode() {
     	return code;

@@ -25,12 +25,10 @@ public class StockManager implements ReadOnlyStockManager {
 
     private final UniqueStockList myStocks;
     private final UniqueEventList events;
-    private HashMap<String, String> allStocksAndCodesMap;
 
     {
         myStocks = new UniqueStockList();
         events = new UniqueEventList();
-        allStocksAndCodesMap = TxtStockCodeStorage.readStockCodeMap();
     }
 
     public StockManager() {}

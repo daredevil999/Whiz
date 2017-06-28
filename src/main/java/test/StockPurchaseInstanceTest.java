@@ -11,6 +11,7 @@ import seedu.task.model.item.Date;
 import seedu.task.model.item.Name;
 import seedu.task.model.item.Price;
 import seedu.task.model.item.Stock;
+import seedu.task.model.item.StockCode;
 import seedu.task.model.item.StockPurchaseInstance;;
 
 public class StockPurchaseInstanceTest {
@@ -44,15 +45,15 @@ public class StockPurchaseInstanceTest {
 		listInput.add(inst1);
 		listInput.add(inst2);
 		listInput.add(inst3);
-		Stock ts1 = new Stock (new Name("DBS"), listInput);
+		Stock ts1 = new Stock (new Name("DBS GROUP HOLDINGS LTD"), new StockCode ("D05"), listInput);
 		
-		assertEquals(ts1.toString()," Name: DBS"
+		assertEquals(ts1.toString()," Name: DBS GROUP HOLDINGS LTD | D05"
 				+ System.getProperty("line.separator")
-				+ " Instance 1:  Purchase Date: 2017-06-23 Purchase Price: 23.056 Purchase Lots: 1200"
+				+ "Instance 1:  Purchase Date: 2017-06-23 Purchase Price: 23.056 Purchase Lots: 1200"
 				+ System.getProperty("line.separator")
-				+ " Instance 2:  Purchase Date: 2017-06-24 Purchase Price: 22.555 Purchase Lots: 1000"
+				+ "Instance 2:  Purchase Date: 2017-06-24 Purchase Price: 22.555 Purchase Lots: 1000"
 				+ System.getProperty("line.separator")
-				+ " Instance 3:  Purchase Date: 2017-06-25 Purchase Price: 21.0 Purchase Lots: 200");
+				+ "Instance 3:  Purchase Date: 2017-06-25 Purchase Price: 21.0 Purchase Lots: 200");
 		
 		int expectedTotalLots = 2400;
 		assertEquals(expectedTotalLots, ts1.getTotalStockPurchaseLots());

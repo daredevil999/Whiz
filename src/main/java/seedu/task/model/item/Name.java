@@ -1,6 +1,7 @@
 package seedu.task.model.item;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.storage.TxtStockCodeStorage;
 
 /**
  * Represents a Task's or an Event's name in the task book.
@@ -9,6 +10,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_NAME_CONSTRAINTS = "Stock names should be spaces or alphanumeric characters";
+    public static final String MESSAGE_STOCK_NAME_CONSTRAINTS = "Stock names should correspond to official names as listed in SGX";
     public static final String NAME_VALIDATION_REGEX = "[a-zA-Z0-9#\\$\\.\\(\\)%&\\s\\,\\@\\:\\'\\_]+";
 
     public final String fullName;
@@ -24,10 +26,17 @@ public class Name implements Comparable<Name> {
         if (!isValidName(name)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
+        if (!isValidStockName(name)) {
+            throw new IllegalValueException(MESSAGE_STOCK_NAME_CONSTRAINTS);
+        }
         this.fullName = name;
     }
 
-    /**
+    private boolean isValidStockName(String name) {
+		return TxtStockCodeStorage.isStockNameValid(name);
+	}
+
+	/**
      * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {

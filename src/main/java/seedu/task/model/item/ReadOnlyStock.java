@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface ReadOnlyStock {
 
     Name getStockName();
+    StockCode getStockCode();
     Optional<List<StockPurchaseInstance>> getStockPurchaseInstanceList();
     
     //Optional<Description> getDescription();
@@ -27,7 +28,7 @@ public interface ReadOnlyStock {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getStockName().equals(this.getStockName()) // state checks here onwards
-//                && other.getPurchaseDate().equals(this.getPurchaseDate())
+                && other.getStockCode().equals(this.getStockCode())
 //                && other.getTaskStatus().equals(this.getTaskStatus())
 //                && other.getDescription().equals(this.getDescription())
                 );
@@ -40,6 +41,8 @@ public interface ReadOnlyStock {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ")
                 .append(getStockName())
+                .append(" | ")
+                .append(getStockCode())
                 .append(getStockPurchaseInstancesToString());
 //                .append(getFormalDescriptionToString())
 //                .append(getFormalDeadlineToString())
@@ -54,6 +57,8 @@ public interface ReadOnlyStock {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Name: ")
                 .append(getStockName())
+                .append(" | ")
+                .append(getStockCode())
                 .append(getNewStockPurchaseInstanceToString());
 //                .append(getFormalDescriptionToString())
 //                .append(getFormalDeadlineToString())

@@ -21,6 +21,11 @@
     -fx-text-fill: #010504;
 }
 
+.cell_big_code {
+    -fx-font-size: 16px;
+    -fx-text-fill: red;
+}
+
 .cell_desc_label {
     -fx-font-size: 11px !important;
     -fx-text-fill: #2c3e50;

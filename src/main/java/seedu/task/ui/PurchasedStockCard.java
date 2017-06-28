@@ -18,6 +18,8 @@ public class PurchasedStockCard extends UiPart{
     @FXML
     private Label name;
     @FXML
+    private Label code;
+    @FXML
     private Label index;
     @FXML
     private Label averagePrice;
@@ -46,7 +48,8 @@ public class PurchasedStockCard extends UiPart{
     //@@author-A0127570H
     @FXML
     public void initialize() {
-        name.setText(stock.getStockName().fullName);
+        name.setText(stock.getStockName().fullName + "  ");
+        code.setText("[" + stock.getStockCode().code + "]");
         index.setText(displayedIndex + ". "); 
         initialiseStockPurchasePrice();
         initialiseStockPurchaseLots();

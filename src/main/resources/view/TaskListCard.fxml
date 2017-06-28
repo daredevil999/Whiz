@@ -39,6 +39,7 @@
                                 <HBox>
                                    <children>
                                        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
+                                       <Label fx:id="code" styleClass="cell_big_code" text="\$code" wrapText="true" />
                                    </children>
                                 </HBox>
                             </children>

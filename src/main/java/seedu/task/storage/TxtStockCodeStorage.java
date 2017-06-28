@@ -4,33 +4,34 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Optional;
+import java.util.logging.Logger;
 
-import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.util.StringUtil;
 
-public class TxtStockCodeStorage implements StockCodeStorage {
+public class TxtStockCodeStorage {
 
-	private String filePath;
+	private static final Logger logger = LogsCenter.getLogger(TxtStockCodeStorage.class);
+	private final static String filePath = "StockCodesAndNames.txt";;
 	
-	public TxtStockCodeStorage(String filePath) {
-		this.filePath = filePath;
-	}
+	public TxtStockCodeStorage() {}
 	
-	@Override
 	public String getStockCodeStorageFilePath() {
 		return filePath;
 	}
 
-	@Override
-	public Optional<HashMap<String, String>> readStockCodeMap(String filepath)
-			throws IOException {
-		assert filePath != null;
+	public static HashMap<String, String> readStockCodeMap() {
 		
-		HashMap<String, String> stockCodeMapOptional = loadCodesFromTxt ();
-		return Optional.of(stockCodeMapOptional);
+		HashMap<String, String> stockCodeMapOptional = new HashMap<>();
+		try {
+			stockCodeMapOptional = loadCodesFromTxt();
+		} catch (IOException e) {
+			logger.warning("Failed to load stock codes from text file path : " + filePath);
+		}
+		return stockCodeMapOptional;
 	}
 
-	private HashMap<String, String> loadCodesFromTxt() throws IOException {
+	private static HashMap<String, String> loadCodesFromTxt() throws IOException {
 		FileReader fr = new FileReader(filePath);
 		BufferedReader br = new BufferedReader(fr);
 		HashMap<String, String> stockCodeMapOptional = new HashMap<>();
@@ -41,11 +42,6 @@ public class TxtStockCodeStorage implements StockCodeStorage {
     	}
     	br.close();
 		return stockCodeMapOptional;
-	}
-
-	@Override
-	public Optional<HashMap<String, String>> readStockCodeMap() throws DataConversionException, IOException {
-		return readStockCodeMap(filePath);
 	}
 
 }

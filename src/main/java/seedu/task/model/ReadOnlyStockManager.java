@@ -1,6 +1,5 @@
 package seedu.task.model;
 
-
 import java.util.List;
 
 import seedu.task.model.item.ReadOnlyEvent;

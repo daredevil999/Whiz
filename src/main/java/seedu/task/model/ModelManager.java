@@ -40,7 +40,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final StockManager stockManager;
     private final FilteredList<Stock> filteredStocks;
     private final FilteredList<Event> filteredEvents;
-    private final HashMap<String, String> allStocksAndCodesMap;
 
     /**
      * Initializes a ModelManager with the given TaskBook
@@ -56,7 +55,6 @@ public class ModelManager extends ComponentManager implements Model {
         stockManager = new StockManager(src);
         filteredStocks = new FilteredList<>(stockManager.getTasks());
         filteredEvents = new FilteredList<>(stockManager.getEvents());
-        allStocksAndCodesMap = initStockCodeMap();
     }
 
     public ModelManager() {
@@ -67,14 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
         stockManager = new StockManager(initialData);
         filteredStocks = new FilteredList<>(stockManager.getTasks());
         filteredEvents = new FilteredList<>(stockManager.getEvents());
-        allStocksAndCodesMap = initStockCodeMap();
     }
-
-    private HashMap<String, String> initStockCodeMap() {
-		HashMap<String,String> newMap = new HashMap<>();
-		
-		return newMap;
-	}
 
 	@Override
     public void resetData(ReadOnlyStockManager newData) {

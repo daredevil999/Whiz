@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
 import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueStockList;
+import seedu.task.storage.TxtStockCodeStorage;
 
 /**
  * Wraps all data at the task-book level
@@ -23,10 +25,12 @@ public class StockManager implements ReadOnlyStockManager {
 
     private final UniqueStockList myStocks;
     private final UniqueEventList events;
+    private HashMap<String, String> allStocksAndCodesMap;
 
     {
         myStocks = new UniqueStockList();
         events = new UniqueEventList();
+        allStocksAndCodesMap = TxtStockCodeStorage.readStockCodeMap();
     }
 
     public StockManager() {}

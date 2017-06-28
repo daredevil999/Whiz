@@ -16,7 +16,6 @@ public class Config {
     private String userPrefsFilePath = "preferences.json";
     private String stockManagerFilePath = "Whiz.xml";
     private String stockManagerName = "TypicalStockManagerName";
-    private String stockCodeFilePath = "StockCodesAndNames.txt";
 
 
     public Config() {
@@ -40,10 +39,6 @@ public class Config {
 
     public String getUserPrefsFilePath() {
         return userPrefsFilePath;
-    }
-    
-    public String getStockCodeFilePath() {
-        return stockCodeFilePath;
     }
 
     public void setUserPrefsFilePath(String userPrefsFilePath) {

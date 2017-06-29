@@ -28,26 +28,26 @@ public interface StockManagerStorage {
 	Optional<ReadOnlyStockManager> readStockManager() throws DataConversionException, IOException;
 
 	/**
-	 * @see #getTaskManagerFilePath()
+	 * @see #getStockManagerFilePath()
 	 */
 	Optional<ReadOnlyStockManager> readStockManager(String filePath) throws DataConversionException, IOException;
 
 	/**
 	 * Saves the given {@link ReadOnlyStockManager} to the storage.
 	 * 
-	 * @param taskBook
+	 * @param stockManager
 	 *            cannot be null.
 	 * @throws IOException
 	 *             if there was any problem writing to the file.
 	 */
 
-	void saveStockManager(ReadOnlyStockManager taskBook) throws IOException;
+	void saveStockManager(ReadOnlyStockManager stockManager) throws IOException;
 
 	/**
-	 * @see #saveTaskManager(ReadOnlyStockManager)
+	 * @see #saveStockManager(ReadOnlyStockManager)
 	 */
 	
-	void saveStockManager(ReadOnlyStockManager taskBook, String filePath) throws IOException;
+	void saveStockManager(ReadOnlyStockManager stockManager, String filePath) throws IOException;
 
 	
 }

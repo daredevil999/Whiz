@@ -37,29 +37,29 @@ public class XmlStockManagerStorage implements StockManagerStorage {
     public Optional<ReadOnlyStockManager> readStockManager(String filePath) throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
-        File taskBookFile = new File(filePath);
+        File stockManagerFile = new File(filePath);
 
-        if (!taskBookFile.exists()) {
-            logger.info("TaskBook file "  + taskBookFile + " not found");
+        if (!stockManagerFile.exists()) {
+            logger.info("StockManager file "  + stockManagerFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyStockManager taskBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyStockManager stockManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(taskBookOptional);
+        return Optional.of(stockManagerOptional);
     }
 
     /**
      * Similar to {@link #saveStockManager(ReadOnlyStockManager)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveStockManager(ReadOnlyStockManager taskBook, String filePath) throws IOException {
-        assert taskBook != null;
+    public void saveStockManager(ReadOnlyStockManager stockManager, String filePath) throws IOException {
+        assert stockManager != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableStockManager(taskBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableStockManager(stockManager));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class XmlStockManagerStorage implements StockManagerStorage {
     }
 
     @Override
-    public void saveStockManager(ReadOnlyStockManager taskBook) throws IOException {
-        saveStockManager(taskBook, filePath);
+    public void saveStockManager(ReadOnlyStockManager stockManager) throws IOException {
+        saveStockManager(stockManager, filePath);
     }
 }

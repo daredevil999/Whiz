@@ -41,7 +41,7 @@ public class SaveCommand extends Command {
     private static Storage storage;
     
     public SaveCommand(String newStorageFilePath) {
-        this.oldStorageFilePath = config.getTaskBookFilePath();
+        this.oldStorageFilePath = config.getStockManagerFilePath();
         logger.info("Old file path: " + oldStorageFilePath);
         
         this.newStorageFilePath = newStorageFilePath.trim().replace("\\", "/") + "/dowat.xml";
@@ -62,9 +62,9 @@ public class SaveCommand extends Command {
         assert config != null;
         assert jsonConfigStorage != null;
 
-        taskBookManager = model.getTaskBook();
+        taskBookManager = model.getStockManager();
         
-        config.setTaskBookFilePath(newStorageFilePath);
+        config.setStockManagerFilePath(newStorageFilePath);
         indicateStorageLocationChanged();
         try {
             storage.saveStockManager(taskBookManager, newStorageFilePath);
@@ -87,7 +87,7 @@ public class SaveCommand extends Command {
         logger.info("Error writing to filepath. Handling data save exception.");
         assert config != null;
         
-        config.setTaskBookFilePath(oldStorageFilePath);  //set back to old filepath
+        config.setStockManagerFilePath(oldStorageFilePath);  //set back to old filepath
         indicateStorageLocationChanged(); 
         indicateAttemptToExecuteIncorrectCommand();
         

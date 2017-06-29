@@ -62,20 +62,20 @@ public class ClearCommand extends UndoableCommand {
     public CommandResult execute() {
         assert model != null;
         
-        ReadOnlyStockManager taskbook = model.getTaskBook();
-        currentTaskBook = new StockManager(model.getTaskBook());
+        ReadOnlyStockManager taskbook = model.getStockManager();
+        currentTaskBook = new StockManager(model.getStockManager());
         
         if(clearType == Type.all && !clearAll){ // clears completed tasks and events
-            model.clearTasks();
+            model.clearStocks();
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_TASKS_EVENTS));
         }else if (clearType == Type.task && !clearAll){ // clears completed tasks
-            model.clearTasks();
+            model.clearStocks();
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_TASKS));
         }else if (clearType == Type.task && clearAll){ // clears all completed and uncompleted tasks
             model.resetData(new StockManager(new UniqueStockList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS));
         }else { // clears all completed and uncompleted tasks and events, only possible path left
-            model.resetData(StockManager.getEmptyTaskBook());
+            model.resetData(StockManager.getEmptyStockManager());
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS_EVENTS));
         }
     }

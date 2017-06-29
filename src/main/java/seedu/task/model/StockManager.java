@@ -39,23 +39,23 @@ public class StockManager implements ReadOnlyStockManager {
         resetData(stocks.getInternalList());
     }
 
-    public static ReadOnlyStockManager getEmptyTaskBook() {
+    public static ReadOnlyStockManager getEmptyStockManager() {
         return new StockManager();
     }
 
 //// list overwrite operations
 
-    public ObservableList<Stock> getTasks() {
+    public ObservableList<Stock> getStocks() {
         return myStocks.getInternalList();
     }
 
-    public void setTasks(List<Stock> tasks) {
-        this.myStocks.getInternalList().setAll(tasks);
+    public void setStocks(List<Stock> stocks) {
+        this.myStocks.getInternalList().setAll(stocks);
     }
     
     //@@author A0121608N
     public void resetData(Collection<? extends ReadOnlyStock> newStocks) {
-        setTasks(newStocks.stream().map(Stock::new).collect(Collectors.toList()));
+        setStocks(newStocks.stream().map(Stock::new).collect(Collectors.toList()));
     }
 
     public void resetData(ReadOnlyStockManager newData) {
@@ -74,11 +74,11 @@ public class StockManager implements ReadOnlyStockManager {
 
     //@@author A0121608N
     /**
-     * Removes a task in the task book.
+     * Removes a stock in the stock manager.
      *
-     * @throws UniqueStockList.StockNotFoundException if specified task does not exist.
+     * @throws UniqueStockList.StockNotFoundException if specified stock does not exist.
      */
-    public boolean removeTask(ReadOnlyStock key) throws UniqueStockList.StockNotFoundException {
+    public boolean removeStock(ReadOnlyStock key) throws UniqueStockList.StockNotFoundException {
         if (myStocks.remove(key)) {
             return true;
         } else {
@@ -87,19 +87,19 @@ public class StockManager implements ReadOnlyStockManager {
     }
 
     /**
-     * Marks a task in the task book.
+     * Marks a stock in the stock manager.
      */
-    public void markTask(ReadOnlyStock key){
+    public void markStock(ReadOnlyStock key){
         myStocks.mark(key);
 	}
     //@@author A0127570H
     
     /**
-     * Edits a task in the task book.
+     * Edits a stock in the stock manager.
      *
      */
-    public void editTask(Stock editTask, ReadOnlyStock targetTask) {
-        myStocks.edit(editTask, targetTask);
+    public void editStock(Stock editStock, ReadOnlyStock targetStock) {
+        myStocks.edit(editStock, targetStock);
     }
     //@@author 
     

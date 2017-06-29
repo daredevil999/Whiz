@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.core.Status;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.UndoableCommand;
@@ -48,12 +47,12 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyStock> getFilteredTaskList() {
     	model.updateFilteredStockListToShowAll();
-        return model.getFilteredTaskList();
+        return model.getFilteredStockList();
     }
 	
     @Override
 	public List<ReadOnlyStock> getAllTasks() {
-		return model.getTaskBook().getStockList();
+		return model.getStockManager().getStockList();
 	}
     
     

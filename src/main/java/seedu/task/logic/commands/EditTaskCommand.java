@@ -78,11 +78,11 @@ public class EditTaskCommand extends EditCommand  {
     public CommandResult execute() {
         logger.info("-------[Executing EditTaskCommand]");
         try {
-            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();        
+            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();        
             targetTask = lastShownList.get(getTargetIndex());
 
             editTask = editTask(targetTask);
-            model.editTask(editTask, targetTask);
+            model.editStock(editTask, targetTask);
             EventsCenter.getInstance().post(new JumpToStockListRequestEvent(editTask, getTargetIndex()));
             
             logger.info("-------[Executed EditTaskCommand]" + this.toString());
@@ -128,7 +128,7 @@ public class EditTaskCommand extends EditCommand  {
 
 	@Override
 	public CommandResult undo() {
-        model.editTask((Stock)targetTask, editTask);
+        model.editStock((Stock)targetTask, editTask);
             
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editTask));
 	}

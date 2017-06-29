@@ -37,7 +37,7 @@ public class DeleteTaskCommand extends DeleteCommand {
         assert model != null;
         
         if(taskToDelete == null){
-            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
+            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
         
             if (outOfBounds(lastShownList.size())) {
                 indicateAttemptToExecuteIncorrectCommand();
@@ -50,7 +50,7 @@ public class DeleteTaskCommand extends DeleteCommand {
         logger.info("-------[Executing DeleteTaskCommand] " + this.toString() );
         
         try {
-            model.deleteTask(taskToDelete);
+            model.deleteStock(taskToDelete);
         } catch (StockNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }

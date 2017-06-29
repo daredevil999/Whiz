@@ -45,20 +45,20 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getTaskBookFilePath() {
+    public String getStockManagerFilePath() {
         return stockManagerFilePath;
     }
 
-    public void setTaskBookFilePath(String taskBookFilePath) {
-        this.stockManagerFilePath = taskBookFilePath;
+    public void setStockManagerFilePath(String stockManagerFilePath) {
+        this.stockManagerFilePath = stockManagerFilePath;
     }
 
-    public String getTaskBookName() {
+    public String getStockManagerName() {
         return stockManagerName;
     }
 
-    public void setTaskBookName(String taskBookName) {
-        this.stockManagerName = taskBookName;
+    public void setStockManagerName(String stockManagerName) {
+        this.stockManagerName = stockManagerName;
     }
 
     @Override

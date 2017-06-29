@@ -2,7 +2,6 @@ package seedu.task.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,7 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with stock manager: " + src + " and user prefs " + userPrefs);
 
         stockManager = new StockManager(src);
-        filteredStocks = new FilteredList<>(stockManager.getTasks());
+        filteredStocks = new FilteredList<>(stockManager.getStocks());
     }
 
     public ModelManager() {
@@ -56,18 +55,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
         stockManager = new StockManager(initialData);
-        filteredStocks = new FilteredList<>(stockManager.getTasks());
+        filteredStocks = new FilteredList<>(stockManager.getStocks());
     }
 
 	@Override
     public void resetData(ReadOnlyStockManager newData) {
         stockManager.resetData(newData);
-        updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
+        updateFilteredStockListToShowWithStatus(INCOMPLETE_STATUS);
         indicateStockManagerChanged();
     }
 
     @Override
-    public ReadOnlyStockManager getTaskBook() {
+    public ReadOnlyStockManager getStockManager() {
         return stockManager;
     }
 
@@ -78,20 +77,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0121608N
     @Override
-    public synchronized void deleteTask(ReadOnlyStock target) throws StockNotFoundException {
-        stockManager.removeTask(target);
-        updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
+    public synchronized void deleteStock(ReadOnlyStock target) throws StockNotFoundException {
+        stockManager.removeStock(target);
+        updateFilteredStockListToShowWithStatus(INCOMPLETE_STATUS);
         indicateStockManagerChanged();
     }
     
     @Override
-    public synchronized void clearTasks() {
+    public synchronized void clearStocks() {
         
-        updateFilteredTaskListToShowWithStatus(COMPLETE_STATUS);
+        updateFilteredStockListToShowWithStatus(COMPLETE_STATUS);
         while(!filteredStocks.isEmpty()){
             ReadOnlyStock task = filteredStocks.get(0);
             try {
-                stockManager.removeTask(task);
+                stockManager.removeStock(task);
             } catch (StockNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";
             }
@@ -101,9 +100,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void markTask(ReadOnlyStock target){
-        stockManager.markTask(target);
-        updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
+    public synchronized void markStock(ReadOnlyStock target){
+        stockManager.markStock(target);
+        updateFilteredStockListToShowWithStatus(INCOMPLETE_STATUS);
         indicateStockManagerChanged();
     }
     
@@ -117,8 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
    
     @Override
-    public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) {
-        stockManager.editTask(editTask, targetTask);
+    public synchronized void editStock(Stock editTask, ReadOnlyStock targetTask) {
+        stockManager.editStock(editTask, targetTask);
         updateFilteredStockListToShowAll();
         indicateStockManagerChanged();   
     }
@@ -129,7 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0144702N
     @Override
-    public UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList() {
+    public UnmodifiableObservableList<ReadOnlyStock> getFilteredStockList() {
     	SortedList<Stock> sortedTasks = new SortedList<>(filteredStocks);
     	return new UnmodifiableObservableList<>(sortedTasks);
     }
@@ -140,12 +139,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void showFoundTaskList(Set<String> keywords, boolean isPowerSearch){
+    public void showFoundStockList(Set<String> keywords, boolean isPowerSearch){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, isPowerSearch)));
     }
     
     @Override
-	public void updateFilteredTaskListToShowWithStatus(Status status) {
+	public void updateFilteredStockListToShowWithStatus(Status status) {
     	if(status == Status.ALL) {
     		updateFilteredStockListToShowAll();
     	} else {

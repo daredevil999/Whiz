@@ -46,7 +46,7 @@ public class MainWindow extends UiPart {
     private VBox rootLayout;
     private Scene scene;
 
-    private String stockManagerNamer;
+    private String stockManagerName;
 
     @FXML
     private AnchorPane eventListPanelPlaceholder;
@@ -125,7 +125,7 @@ public class MainWindow extends UiPart {
     public static MainWindow load(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
 
         MainWindow mainWindow = UiPartLoader.loadUiPart(primaryStage, new MainWindow());
-        mainWindow.configure(config.getAppTitle(), config.getTaskBookName(), config, prefs, logic);
+        mainWindow.configure(config.getAppTitle(), config.getStockManagerName(), config, prefs, logic);
         return mainWindow;
     }
 
@@ -135,7 +135,7 @@ public class MainWindow extends UiPart {
 
         //Set dependencies
         this.logic = logic;
-        this.stockManagerNamer = stockManagerName;
+        this.stockManagerName = stockManagerName;
         this.config = config;
         this.userPrefs = prefs;
 
@@ -160,7 +160,7 @@ public class MainWindow extends UiPart {
 //    	calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder(), logic.getAllEvents(), logic.getAllTasks());
         stockListPanel = StockListPanel.load(primaryStage, getStockListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
-        statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath());
+        statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getStockManagerFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
         
         // define focus variables

@@ -15,35 +15,35 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyStockManager newData);
 
-    /** Returns the TaskBook */
-    ReadOnlyStockManager getTaskBook();
+    /** Returns the StockManager */
+    ReadOnlyStockManager getStockManager();
 
-    /** Deletes the given task. */
-    void deleteTask(ReadOnlyStock target) throws UniqueStockList.StockNotFoundException;
+    /** Deletes the given stock. */
+    void deleteStock(ReadOnlyStock target) throws UniqueStockList.StockNotFoundException;
     
-    /** Clears the list of completed tasks. */
-    void clearTasks();
+    /** Clears the list of stocks. */
+    void clearStocks();
 
     /** Adds the given stock */
     void addStock(Stock stock);
     
-    /** Edits the given task */
-    void editTask(Stock editTask, ReadOnlyStock targetTask);
+    /** Edits the given stock */
+    void editStock(Stock editStock, ReadOnlyStock targetTask);
     
-    /** Marks the given task */
-    void markTask(ReadOnlyStock target);
+    /** Marks the given stock */
+    void markStock(ReadOnlyStock target);
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList();
+    /** Returns the filtered stock list as an {@code UnmodifiableObservableList<ReadOnlyStock>} */
+    UnmodifiableObservableList<ReadOnlyStock> getFilteredStockList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
+    /** Updates the filter of the filtered stock list to show all stocks */
     void updateFilteredStockListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void showFoundTaskList(Set<String> keywords, boolean isPowerFind);
+    /** Updates the filter of the filtered stock list to filter by the given keywords*/
+    void showFoundStockList(Set<String> keywords, boolean isPowerFind);
     
-    /** Updates the filter of the filtered task list to filter by the status*/
-    void updateFilteredTaskListToShowWithStatus(Status statusCompleted);
+    /** Updates the filter of the filtered stock list to filter by the status*/
+    void updateFilteredStockListToShowWithStatus(Status statusCompleted);
 
 
 }

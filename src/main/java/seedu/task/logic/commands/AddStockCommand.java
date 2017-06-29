@@ -56,7 +56,7 @@ public class AddStockCommand extends AddCommand {
 		logger.info("-------[Executing AddStockCommand] " + this.toString() );
 		model.addStock(toAddStock);
 			
-		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
+		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
 		EventsCenter.getInstance().post(new JumpToStockListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));
 		return new CommandResult(String.format(MESSAGE_SUCCESS, toAddStock.getPurchasedStockAsText()));
 	}

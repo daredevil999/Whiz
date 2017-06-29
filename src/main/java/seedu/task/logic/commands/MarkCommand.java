@@ -39,7 +39,7 @@ public class MarkCommand extends UndoableCommand {
         assert model != null;
         logger.info("-------[Executing MarkCommand] " + this.toString() );
         
-        UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
 
         if (outOfBounds(lastShownList.size(),targetIndex)) {
             indicateAttemptToExecuteIncorrectCommand();
@@ -47,7 +47,7 @@ public class MarkCommand extends UndoableCommand {
         }
         
         taskToMark = lastShownList.get(targetIndex - 1);
-        model.markTask(taskToMark); // list starts at zero
+        model.markStock(taskToMark); // list starts at zero
         if (true) {   //Task will be selected if being marked from completed to uncompleted
             EventsCenter.getInstance().post(new JumpToStockListRequestEvent(taskToMark, targetIndex - 1));
         }
@@ -62,8 +62,8 @@ public class MarkCommand extends UndoableCommand {
 	
 	@Override
 	public CommandResult undo() {
-		model.markTask(taskToMark);
-		targetIndex = model.getFilteredTaskList().indexOf(taskToMark);
+		model.markStock(taskToMark);
+		targetIndex = model.getFilteredStockList().indexOf(taskToMark);
 		return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, targetIndex+1));
 	}
 

@@ -29,7 +29,7 @@ public interface Storage extends StockManagerStorage, UserPrefsStorage {
     void saveStockManager(ReadOnlyStockManager stockManager) throws IOException;
 
     /**
-     * Saves the current version of the Task Book to the hard disk.
+     * Saves the current version of the Stock Manager to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */

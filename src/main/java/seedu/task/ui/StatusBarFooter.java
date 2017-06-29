@@ -102,7 +102,7 @@ public class StatusBarFooter extends UiPart {
     //@@author A0125534L
     @Subscribe
     public void handleStorageLocationChangedEvent(StorageLocationChangedEvent event) {
-        setSaveLocation(event.getConfig().getTaskBookFilePath());
+        setSaveLocation(event.getConfig().getStockManagerFilePath());
     }
     
 }

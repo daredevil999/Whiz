@@ -54,7 +54,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getStockManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -194,7 +194,7 @@ public class MainApp extends Application {
     @Subscribe
     private void handleStorageLocationChangedEvent(StorageLocationChangedEvent event) {
         config = event.getConfig();
-        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getStockManagerFilePath(), config.getUserPrefsFilePath());
     }
 
     public static void main(String[] args) {

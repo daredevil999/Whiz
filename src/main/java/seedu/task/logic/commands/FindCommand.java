@@ -32,10 +32,10 @@ public class FindCommand extends Command {
     
 	@Override
     public CommandResult execute() {
-        model.showFoundTaskList(keywords, isPowerSearch);
+        model.showFoundStockList(keywords, isPowerSearch);
         
         return new CommandResult(String.format(MESSAGE_SUCCESS_FIND, 
-        		getMessageForTaskListShownSummary(model.getFilteredTaskList().size())));
+        		getMessageForTaskListShownSummary(model.getFilteredStockList().size())));
     }
 
 }

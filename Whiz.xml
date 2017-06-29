@@ -8,15 +8,5 @@
             <purchasePrice>23.0</purchasePrice>
             <purchaseLots>1000</purchaseLots>
         </purchased>
-        <purchased>
-            <purchaseDate>30 Jun, 2017 7:00 PM</purchaseDate>
-            <purchasePrice>23.0</purchasePrice>
-            <purchaseLots>1000</purchaseLots>
-        </purchased>
-        <purchased>
-            <purchaseDate>30 Jun, 2017 7:00 PM</purchaseDate>
-            <purchasePrice>23.0</purchasePrice>
-            <purchaseLots>1000</purchaseLots>
-        </purchased>
     </stocks>
 </stockmanager>

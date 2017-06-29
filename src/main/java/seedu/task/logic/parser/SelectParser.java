@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.SelectCommand;
-import seedu.task.logic.commands.SelectEventCommand;
 import seedu.task.logic.commands.SelectTaskCommand;
 
 //@@author A0125534L
@@ -42,14 +41,6 @@ public class SelectParser implements Parser {
 				return new SelectTaskCommand(index);
 			}
 			
-		} else if (eventMatcher.matches()) {
-			int index = Integer.parseInt(eventMatcher.group("index"));
-			// validation if index equals to zero
-			if (index==0){
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
-            }else{ //index > 0
-                return new SelectEventCommand(index);
-            }
 		} else {
 			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 		}

@@ -8,7 +8,6 @@ import seedu.task.commons.exceptions.EmptyValueException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.exceptions.MissingValueException;
 import seedu.task.logic.commands.AddCommand;
-import seedu.task.logic.commands.AddEventCommand;
 import seedu.task.logic.commands.AddStockCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;

@@ -19,7 +19,6 @@ import jfxtras.scene.control.agenda.Agenda.LocalDateTimeRange;
 import seedu.task.commons.core.CalendarView;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.CalendarUnsyncException;
-import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 
 //@@author A0144702N
@@ -49,11 +48,10 @@ public class CalendarPanel extends UiPart {
 		calHelper = CalendarHelper.getInstance();
 	}
 
-	public static CalendarPanel load(Stage primaryStage, AnchorPane calendarPlaceHolder,
-			List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
+	public static CalendarPanel load(Stage primaryStage, AnchorPane calendarPlaceHolder, List<ReadOnlyStock> stockList) {
 		CalendarPanel calendarPanel = new CalendarPanel();
 		calendarPanel.setupCalendar(primaryStage, calendarPlaceHolder);
-		calendarPanel.configure(eventList, taskList);
+		calendarPanel.configure(stockList);
 		return calendarPanel;
 	}
 
@@ -138,20 +136,14 @@ public class CalendarPanel extends UiPart {
 	 * @param eventList
 	 * @param taskList
 	 */
-	private void configure(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
-		setConnection(eventList, taskList);
+	private void configure(List<ReadOnlyStock> stockList) {
+		setConnection(stockList);
 	}
 	
-	private void setConnection(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
+	private void setConnection(List<ReadOnlyStock> stockList) {
 		agenda.appointments().clear();
 		agenda.selectedAppointments().clear();
-		setConnectionEvent(eventList);
-		setConnectionTask(taskList);
-	}
-
-	private void setConnectionEvent(List<ReadOnlyEvent> eventList) {
-		eventList.forEach(event ->
-			agenda.appointments().add(calHelper.convertFromEvent(event)));
+		setConnectionTask(stockList);
 	}
 	
 	private void setConnectionTask(List<ReadOnlyStock> taskList) {
@@ -165,9 +157,9 @@ public class CalendarPanel extends UiPart {
 	 * Refresh data shown when eventlist in model modified
 	 * @param eventList
 	 */
-	public void refresh(List<ReadOnlyEvent> eventList, List<ReadOnlyStock> taskList) {
+	public void refresh(List<ReadOnlyStock> stockList) {
 		logger.info("Refreshing calendar...");
-		setConnection(eventList, taskList);
+		setConnection(stockList);
 	}
 
 	/**
@@ -186,27 +178,27 @@ public class CalendarPanel extends UiPart {
 			setWeekView(DEFAULT_BEFORE, DEFAULT_AFTER);
 		}
 	}
-	
-	/**
-	 * Select an event in the calendar and show its details. 
-	 * @param targetEvent
-	 * @throws exception if calendar is not sync with event list. Restart needed.
-	 */
-	public void select(ReadOnlyEvent targetEvent) throws CalendarUnsyncException {
-		// focus on the event
-		LocalDateTime displayedDateTime = targetEvent.getDuration().getStartTime();
-		updateCalendarShownPeriod(displayedDateTime);
-		
-		//highlight the event 
-		Appointment targetAppoint  = agenda.appointments()
-				.stream()
-				.filter((Predicate<? super Agenda.Appointment>) eventInCalendar 
-						-> CalendarHelper.compareWithEvent(targetEvent, eventInCalendar))
-				.findAny()
-				.orElseThrow(()-> new CalendarUnsyncException(CALENDAR_UNSYC_MESSAGE));
-		
-		agenda.selectedAppointments().add(targetAppoint);
-	}
+//	
+//	/**
+//	 * Select an event in the calendar and show its details. 
+//	 * @param targetEvent
+//	 * @throws exception if calendar is not sync with event list. Restart needed.
+//	 */
+//	public void select(ReadOnlyEvent targetEvent) throws CalendarUnsyncException {
+//		// focus on the event
+//		LocalDateTime displayedDateTime = targetEvent.getDuration().getStartTime();
+//		updateCalendarShownPeriod(displayedDateTime);
+//		
+//		//highlight the event 
+//		Appointment targetAppoint  = agenda.appointments()
+//				.stream()
+//				.filter((Predicate<? super Agenda.Appointment>) eventInCalendar 
+//						-> CalendarHelper.compareWithEvent(targetEvent, eventInCalendar))
+//				.findAny()
+//				.orElseThrow(()-> new CalendarUnsyncException(CALENDAR_UNSYC_MESSAGE));
+//		
+//		agenda.selectedAppointments().add(targetAppoint);
+//	}
 
 	public void select(ReadOnlyStock targetTask) throws CalendarUnsyncException {
 		if(isCompleted(targetTask) || isFloatingTask(targetTask)) {

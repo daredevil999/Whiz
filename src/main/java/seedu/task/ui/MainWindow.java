@@ -34,7 +34,6 @@ public class MainWindow extends UiPart {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private EventListPanel eventListPanel;
     private StockListPanel stockListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -159,7 +158,6 @@ public class MainWindow extends UiPart {
     void fillInnerParts() {
         //AquaFx.style();
 //    	calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder(), logic.getAllEvents(), logic.getAllTasks());
-    	eventListPanel = EventListPanel.load(primaryStage, getEventListPlaceholder(), logic.getFilteredEventList());
         stockListPanel = StockListPanel.load(primaryStage, getStockListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath());
@@ -170,7 +168,6 @@ public class MainWindow extends UiPart {
         focusElements.add(commandBox.getCommandTextField());
         focusElements.add(resultDisplay.getResultDisplayArea());
         focusElements.add(stockListPanel.getStockListView());
-        focusElements.add(eventListPanel.getEventListView());
 
     }
     //@@author
@@ -252,10 +249,6 @@ public class MainWindow extends UiPart {
 
     public StockListPanel getStockListPanel() {
         return this.stockListPanel;
-    }
-    
-    public EventListPanel getEventListPanel() {
-        return this.eventListPanel;
     }
     
 //    public CalendarPanel getCalendarPanel() {

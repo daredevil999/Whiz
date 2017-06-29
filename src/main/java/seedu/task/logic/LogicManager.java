@@ -12,12 +12,11 @@ import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.UndoableCommand;
 import seedu.task.logic.parser.ParserManager;
 import seedu.task.model.Model;
-import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.storage.Storage;
 
 /**
- * The main LogicManager of dowat.
+ * The main LogicManager of Whiz.
  */
 public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
@@ -50,17 +49,6 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyStock> getFilteredTaskList() {
     	model.updateFilteredStockListToShowAll();
         return model.getFilteredTaskList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyEvent> getFilteredEventList() {
-    	model.updateFilteredEventListToShowWithStatus(Status.INCOMPLETED);
-        return model.getFilteredEventList();
-    }
-    
-    @Override
-    public List<ReadOnlyEvent> getAllEvents() {
-    	return model.getTaskBook().getEventList();
     }
 	
     @Override

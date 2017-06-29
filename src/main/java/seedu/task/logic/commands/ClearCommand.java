@@ -2,7 +2,6 @@ package seedu.task.logic.commands;
 
 import seedu.task.model.ReadOnlyStockManager;
 import seedu.task.model.StockManager;
-import seedu.task.model.item.UniqueEventList;
 import seedu.task.model.item.UniqueStockList;
 
 /**
@@ -18,7 +17,6 @@ public class ClearCommand extends UndoableCommand {
     public static final String MESSAGE_COMPLETED = "completed";
     public static final String MESSAGE_COMPLETED_UNCOMPLETED = "completed and uncompleted";
     public static final String MESSAGE_TASKS = "tasks";
-    public static final String MESSAGE_EVENTS = "events";
     public static final String MESSAGE_TASKS_EVENTS = "tasks and events";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n" 
             + "Clears completed/uncompleted tasks and/or events from the task book.\n\n"
@@ -69,20 +67,13 @@ public class ClearCommand extends UndoableCommand {
         
         if(clearType == Type.all && !clearAll){ // clears completed tasks and events
             model.clearTasks();
-            model.clearEvents();
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_TASKS_EVENTS));
         }else if (clearType == Type.task && !clearAll){ // clears completed tasks
             model.clearTasks();
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_TASKS));
-        }else if (clearType == Type.event && !clearAll){ // clears completed events
-            model.clearEvents();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED, MESSAGE_EVENTS));
         }else if (clearType == Type.task && clearAll){ // clears all completed and uncompleted tasks
-            model.resetData(new StockManager(new UniqueStockList(), taskbook.getUniqueEventList()));
+            model.resetData(new StockManager(new UniqueStockList()));
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS));
-        }else if (clearType == Type.event && clearAll){ // clears all completed and uncompleted events
-            model.resetData(new StockManager(taskbook.getUniqueStockList(), new UniqueEventList()));
-            return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_EVENTS));
         }else { // clears all completed and uncompleted tasks and events, only possible path left
             model.resetData(StockManager.getEmptyTaskBook());
             return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_COMPLETED_UNCOMPLETED, MESSAGE_TASKS_EVENTS));

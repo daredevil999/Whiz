@@ -9,7 +9,6 @@ import seedu.task.commons.exceptions.EmptyValueException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
-import seedu.task.logic.commands.EditEventCommand;
 import seedu.task.logic.commands.EditTaskCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
@@ -55,11 +54,7 @@ public class EditParser implements Parser {
         try {           
             getTokenizerValue(argsTokenizer);
             
-            if (eventIndex.isPresent()) { 
-                int index = getIndex(eventIndex.get().trim());
-                return new EditEventCommand(index, name.orElse(""), description.orElse(""), 
-                            startDuration.orElse(""), endDuration.orElse(""));                              
-            } else if (taskIndex.isPresent()) {  
+            if (taskIndex.isPresent()) {  
                 int index = getIndex(taskIndex.get().trim());
                 return new EditTaskCommand(index, name.orElse(""), description.orElse(""), deadline.orElse(""));             
             } else {

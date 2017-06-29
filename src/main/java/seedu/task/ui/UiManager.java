@@ -15,7 +15,6 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.StockManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
-import seedu.task.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.task.commons.events.ui.JumpToStockListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpEvent;
 import seedu.task.commons.events.ui.UpdateCalendarEvent;
@@ -122,19 +121,6 @@ public class UiManager extends ComponentManager implements Ui {
 		mainWindow.getStockListPanel().scrollTo(event.targetIndex);
 //		try {
 //			mainWindow.getCalendarPanel().select(event.targetTask);
-//		} catch (CalendarUnsyncException e) {
-//			logger.severe(StringUtil.getDetails(e));
-//			showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);
-//		}
-	}
-
-	//@@author A0144702N
-	@Subscribe
-	private void handleJumpToEListRequestEvent(JumpToEventListRequestEvent event) {
-		logger.info(LogsCenter.getEventHandlingLogMessage(event));
-		mainWindow.getEventListPanel().scrollTo(event.targetIndex);
-//		try {
-//			mainWindow.getCalendarPanel().select(event.targetEvent);
 //		} catch (CalendarUnsyncException e) {
 //			logger.severe(StringUtil.getDetails(e));
 //			showFatalErrorDialogAndShutdown("Fatal error unsycn calendar:", e);

@@ -50,15 +50,11 @@ public class ListCommand extends Command {
 		logger.info("-------[Executing ListCommands]"+ this.toString() );
 		
 		switch (listTarget) {
-		case EVENT:
-			model.updateFilteredEventListToShowWithStatus(status);
-			break;
 		case TASK:
 			model.updateFilteredStockListToShowAll();
 			break;
 		case BOTH:
 			model.updateFilteredStockListToShowAll();
-			model.updateFilteredEventListToShowWithStatus(status);
 			break;
 		default:
 			return new CommandResult(MESSAGE_USAGE);

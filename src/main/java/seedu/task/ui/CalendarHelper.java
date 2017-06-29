@@ -1,6 +1,5 @@
 package seedu.task.ui;
 
-import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,19 +28,7 @@ public class CalendarHelper extends AppointmentImplBase implements Appointment {
 		for (AppointmentGroup group : new Agenda().appointmentGroups()) {
 			groupMap.put(group.getDescription(), group);
 		}
-	}
-	
-	public Appointment convertFromEvent(ReadOnlyEvent event) {
-		Appointment item = new AppointmentImplLocal();
-		item.setSummary(event.getEvent().fullName);
-		item.setStartLocalDateTime(event.getDuration().getStartTime());
-		item.setEndLocalDateTime(event.getDuration().getEndTime());
-		item.setDescription(event.getDescriptionValue());
-		item.setAppointmentGroup(groupMap.get(EVENT_GROUP));
-		
-		return item;
-	}
-	
+	}	
 
 	public Appointment convertFromTask(ReadOnlyStock task) {
 		Appointment item = new AppointmentImplLocal();
@@ -70,12 +57,6 @@ public class CalendarHelper extends AppointmentImplBase implements Appointment {
 		return true;
 //				taskInCalendar.getSummary().equals(targetTask.getStockName().getNameValue())
 //				&& taskInCalendar.getStartLocalDateTime().equals(targetTask.getPurchaseDate().get().getTime());
-	}
-
-	public static boolean compareWithEvent(ReadOnlyEvent targetEvent, Appointment eventInCalendar) {
-		return eventInCalendar.getSummary().equals(targetEvent.getEvent().getNameValue())
-				&& eventInCalendar.getStartLocalDateTime().equals(targetEvent.getDuration().getStartTime())
-				&& eventInCalendar.getEndLocalDateTime().equals(targetEvent.getDuration().getEndTime());
 	}
 	
 	public boolean isTask(Appointment appointment) {

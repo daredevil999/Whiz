@@ -16,13 +16,8 @@ import seedu.task.commons.core.Status;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.StockManagerChangedEvent;
 import seedu.task.commons.util.StringUtil;
-import seedu.task.model.item.Event;
-import seedu.task.model.item.ReadOnlyEvent;
 import seedu.task.model.item.ReadOnlyStock;
 import seedu.task.model.item.Stock;
-import seedu.task.model.item.UniqueEventList;
-import seedu.task.model.item.UniqueEventList.DuplicateEventException;
-import seedu.task.model.item.UniqueEventList.EventNotFoundException;
 import seedu.task.model.item.UniqueStockList;
 import seedu.task.model.item.UniqueStockList.StockNotFoundException;
 
@@ -39,7 +34,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final StockManager stockManager;
     private final FilteredList<Stock> filteredStocks;
-    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given TaskBook
@@ -54,7 +48,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         stockManager = new StockManager(src);
         filteredStocks = new FilteredList<>(stockManager.getTasks());
-        filteredEvents = new FilteredList<>(stockManager.getEvents());
     }
 
     public ModelManager() {
@@ -64,14 +57,11 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
         stockManager = new StockManager(initialData);
         filteredStocks = new FilteredList<>(stockManager.getTasks());
-        filteredEvents = new FilteredList<>(stockManager.getEvents());
     }
 
 	@Override
     public void resetData(ReadOnlyStockManager newData) {
         stockManager.resetData(newData);
-        
-        updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
         updateFilteredTaskListToShowWithStatus(INCOMPLETE_STATUS);
         indicateStockManagerChanged();
     }
@@ -95,13 +85,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-        stockManager.removeEvent(target);
-        updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateStockManagerChanged();
-    }    
-    
-    @Override
     public synchronized void clearTasks() {
         
         updateFilteredTaskListToShowWithStatus(COMPLETE_STATUS);
@@ -114,21 +97,6 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
         updateFilteredStockListToShowAll();
-        indicateStockManagerChanged();
-    }
-    
-    @Override
-    public synchronized void clearEvents() {
-        updateFilteredEventListToShowWithStatus(COMPLETE_STATUS);
-        while(!filteredEvents.isEmpty()){
-            ReadOnlyEvent event = filteredEvents.get(0);
-            try {
-                stockManager.removeEvent(event);
-            } catch (EventNotFoundException tnfe) {
-                assert false : "The target event cannot be missing";
-            }
-        }
-        updateFilteredEventListToShowAll();
         indicateStockManagerChanged();
     }
 
@@ -147,26 +115,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredStockListToShowAll();
         indicateStockManagerChanged();
     }
-    
-    @Override
-    public synchronized void addEvent(Event event) throws DuplicateEventException {
-        stockManager.addEvent(event);
-        updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateStockManagerChanged();
-    }
    
     @Override
     public synchronized void editTask(Stock editTask, ReadOnlyStock targetTask) {
         stockManager.editTask(editTask, targetTask);
         updateFilteredStockListToShowAll();
         indicateStockManagerChanged();   
-    }
-    
-    @Override
-    public void editEvent(Event editEvent, ReadOnlyEvent targetEvent) throws UniqueEventList.DuplicateEventException {
-        stockManager.editEvent(editEvent, targetEvent);
-        updateFilteredEventListToShowWithStatus(INCOMPLETE_STATUS);
-        indicateStockManagerChanged(); 
     }
     //@@author 
         
@@ -178,14 +132,6 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyStock> getFilteredTaskList() {
     	SortedList<Stock> sortedTasks = new SortedList<>(filteredStocks);
     	return new UnmodifiableObservableList<>(sortedTasks);
-    }
-   
-    
-    @Override
-    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-        SortedList<Event> sortedEvents = new SortedList<>(filteredEvents);
-    	sortedEvents.setComparator(Event.getAscComparator());
-    	return new UnmodifiableObservableList<>(sortedEvents);
     }
 
     @Override
@@ -199,11 +145,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void showFoundEventList(Set<String> keywords, boolean isPowerSearch){
-        updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords, isPowerSearch)));
-    }
-    
-    @Override
 	public void updateFilteredTaskListToShowWithStatus(Status status) {
     	if(status == Status.ALL) {
     		updateFilteredStockListToShowAll();
@@ -212,33 +153,14 @@ public class ModelManager extends ComponentManager implements Model {
     	}
 	}
     
-    @Override
-	public void updateFilteredEventListToShowWithStatus(Status status) {
-    	if(status == Status.ALL) {
-    		updateFilteredEventListToShowAll();
-    	} else {
-    		updateFilteredEventList(new PredicateExpression(new StatusQualifier(status)));
-    	}
-	}
-    
-    @Override
-	public void updateFilteredEventListToShowAll() {
-    	filteredEvents.setPredicate(null);
-	}
-    
     private void updateFilteredTaskList(Expression expression) {
         filteredStocks.setPredicate(expression::satisfies);
-    }
-    
-    private void updateFilteredEventList(Expression expression) {
-        filteredEvents.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyStock task);
-        boolean satisfies(ReadOnlyEvent event);
         String toString();
     }
 
@@ -257,11 +179,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-		public boolean satisfies(ReadOnlyEvent event) {
-        	qualifier.prepare(event);
-        	return qualifier.run();
-		}
-        @Override
         public String toString() {
             return qualifier.toString();
         }
@@ -270,7 +187,6 @@ public class ModelManager extends ComponentManager implements Model {
     interface Qualifier {
 		boolean run();
 		void prepare(ReadOnlyStock task);
-		void prepare(ReadOnlyEvent event);
         String toString();
     }
 
@@ -331,12 +247,6 @@ public class ModelManager extends ComponentManager implements Model {
 		public void prepare(ReadOnlyStock task) {
 			targetName = task.getStockName().fullName;
 		}
-
-		@Override
-		public void prepare(ReadOnlyEvent event) {
-			targetName = event.getEvent().fullName;
-    		targetDesc = event.getDescriptionValue();
-		}
     }
     
     private class StatusQualifier implements Qualifier {
@@ -369,13 +279,6 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public void prepare(ReadOnlyStock task) {
 			targetStatus = true;
-		}
-
-		@Override
-		public void prepare(ReadOnlyEvent event) {
-			targetStatus = event.isEventCompleted();
-		}
-    	
+		}    	
     }
-
 }

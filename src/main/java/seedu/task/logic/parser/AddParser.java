@@ -11,6 +11,7 @@ import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.AddStockCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.storage.TxtStockCodeStorage;
 
 //@@author A0127570H
 /**
@@ -27,7 +28,8 @@ public class AddParser implements Parser {
     
     public static final String MESSAGE_MISSING_PRICE_VALUE = "Price value is missing!"; 
     public static final String MESSAGE_MISSING_DATE_VALUE = "Date input is missing!"; 
-    public static final String MESSAGE_MISSING_LOTS_VALUE = "Number of lots is missing!"; 
+    public static final String MESSAGE_MISSING_LOTS_VALUE = "Number of lots is missing!";
+    public static final String MESSAGE_INCORRECT_STOCK_CODE_INPUT = "Incorrect stock code input!";
     
     public AddParser() {}
     
@@ -67,7 +69,13 @@ public class AddParser implements Parser {
     private void getTokenizerValue(ArgumentTokenizer argsTokenizer) throws EmptyValueException, MissingValueException {
         boolean temp = false;
         StringBuilder message = new StringBuilder();
-    	name = argsTokenizer.getPreamble().get();
+    	String nameOrCode = argsTokenizer.getPreamble().get().trim();
+    	if (nameOrCode.length() < 5) {
+    		this.name = TxtStockCodeStorage.getStockNameFromCode(nameOrCode).trim();
+    	} else {
+    		this.name = nameOrCode;
+    	}
+    	
         if (argsTokenizer.getValue(pricePrefix).isPresent()) {
         	price = argsTokenizer.getValue(pricePrefix).get();
         } else {

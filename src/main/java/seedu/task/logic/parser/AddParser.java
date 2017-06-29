@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.task.commons.exceptions.EmptyValueException;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.exceptions.MissingValueException;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.AddEventCommand;
 import seedu.task.logic.commands.AddStockCommand;
@@ -21,9 +22,13 @@ import seedu.task.logic.commands.IncorrectCommand;
 public class AddParser implements Parser {
     
     private String name;
-    private Optional <String> price;
-    private Optional <String> lots;
-    private Optional <String> date;
+    private String price;
+    private String lots;
+    private String date;
+    
+    public static final String MESSAGE_MISSING_PRICE_VALUE = "Price value is missing!"; 
+    public static final String MESSAGE_MISSING_DATE_VALUE = "Date input is missing!"; 
+    public static final String MESSAGE_MISSING_LOTS_VALUE = "Number of lots is missing!"; 
     
     public AddParser() {}
     
@@ -46,24 +51,48 @@ public class AddParser implements Parser {
         try {           
             getTokenizerValue(argsTokenizer);
             
-            return new AddStockCommand(name ,
-            		price.orElse(""), date.orElse(""),lots.orElse(""));
+            return new AddStockCommand(name, price, date, lots);
 //            		description.orElse(""), deadline.orElse(""));             
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         } catch (EmptyValueException e) {
             return new IncorrectCommand(e.getMessage());
-        }
+        } catch (MissingValueException e) {
+			return new IncorrectCommand(e.getMessage());
+		}
     }
 
     /*
      * To get the values according to each field prefix
      */
-    private void getTokenizerValue(ArgumentTokenizer argsTokenizer) throws EmptyValueException {
-        name = argsTokenizer.getPreamble().get();
-        price = argsTokenizer.getValue(pricePrefix);
-        date = argsTokenizer.getValue(datePrefix);
-        lots = argsTokenizer.getValue(lotsPrefix);
+    private void getTokenizerValue(ArgumentTokenizer argsTokenizer) throws EmptyValueException, MissingValueException {
+        boolean temp = false;
+        StringBuilder message = new StringBuilder();
+    	name = argsTokenizer.getPreamble().get();
+        if (argsTokenizer.getValue(pricePrefix).isPresent()) {
+        	price = argsTokenizer.getValue(pricePrefix).get();
+        } else {
+        	temp = true;
+        	message.append(MESSAGE_MISSING_PRICE_VALUE)
+        			.append(System.getProperty("line.separator"));
+        }
+        if (argsTokenizer.getValue(datePrefix).isPresent()) {
+        	date = argsTokenizer.getValue(datePrefix).get();
+        } else {
+        	temp = true;
+        	message.append(MESSAGE_MISSING_DATE_VALUE)
+        			.append(System.getProperty("line.separator"));
+        }
+        if (argsTokenizer.getValue(lotsPrefix).isPresent()) {
+        	lots = argsTokenizer.getValue(lotsPrefix).get();
+        } else {
+        	temp = true;
+        	message.append(MESSAGE_MISSING_LOTS_VALUE)
+        			.append(System.getProperty("line.separator"));
+        }
+        if (temp) {
+        	throw new MissingValueException(message.toString());
+        }
     } 
     
 }

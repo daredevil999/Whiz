@@ -27,8 +27,8 @@ public interface ReadOnlyStock {
     default boolean isSameStateAs(ReadOnlyStock other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getStockName().equals(this.getStockName()) // state checks here onwards
-                && other.getStockCode().equals(this.getStockCode())
+                && (other.getStockName().equals(this.getStockName()) // state checks here onwards
+                || other.getStockCode().equals(this.getStockCode()))
 //                && other.getTaskStatus().equals(this.getTaskStatus())
 //                && other.getDescription().equals(this.getDescription())
                 );

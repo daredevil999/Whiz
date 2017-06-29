@@ -1,7 +1,5 @@
 package seedu.task.ui;
 
-import java.time.LocalDateTime;
-
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -11,7 +9,7 @@ import seedu.task.model.item.ReadOnlyStock;
 
 public class PurchasedStockCard extends UiPart{
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "StockListCard.fxml";
 
     @FXML
     private HBox cardPane;

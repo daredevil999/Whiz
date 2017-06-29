@@ -1,9 +1,6 @@
 package seedu.task.ui;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -16,14 +13,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.task.commons.core.CalendarView;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
-import seedu.task.model.item.ReadOnlyEvent;
-import seedu.task.model.item.ReadOnlyStock;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -53,7 +47,7 @@ public class MainWindow extends UiPart {
     private VBox rootLayout;
     private Scene scene;
 
-    private String taskBookName;
+    private String stockManagerNamer;
 
     @FXML
     private AnchorPane eventListPanelPlaceholder;
@@ -137,12 +131,12 @@ public class MainWindow extends UiPart {
     }
 
 
-    private void configure(String appTitle, String taskBookName, Config config, UserPrefs prefs,
+    private void configure(String appTitle, String stockManagerName, Config config, UserPrefs prefs,
                            Logic logic) {
 
         //Set dependencies
         this.logic = logic;
-        this.taskBookName = taskBookName;
+        this.stockManagerNamer = stockManagerName;
         this.config = config;
         this.userPrefs = prefs;
 
@@ -175,7 +169,7 @@ public class MainWindow extends UiPart {
         focusNumber = 0;
         focusElements.add(commandBox.getCommandTextField());
         focusElements.add(resultDisplay.getResultDisplayArea());
-        focusElements.add(stockListPanel.getTaskListView());
+        focusElements.add(stockListPanel.getStockListView());
         focusElements.add(eventListPanel.getEventListView());
 
     }

@@ -26,7 +26,7 @@ public class StockListPanel extends UiPart {
     private AnchorPane placeHolderPane;
 
     @FXML
-    private ListView<ReadOnlyStock> taskListView;
+    private ListView<ReadOnlyStock> stockListView;
 
     public StockListPanel() {
         super();
@@ -47,22 +47,22 @@ public class StockListPanel extends UiPart {
         this.placeHolderPane = pane;
     }
 
-    public static StockListPanel load(Stage primaryStage, AnchorPane taskListPlaceHolder,
-                                       ObservableList<ReadOnlyStock> taskList) {
-        StockListPanel taskListPanel =
-                UiPartLoader.loadUiPart(primaryStage, taskListPlaceHolder, new StockListPanel());
-        taskListPanel.configure(taskList);
-        return taskListPanel;
+    public static StockListPanel load(Stage primaryStage, AnchorPane stockListPlaceHolder,
+                                       ObservableList<ReadOnlyStock> stockList) {
+        StockListPanel stockListPanel =
+                UiPartLoader.loadUiPart(primaryStage, stockListPlaceHolder, new StockListPanel());
+        stockListPanel.configure(stockList);
+        return stockListPanel;
     }
 
-    private void configure(ObservableList<ReadOnlyStock> taskList) {
-        setConnections(taskList);
+    private void configure(ObservableList<ReadOnlyStock> stockList) {
+        setConnections(stockList);
         addToPlaceholder();
     }
 
-    private void setConnections(ObservableList<ReadOnlyStock> taskList) {
-        taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
+    private void setConnections(ObservableList<ReadOnlyStock> stockList) {
+        stockListView.setItems(stockList);
+        stockListView.setCellFactory(listView -> new StockListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -72,9 +72,9 @@ public class StockListPanel extends UiPart {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        stockListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                logger.fine("Selection in stock list panel changed to : '" + newValue + "'");
                 raise(new StockPanelSelectionChangedEvent(newValue));
             }
         });
@@ -82,25 +82,25 @@ public class StockListPanel extends UiPart {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
-            taskListView.getSelectionModel().clearAndSelect(index);
+            stockListView.scrollTo(index);
+            stockListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyStock> {
+    class StockListViewCell extends ListCell<ReadOnlyStock> {
 
-        public TaskListViewCell() {
+        public StockListViewCell() {
         }
 
         @Override
-        protected void updateItem(ReadOnlyStock task, boolean empty) {
-            super.updateItem(task, empty);
+        protected void updateItem(ReadOnlyStock stock, boolean empty) {
+            super.updateItem(stock, empty);
 
-            if (empty || task == null) {
+            if (empty || stock == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(PurchasedStockCard.load(task, getIndex() + 1).getLayout());
+                setGraphic(PurchasedStockCard.load(stock, getIndex() + 1).getLayout());
             }
         }
     }
@@ -109,7 +109,7 @@ public class StockListPanel extends UiPart {
      * public function to get taskListView Node
      *  used in focus traversal 
      */
-    public Node getTaskListView(){
-        return taskListView;
+    public Node getStockListView(){
+        return stockListView;
     }
 }

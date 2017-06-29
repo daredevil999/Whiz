@@ -13,6 +13,6 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
+        <ListView fx:id="stockListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>

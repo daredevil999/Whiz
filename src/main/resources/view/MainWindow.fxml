@@ -35,16 +35,16 @@
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
       </AnchorPane>
-       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="125" minHeight="125" prefHeight="125" styleClass="titled-pane" VBox.vgrow="NEVER">
+       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="130" minHeight="130" prefHeight="130" styleClass="titled-pane" VBox.vgrow="NEVER">
            <padding>
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" orientation="HORIZONTAL" VBox.vgrow="ALWAYS">
          <items>
-          <VBox fx:id="taskList">
+          <VBox fx:id="stockList">
             <children>
-              <AnchorPane styleClass="list-panel-head" VBox.vgrow="ALWAYS">
+              <AnchorPane styleClass="list-panel-head" maxHeight="80" minHeight="40" prefHeight="60" VBox.vgrow="ALWAYS">
                 <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="event-panel-header" text="My Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>
@@ -54,7 +54,7 @@
           </VBox>
           <VBox fx:id="eventList">
             <children>
-              <AnchorPane VBox.vgrow="ALWAYS">
+              <AnchorPane styleClass="list-panel-head" maxHeight="80" minHeight="40" prefHeight="60" VBox.vgrow="ALWAYS">
                 <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="task-panel-header" text="Events TO ATTEND!" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>

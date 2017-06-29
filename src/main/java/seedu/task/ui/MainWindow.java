@@ -41,7 +41,7 @@ public class MainWindow extends UiPart {
 
     // Independent Ui parts residing in this Ui container
     private EventListPanel eventListPanel;
-    private TaskListPanel taskListPanel;
+    private StockListPanel stockListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -65,7 +65,7 @@ public class MainWindow extends UiPart {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane stockListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -166,7 +166,7 @@ public class MainWindow extends UiPart {
         //AquaFx.style();
 //    	calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder(), logic.getAllEvents(), logic.getAllTasks());
     	eventListPanel = EventListPanel.load(primaryStage, getEventListPlaceholder(), logic.getFilteredEventList());
-        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
+        stockListPanel = StockListPanel.load(primaryStage, getStockListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -175,7 +175,7 @@ public class MainWindow extends UiPart {
         focusNumber = 0;
         focusElements.add(commandBox.getCommandTextField());
         focusElements.add(resultDisplay.getResultDisplayArea());
-        focusElements.add(taskListPanel.getTaskListView());
+        focusElements.add(stockListPanel.getTaskListView());
         focusElements.add(eventListPanel.getEventListView());
 
     }
@@ -197,8 +197,8 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
 
-    public AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    public AnchorPane getStockListPlaceholder() {
+        return stockListPanelPlaceholder;
     }
     
     public AnchorPane getEventListPlaceholder() {
@@ -256,8 +256,8 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public StockListPanel getStockListPanel() {
+        return this.stockListPanel;
     }
     
     public EventListPanel getEventListPanel() {

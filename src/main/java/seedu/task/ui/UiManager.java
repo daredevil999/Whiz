@@ -119,7 +119,7 @@ public class UiManager extends ComponentManager implements Ui {
 	@Subscribe
 	private void handleJumpToTListRequestEvent(JumpToStockListRequestEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
-		mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+		mainWindow.getStockListPanel().scrollTo(event.targetIndex);
 //		try {
 //			mainWindow.getCalendarPanel().select(event.targetTask);
 //		} catch (CalendarUnsyncException e) {

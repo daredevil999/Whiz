@@ -19,16 +19,16 @@ import seedu.task.model.item.ReadOnlyStock;
 /**
  * Panel containing the list of tasks.
  */
-public class TaskListPanel extends UiPart {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "TaskListPanel.fxml";
+public class StockListPanel extends UiPart {
+    private final Logger logger = LogsCenter.getLogger(StockListPanel.class);
+    private static final String FXML = "StockListPanel.fxml";
     private VBox panel;
     private AnchorPane placeHolderPane;
 
     @FXML
     private ListView<ReadOnlyStock> taskListView;
 
-    public TaskListPanel() {
+    public StockListPanel() {
         super();
     }
 
@@ -47,10 +47,10 @@ public class TaskListPanel extends UiPart {
         this.placeHolderPane = pane;
     }
 
-    public static TaskListPanel load(Stage primaryStage, AnchorPane taskListPlaceHolder,
+    public static StockListPanel load(Stage primaryStage, AnchorPane taskListPlaceHolder,
                                        ObservableList<ReadOnlyStock> taskList) {
-        TaskListPanel taskListPanel =
-                UiPartLoader.loadUiPart(primaryStage, taskListPlaceHolder, new TaskListPanel());
+        StockListPanel taskListPanel =
+                UiPartLoader.loadUiPart(primaryStage, taskListPlaceHolder, new StockListPanel());
         taskListPanel.configure(taskList);
         return taskListPanel;
     }

@@ -27,7 +27,6 @@ public class BuyStockCommand extends BuyCommand {
 
 	private final Stock toAddStock;
 	
-
 	/**
 	 * Convenience constructor using raw values.
 	 * @throws IllegalValueException

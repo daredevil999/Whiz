@@ -6,7 +6,7 @@ import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.BuyCommand;
 import seedu.task.logic.commands.CalendarCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
@@ -49,7 +49,7 @@ public class ParserManager {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
         
-        case AddCommand.COMMAND_WORD:
+        case BuyCommand.COMMAND_WORD:
             return new AddParser().prepare(arguments);
             
         case EditTaskCommand.COMMAND_WORD:

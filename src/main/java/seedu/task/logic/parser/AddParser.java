@@ -7,8 +7,8 @@ import java.util.Optional;
 import seedu.task.commons.exceptions.EmptyValueException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.exceptions.MissingValueException;
-import seedu.task.logic.commands.AddCommand;
-import seedu.task.logic.commands.AddStockCommand;
+import seedu.task.logic.commands.BuyCommand;
+import seedu.task.logic.commands.BuyStockCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.storage.TxtStockCodeStorage;
@@ -43,7 +43,7 @@ public class AddParser implements Parser {
     public Command prepare(String args){
         
         if (args.isEmpty()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BuyCommand.MESSAGE_USAGE));
         }
         
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(pricePrefix, datePrefix, lotsPrefix);
@@ -52,7 +52,7 @@ public class AddParser implements Parser {
         try {           
             getTokenizerValue(argsTokenizer);
             
-            return new AddStockCommand(name, price, date, lots);
+            return new BuyStockCommand(name, price, date, lots);
 //            		description.orElse(""), deadline.orElse(""));             
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

@@ -46,7 +46,7 @@
             <children>
               <AnchorPane styleClass="list-panel-head" maxHeight="80" minHeight="40" prefHeight="60" VBox.vgrow="ALWAYS">
                 <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="event-panel-header" text="My Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="event-panel-header" text="Purchased Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>
               </AnchorPane>
               <AnchorPane fx:id="stockListPanelPlaceholder" VBox.vgrow="ALWAYS" />
@@ -56,7 +56,7 @@
             <children>
               <AnchorPane styleClass="list-panel-head" maxHeight="80" minHeight="40" prefHeight="60" VBox.vgrow="ALWAYS">
                 <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="task-panel-header" text="Events TO ATTEND!" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="task-panel-header" text="Tracked Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>
               </AnchorPane>
               <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />

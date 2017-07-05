@@ -5,7 +5,7 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.BuyCommand;
 import seedu.task.logic.commands.CalendarCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
@@ -53,8 +53,8 @@ public class HelpParser implements Parser {
 
 		switch (matcher.group("arguments")) {
 
-		case AddCommand.COMMAND_WORD:
-			return new HelpCommand(AddCommand.MESSAGE_USAGE, false);
+		case BuyCommand.COMMAND_WORD:
+			return new HelpCommand(BuyCommand.MESSAGE_USAGE, false);
 		case EditCommand.COMMAND_WORD:
             return new HelpCommand(EditCommand.MESSAGE_USAGE, false);
 		case DeleteCommand.COMMAND_WORD:

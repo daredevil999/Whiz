@@ -19,12 +19,11 @@ import seedu.task.model.item.UniqueStockList;
 import seedu.task.storage.TxtStockCodeStorage;
 
 
-public class AddStockCommand extends AddCommand {
+public class BuyStockCommand extends BuyCommand {
 
-    public static final String MESSAGE_SUCCESS = "New stock added: %1$s";
-	public static final String MESSAGE_DUPLICATE_STOCK = "This stock already exists in the stock manager";
+    public static final String MESSAGE_SUCCESS = "Newly purchased stock added: %1$s";
 
-	private final Logger logger = LogsCenter.getLogger(AddStockCommand.class);
+	private final Logger logger = LogsCenter.getLogger(BuyStockCommand.class);
 
 	private final Stock toAddStock;
 	
@@ -35,13 +34,13 @@ public class AddStockCommand extends AddCommand {
 	 *             if any of the raw values are invalid
 	 */
 
-	public AddStockCommand(String name, String price, String date, String lots) throws IllegalValueException {
+	public BuyStockCommand(String name, String price, String date, String lots) throws IllegalValueException {
 		StockPurchaseInstance toAddInstance = new StockPurchaseInstance(new Date(date), new Price (price), Integer.parseInt(lots));
 		String code = TxtStockCodeStorage.getStockCodeFromName(name);
 		this.toAddStock = new Stock(new Name(name), new StockCode(code), toAddInstance);
 	}
 	
-	public AddStockCommand(ReadOnlyStock t) {
+	public BuyStockCommand(ReadOnlyStock t) {
 		this.toAddStock = new Stock(t);
 	}
 

@@ -17,7 +17,7 @@ import seedu.task.commons.events.ui.StockPanelSelectionChangedEvent;
 import seedu.task.model.item.ReadOnlyStock;
 
 /**
- * Panel containing the list of stocks.
+ * Panel containing the list of tasks.
  */
 public class StockListPanel extends UiPart {
     private final Logger logger = LogsCenter.getLogger(StockListPanel.class);

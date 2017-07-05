@@ -33,6 +33,16 @@ public class StockPurchaseInstance {
                 .append(getPurchaseLots());
         return builder.toString();
     }
+    
+    public String getAsDisplayText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getPurchaseLots())
+        		.append(" lots purchased on ")
+        		.append(getPurchaseDate().getDate())
+        		.append(" at $")
+                .append(getPurchasePrice());
+        return builder.toString();
+    }
 
 	public int getPurchaseLots() {
 		return purchaseLots;

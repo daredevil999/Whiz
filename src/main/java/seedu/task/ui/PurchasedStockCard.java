@@ -23,6 +23,8 @@ public class PurchasedStockCard extends UiPart{
     private Label averagePrice;
     @FXML
     private Label totalLots;
+    @FXML
+    private Label purchaseInstance;
 //    @FXML
 //    private Label description;
 //    @FXML
@@ -51,10 +53,20 @@ public class PurchasedStockCard extends UiPart{
         index.setText(displayedIndex + ". "); 
         initialiseStockPurchasePrice();
         initialiseStockPurchaseLots();
+        intialiseStockPurchaseInstance();
         //setStyleClass();
     }
     
-    private void initialiseStockPurchasePrice() {	
+    private void intialiseStockPurchaseInstance() {
+    	purchaseInstance.setText(stock.getStockPurchaseInstancesAsDisplayText().trim());
+    	if (stock.getStockPurchaseInstanceList().isPresent()) {
+    		purchaseInstance.setManaged(true);
+	    } else {
+	    	purchaseInstance.setManaged(false);
+	    }	
+	}
+
+	private void initialiseStockPurchasePrice() {	
     	averagePrice.setText(stock.getAveragePriceToString().trim());  	
     	if (stock.getStockPurchaseInstanceList().isPresent()) {
     		averagePrice.setManaged(true);
@@ -72,7 +84,6 @@ public class PurchasedStockCard extends UiPart{
 	    }	
 	}
     
-
 //	private void initialiseDeadline() {
 //        deadline.setText(task.getDeadlineToString().trim());
 //        if (task.getPurchaseDate().isPresent()) {

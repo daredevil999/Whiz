@@ -21,6 +21,11 @@
     -fx-text-fill: #010504;
 }
 
+.cell_big_purchase_title {
+    -fx-font-size: 18px;
+    -fx-text-fill: blue;
+}
+
 .cell_big_code {
     -fx-font-size: 18px;
     -fx-text-fill: red;

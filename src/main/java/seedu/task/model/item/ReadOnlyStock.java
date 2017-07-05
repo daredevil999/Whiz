@@ -96,8 +96,26 @@ public interface ReadOnlyStock {
             			.append(inst.getAsText());
             	index++;
             }
+            return builder.toString();
+        } else {
+        	return "";
         }
-    	return builder.toString();
+	}
+    
+    default String getStockPurchaseInstancesAsDisplayText() {
+    	final StringBuilder builder = new StringBuilder();
+    	if (getStockPurchaseInstanceList().isPresent()) {
+        	int index = 1;
+            for (StockPurchaseInstance inst : getStockPurchaseInstanceList().get()) {
+            	builder.append(System.getProperty("line.separator"));
+            	builder.append(index + ": ")
+            			.append(inst.getAsDisplayText());
+            	index++;
+            }
+            return builder.toString();
+        } else {
+        	return "";
+        }
 	}
     
 	default String getAveragePriceToString() {

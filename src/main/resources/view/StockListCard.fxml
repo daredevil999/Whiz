@@ -24,55 +24,52 @@
                     <Font size="6.0" />
                 </font>
                 </Label>
-                <VBox fx:id="stockDetails">
-                    <children>
-                        <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
-                        <stylesheets>
-                            <URL value="@DarkTheme.css" />
-                            <URL value="@Extensions.css" />
-                        </stylesheets>
-                        <padding>
-                            <Insets bottom="10" left="20" right="10" top="10" />
-                        </padding>
+                <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" orientation="HORIZONTAL" VBox.vgrow="ALWAYS">
+                <items>
+                    <VBox fx:id="stockDetails">
                         <children>
-                            <HBox alignment="CENTER_LEFT" spacing="5">
-                                <children>
-                                    <HBox>
-                                       <children>
-                                           <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
-                                           <Label fx:id="code" styleClass="cell_big_code" text="\$code" wrapText="true" />
-                                       </children>
-                                    </HBox>
-                                </children>
-                            </HBox>
-                            <Label fx:id="averagePrice" styleClass="cell_desc_label" text="\\$desc" textFill="#685252" wrapText="true">
-                                <padding>
-                                    <Insets left="20.0" />
-                                </padding>
-                            </Label>
-                            <Label fx:id="totalLots" styleClass="cell_ddl_label" text="\\$deadline">
-                                <padding>
-                                    <Insets left="20.0" />
-                                </padding>
-                            </Label>
-                            <!-- 
-                            <Label fx:id="purchaseInstance" styleClass="cell_desc_label" text="\\instance" textFill="#685252" wrapText="true">
-                        		<padding>
-                            		<Insets left="20.0" />
-                        		</padding>
-                    		</Label>
-                        -->
+                            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
+                            <stylesheets>
+                                <URL value="@DarkTheme.css" />
+                                <URL value="@Extensions.css" />
+                            </stylesheets>
+                            <padding>
+                                <Insets bottom="10" left="20" right="10" top="10" />
+                            </padding>
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="5">
+                                    <children>
+                                        <HBox>
+                                           <children>
+                                               <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
+                                               <Label fx:id="code" styleClass="cell_big_code" text="\$code" wrapText="true" />
+                                           </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                                <Label fx:id="averagePrice" styleClass="cell_desc_label" text="\\$desc" textFill="#685252" wrapText="true">
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="totalLots" styleClass="cell_ddl_label" text="\\$deadline">
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                            </VBox>
                         </children>
-                        </VBox>
-                    </children>
-                </VBox>
-                <VBox fx:id="purchaseInstanceList">
-                    <padding>
-                        <Insets bottom="10" left="450" right="10" top="10"/>
-                    </padding>
-                    <Label fx:id="purchaseInstanceTitle" text="Purchase History" styleClass="cell_big_purchase_title"/>
-                    <Label fx:id="purchaseInstance" styleClass="cell_small_label" textFill="#685252" text="\\purchaseinstance"/> 
-                </VBox> 
+                    </VBox>
+                    <VBox fx:id="purchaseInstanceList">
+                        <padding>
+                            <Insets bottom="10" left="20" right="10" top="10"/>
+                        </padding>
+                        <Label fx:id="purchaseInstanceTitle" text="Purchase History" styleClass="cell_big_purchase_title"/>
+                        <Label fx:id="purchaseInstance" styleClass="cell_small_label" text="\\purchaseinstance"/> 
+                    </VBox>
+                </items>
+                </SplitPane>
             </children>
          <rowConstraints>
             <RowConstraints />

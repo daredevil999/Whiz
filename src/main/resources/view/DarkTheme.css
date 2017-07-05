@@ -28,7 +28,7 @@
 
 .cell_big_code {
     -fx-font-size: 18px;
-    -fx-text-fill: red;
+    -fx-text-fill: #c0392b;
 }
 
 .cell_desc_label {
@@ -50,8 +50,8 @@
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 10px;
+    -fx-text-fill: #1abc9c;
 }
 
 .background {

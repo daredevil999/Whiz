@@ -120,7 +120,7 @@ public interface ReadOnlyStock {
     
 	default String getAveragePriceToString() {
 	  if (getStockPurchaseInstanceList().isPresent()) {
-		  return " Price: " + this.getAverageStockPurchasePrice().toString(); 
+		  return " Average Price: " + this.getAverageStockPurchasePrice().toString(); 
 	  }
 	  else {
 		  return "";
@@ -129,7 +129,7 @@ public interface ReadOnlyStock {
 	
 	default String getPurchasedLotsToString() {
 		  if (getStockPurchaseInstanceList().isPresent()) {
-			  return " Lots: " + this.getTotalStockPurchaseLots(); 
+			  return " Total Lots: " + this.getTotalStockPurchaseLots(); 
 		  }
 		  else {
 			  return "";

@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
-<HBox id="cardPane" fx:id="cardPane" prefHeight="35.0" prefWidth="244.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<!-- @@author A0127570H -->
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane prefHeight="251.0" prefWidth="242.0" HBox.hgrow="ALWAYS">
+        <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="2.5" prefWidth="3.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="4.0" minWidth="2.5" prefWidth="3.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="6.0" prefWidth="8.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="6.0" prefWidth="8.0" />
             </columnConstraints>
             <children>
-            	<Label fx:id="index" prefHeight="3.0" prefWidth="3.0" styleClass="cell_small_index_label" text="\$index">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </Label>
+            	<Label fx:id="index" prefHeight="10.0" prefWidth="10.0" styleClass="cell_index_label" text="\$index">
+                   	<font>
+                        <Font size="6.0" />
+                   	</font>
+            	</Label>
                 <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
@@ -33,28 +34,30 @@
                     </padding>
 
                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="216.0" spacing="5">
+                        <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
-                                <Label fx:id="date" prefHeight="12.0" prefWidth="55.0" styleClass="cell_small_list" text="\\$date" wrapText="true">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="price" prefHeight="12.0" prefWidth="55.0" styleClass="cell_small_list" text="\\$price" wrapText="true">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="lots" prefHeight="12.0" prefWidth="55.0" styleClass="cell_small_list" text="\\$lots" wrapText="true">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font>
-                                </Label>
+                                <HBox>
+                                   <children>
+                                       <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
+                                       <Label fx:id="code" styleClass="cell_big_code" text="\$code" wrapText="true" />
+                                   </children>
+                                </HBox>
                             </children>
                         </HBox>
+                        <Label fx:id="averagePrice" styleClass="cell_desc_label" text="\\$desc" textFill="#685252" wrapText="true">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding></Label>
+                        <Label fx:id="totalLots" styleClass="cell_ddl_label" text="\\$deadline">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding></Label>
                     </children>
                 </VBox>
             </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </children>
 </HBox>

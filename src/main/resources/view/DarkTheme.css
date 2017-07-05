@@ -26,11 +26,6 @@
     -fx-text-fill: red;
 }
 
-.cell_small_list {
-    -fx-font-size: 12px;
-    -fx-text-fill: black;
-}
-
 .cell_desc_label {
     -fx-font-size: 14px !important;
     -fx-text-fill: #2c3e50;
@@ -153,10 +148,6 @@
     -fx-text-fill: #010504;
 }
 
-.cell_small_index_label {
-    -fx-font-size: 10px;
-    -fx-text-fill: #010504;
-}
 
 .status-bar {
     -fx-background-color: #7f8c8d;

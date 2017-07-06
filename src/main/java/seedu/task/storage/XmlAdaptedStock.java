@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.item.Candlestick;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
@@ -27,6 +28,9 @@ public class XmlAdaptedStock {
 
     @XmlElement
     private List<XmlAdaptedStockPurchaseInstance> purchased = new ArrayList<>();
+    
+    @XmlElement
+    private List<XmlAdaptedCandlestick> candlesticks = new ArrayList<>();
 
     /**
      * No-arg constructor for JAXB use.
@@ -35,9 +39,9 @@ public class XmlAdaptedStock {
 
     //@@author A0127570H
     /**
-     * Converts a given task into this class for JAXB use.
+     * Converts a given stock into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedTask
+     * @param source future changes to this will not affect the created XmlAdaptedStock
      */
     public XmlAdaptedStock(ReadOnlyStock source) {
         name = source.getStockName().fullName;
@@ -46,6 +50,12 @@ public class XmlAdaptedStock {
         if (source.getStockPurchaseInstanceList().isPresent()) {
         	for (StockPurchaseInstance inst : source.getStockPurchaseInstanceList().get()) {
                 purchased.add(new XmlAdaptedStockPurchaseInstance(inst));
+            }
+        }
+        candlesticks = new ArrayList<>();
+        if (source.getCandlestickList().isPresent()) {
+        	for (Candlestick stick : source.getCandlestickList().get()) {
+                candlesticks.add(new XmlAdaptedCandlestick(stick));
             }
         }
     }
@@ -62,7 +72,11 @@ public class XmlAdaptedStock {
         final List<StockPurchaseInstance> purchasedList = new ArrayList<>();
         for (XmlAdaptedStockPurchaseInstance inst : purchased) {
         	purchasedList.add(inst.toModelType());
-        }       
-        return new Stock(name, code, purchasedList);
+        }
+        final List<Candlestick> candlestickList = new ArrayList<>();
+        for (XmlAdaptedCandlestick stick : candlesticks) {
+        	candlestickList.add(stick.toModelType());
+        } 
+        return new Stock(name, code, purchasedList, candlestickList);
     }
 }

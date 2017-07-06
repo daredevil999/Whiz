@@ -26,8 +26,7 @@ import seedu.task.model.item.UniqueStockList.StockNotFoundException;
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-    private static final Status INCOMPLETE_STATUS = Status.INCOMPLETED;
-    private static final Status COMPLETE_STATUS = Status.COMPLETED;
+    private static final Status ALL_STATUS = Status.ALL;
     
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
@@ -35,8 +34,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Stock> filteredStocks;
 
     /**
-     * Initializes a ModelManager with the given TaskBook
-     * TaskBook and its variables should not be null
+     * Initializes a ModelManager with the given StockManager
+     * StockManager and its variables should not be null
      */
     public ModelManager(StockManager src, UserPrefs userPrefs) {
         super();
@@ -61,7 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
     public void resetData(ReadOnlyStockManager newData) {
         stockManager.resetData(newData);
-        updateFilteredStockListToShowWithStatus(INCOMPLETE_STATUS);
+        updateFilteredStockListToShowWithStatus(ALL_STATUS);
         indicateStockManagerChanged();
     }
 
@@ -79,14 +78,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteStock(ReadOnlyStock target) throws StockNotFoundException {
         stockManager.removeStock(target);
-        updateFilteredStockListToShowWithStatus(INCOMPLETE_STATUS);
+        updateFilteredStockListToShowWithStatus(ALL_STATUS);
         indicateStockManagerChanged();
     }
     
     @Override
     public synchronized void clearStocks() {
         
-        updateFilteredStockListToShowWithStatus(COMPLETE_STATUS);
+        updateFilteredStockListToShowWithStatus(ALL_STATUS);
         while(!filteredStocks.isEmpty()){
             ReadOnlyStock task = filteredStocks.get(0);
             try {
@@ -102,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void markStock(ReadOnlyStock target){
         stockManager.markStock(target);
-        updateFilteredStockListToShowWithStatus(INCOMPLETE_STATUS);
+        updateFilteredStockListToShowWithStatus(ALL_STATUS);
         indicateStockManagerChanged();
     }
     
@@ -116,8 +115,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
    
     @Override
-    public synchronized void editStock(Stock editTask, ReadOnlyStock targetTask) {
-        stockManager.editStock(editTask, targetTask);
+    public synchronized void editStock(Stock editStock, ReadOnlyStock targetStock) {
+        stockManager.editStock(editStock, targetStock);
         updateFilteredStockListToShowAll();
         indicateStockManagerChanged();   
     }

@@ -12,7 +12,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.storage.TxtStockCodeStorage;
 
 /**
- * Represents a Task in the task book.
+ * Represents a Stock in the stock manager.
  * Implementations should guarantee:    Details are present and not null, with the exception of Deadline field. 
  *                                      Field values are validated.
  */
@@ -21,20 +21,28 @@ public class Stock implements ReadOnlyStock {
 	
 	private Name name;
     private StockCode code;
-    private List<StockPurchaseInstance> purchasedStocksList ;
+    private List<Candlestick> candlesticks;
+    private List<StockPurchaseInstance> purchasedStocksList;
+    
+    /*
+     * Constructors
+     */
     
     public Stock (Name name, StockCode code) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.code = code;
         this.purchasedStocksList = null;
+        this.candlesticks = null;
     }
     
-    public Stock (Name name, StockCode code, List<StockPurchaseInstance> listInput) {
+    public Stock (Name name, StockCode code, Candlestick input) {
     	assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.code = code;
-        this.purchasedStocksList = listInput;
+        this.candlesticks = new ArrayList<>();
+        this.candlesticks.add(input);
+        this.purchasedStocksList = null;
     }
     
     public Stock (Name name, StockCode code, StockPurchaseInstance input) {
@@ -43,6 +51,15 @@ public class Stock implements ReadOnlyStock {
         this.code = code;
         this.purchasedStocksList = new ArrayList<>();
         this.purchasedStocksList.add(input);
+        this.candlesticks = null;
+    } 
+    
+    public Stock (Name name, StockCode code, List<StockPurchaseInstance> purchaseInstanceListInput, List<Candlestick> candlestickListInput) {
+    	assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.code = code;
+        this.purchasedStocksList = purchaseInstanceListInput;
+        this.candlesticks = candlestickListInput;
     }
 
     /**
@@ -50,9 +67,16 @@ public class Stock implements ReadOnlyStock {
      * @throws IllegalValueException 
      */
     public Stock(ReadOnlyStock source) {
-            this(source.getStockName(), source.getStockCode(), source.getStockPurchaseInstanceList().orElse(null));
+            this(source.getStockName(), 
+            		source.getStockCode(), 
+            		source.getStockPurchaseInstanceList().orElse(null),
+            		source.getCandlestickList().orElse(null));
 //            		, source.getDescription().orElse(null), source.getPurchaseDate().orElse(null) , source.getTaskStatus());
     }
+    
+    /*
+     * Public accessors
+     */
     
     public void addStockPurchaseInstance (StockPurchaseInstance input) {
     	if (this.getStockPurchaseInstanceList().isPresent()) {
@@ -92,28 +116,14 @@ public class Stock implements ReadOnlyStock {
 	}
 
 	@Override
+	public Optional<List<Candlestick>> getCandlestickList() {
+		return Optional.ofNullable(this.candlesticks);
+	}
+
+	@Override
 	public StockCode getStockCode() {
 		return code;
 	}
-
-//    @Override
-//    public Optional<Description> getDescription() {
-//        return Optional.ofNullable(this.description);
-//    }
-//    
-//   @Override
-//    public Optional<Date> getPurchaseDate() { 
-//       return Optional.ofNullable(this.deadline);
-//    }
-//
-//    @Override
-//    public Boolean getTaskStatus() {
-//        return isTaskCompleted;
-//    }
-//    
-//    public void toggleComplete() {
-//    	isTaskCompleted = !isTaskCompleted;
-//    }
 
     @Override
     public boolean equals(Object other) {
@@ -125,14 +135,13 @@ public class Stock implements ReadOnlyStock {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name);
+        return Objects.hash(name,code);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
-
     
 //    //@@author A0144702N
 //	/**

@@ -45,7 +45,7 @@ public class StockPurchaseInstanceTest {
 		listInput.add(inst1);
 		listInput.add(inst2);
 		listInput.add(inst3);
-		Stock ts1 = new Stock (new Name("DBS GROUP HOLDINGS LTD"), new StockCode ("D05"), listInput);
+		Stock ts1 = new Stock (new Name("DBS GROUP HOLDINGS LTD"), new StockCode ("D05"), listInput, null);
 		
 		assertEquals(ts1.toString()," Name: DBS GROUP HOLDINGS LTD | D05"
 				+ System.getProperty("line.separator")

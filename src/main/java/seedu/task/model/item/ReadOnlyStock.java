@@ -1,6 +1,5 @@
 package seedu.task.model.item;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +14,11 @@ public interface ReadOnlyStock {
     Name getStockName();
     StockCode getStockCode();
     Optional<List<StockPurchaseInstance>> getStockPurchaseInstanceList();
+    Optional<List<Candlestick>> getCandlestickList();
     
     //Optional<Description> getDescription();
     //Boolean getTaskStatus();
-    //Optional<Date> getPurchaseDate();
-    
+    //Optional<Date> getPurchaseDate();  
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)

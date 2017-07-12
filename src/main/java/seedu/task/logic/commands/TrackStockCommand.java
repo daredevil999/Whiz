@@ -7,6 +7,7 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.ui.JumpToStockListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.item.Candlestick;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
 import seedu.task.model.item.Name;
@@ -33,10 +34,10 @@ public class TrackStockCommand extends TrackCommand {
 	 *             if any of the raw values are invalid
 	 */
 
-	public TrackStockCommand(String name, String price, String date, String lots) throws IllegalValueException {
-		StockPurchaseInstance toTrackInstance = new StockPurchaseInstance(new Date(date), new Price (price), Integer.parseInt(lots));
+	public TrackStockCommand(String name) throws IllegalValueException {
+		Candlestick candlestickInstance = null;
 		String code = TxtStockCodeStorage.getStockCodeFromName(name);
-		this.toTrackStock = new Stock(new Name(name), new StockCode(code), toAddInstance);
+		this.toTrackStock = new Stock(new Name(name), new StockCode(code), candlestickInstance);
 	}
 	
 	public TrackStockCommand(ReadOnlyStock t) {
@@ -44,14 +45,13 @@ public class TrackStockCommand extends TrackCommand {
 	}
 
 	/*
-	 * Execute for add task command
-	 * Newly added task is to be selected for easy viewing
+	 * Execute for track stockk command
 	 * Done by posting a JumpToTaskListRequestEvent
 	 */
 	@Override
 	public CommandResult execute() {
 		assert model != null;
-		logger.info("-------[Executing AddStockCommand] " + this.toString() );
+		logger.info("-------[Executing TrackStockCommand] " + this.toString() );
 		model.addStock(toTrackStock);
 			
 		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();

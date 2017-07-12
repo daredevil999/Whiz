@@ -47,7 +47,7 @@ public class EditParser implements Parser {
         }
         
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(descriptionPrefix, deadlinePrefix, 
-                durationStartPrefix, durationEndPrefix, taskPrefix, eventPrefix, namePrefix);
+                durationStartPrefix, durationEndPrefix, purchasedStockPrefix, eventPrefix, namePrefix);
        
         argsTokenizer.tokenize(args.trim());
         
@@ -71,7 +71,7 @@ public class EditParser implements Parser {
      * To get the values according to each field prefix
      */
     private void getTokenizerValue(ArgumentTokenizer argsTokenizer) throws EmptyValueException {
-        taskIndex = argsTokenizer.getValue(taskPrefix);
+        taskIndex = argsTokenizer.getValue(purchasedStockPrefix);
         eventIndex = argsTokenizer.getValue(eventPrefix);
         name = argsTokenizer.getValue(namePrefix);
         description = argsTokenizer.getValue(descriptionPrefix);

@@ -10,7 +10,8 @@ import  seedu.task.model.item.Flag;
 
 public interface Parser {
     
-    public static final Prefix taskPrefix = new Prefix(Flag.stockFlag);  
+    public static final Prefix purchasedStockPrefix = new Prefix(Flag.purchasedStockFlag);
+    public static final Prefix trackedStockPrefix = new Prefix(Flag.trackedStockFlag);  
     public static final Prefix eventPrefix = new Prefix(Flag.eventFlag); 
     public static final Prefix namePrefix = new Prefix(Flag.nameFlag);  
     public static final Prefix descriptionPrefix = new Prefix(Flag.descriptionFlag);

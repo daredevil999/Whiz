@@ -10,7 +10,9 @@ import seedu.task.logic.commands.BuyCommand;
 import seedu.task.logic.commands.CalendarCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DeletePurchasedStockCommand;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.EditTaskCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
@@ -20,6 +22,7 @@ import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.MarkCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.TrackCommand;
 import seedu.task.logic.commands.UndoCommand;
 
 /**
@@ -52,7 +55,10 @@ public class ParserManager {
         case BuyCommand.COMMAND_WORD:
             return new BuyParser().prepare(arguments);
             
-        case EditTaskCommand.COMMAND_WORD:
+        case TrackCommand.COMMAND_WORD:
+            return new BuyParser().prepare(arguments);
+            
+        case EditCommand.COMMAND_WORD:
             return new EditParser().prepare(arguments);
 
         case MarkCommand.COMMAND_WORD:
@@ -61,7 +67,7 @@ public class ParserManager {
         case SelectCommand.COMMAND_WORD:
             return new SelectParser().prepare(arguments);
 
-        case DeletePurchasedStockCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteParser().prepare(arguments);
 
         case ClearCommand.COMMAND_WORD:

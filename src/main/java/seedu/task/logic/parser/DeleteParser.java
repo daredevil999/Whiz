@@ -7,19 +7,18 @@ import java.util.regex.Pattern;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.DeleteCommand;
-import seedu.task.logic.commands.DeleteTaskCommand;
+import seedu.task.logic.commands.DeletePurchasedStockCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
 /**
- * @@author A0121608N
  * Responsible for validating and preparing the arguments for DeleteCommand execution
  * 
  */
 public class DeleteParser implements Parser {
     
     // remember to trim 
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?:/t)\\s(?<index>\\d*)");
+    private static final Pattern PURCHASED_STOCK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?:/ps)\\s(?<index>\\d*)");
     
     /**
      * Parses arguments in the context of the DeleteCommand.
@@ -32,11 +31,11 @@ public class DeleteParser implements Parser {
      */
     @Override
     public Command prepare(String args){
-        final Matcher taskMatcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
-        if (taskMatcher.matches()) {
-            int index = Integer.parseInt(taskMatcher.group("index"));
+        final Matcher stockMatcher = PURCHASED_STOCK_DATA_ARGS_FORMAT.matcher(args.trim());
+        if (stockMatcher.matches()) {
+            int index = Integer.parseInt(stockMatcher.group("index"));
             if (index!=0) {
-                return new DeleteTaskCommand(index);
+                return new DeletePurchasedStockCommand(index);
             }
         }
         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

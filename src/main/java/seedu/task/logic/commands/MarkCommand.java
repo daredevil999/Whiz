@@ -43,7 +43,7 @@ public class MarkCommand extends UndoableCommand {
 
         if (outOfBounds(lastShownList.size(),targetIndex)) {
             indicateAttemptToExecuteIncorrectCommand();
-            return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            return new CommandResult(Messages.MESSAGE_INVALID_PURCHASED_STOCK_DISPLAYED_INDEX);
         }
         
         taskToMark = lastShownList.get(targetIndex - 1);

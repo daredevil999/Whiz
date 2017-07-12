@@ -61,7 +61,7 @@ public class BuyStockCommand extends BuyCommand {
 
 	@Override
 	public CommandResult undo() {
-		DeleteTaskCommand reverseCommand = new DeleteTaskCommand(toAddStock);
+		DeletePurchasedStockCommand reverseCommand = new DeletePurchasedStockCommand(toAddStock);
 		reverseCommand.setData(model);
 		
 		return reverseCommand.execute();

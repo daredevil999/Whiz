@@ -10,25 +10,24 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 
 /**
- * @@author A0121608N
- * Deletes a Task identified using it's last displayed index from the taskbook.
+ * Deletes a Stock identified using it's last displayed index from the stockmanager.
  * 
  */
-public class DeleteTaskCommand extends DeleteCommand {
+public class DeletePurchasedStockCommand extends DeleteCommand {
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_PURCHASED_STOCK_SUCCESS = "Deleted Purchased Stock: %1$s";
 
-    private ReadOnlyStock taskToDelete;
+    private ReadOnlyStock stockToDelete;
     
-    private final Logger logger = LogsCenter.getLogger(DeleteTaskCommand.class);
+    private final Logger logger = LogsCenter.getLogger(DeletePurchasedStockCommand.class);
     
-    public DeleteTaskCommand(int targetIndex) {
+    public DeletePurchasedStockCommand(int targetIndex) {
         this.lastShownListIndex = targetIndex;
     }
 
 
-	public DeleteTaskCommand(Stock taskToDelete) {
-        this.taskToDelete = taskToDelete;
+	public DeletePurchasedStockCommand(Stock stockToDelete) {
+        this.stockToDelete = stockToDelete;
     }
 
 
@@ -36,26 +35,26 @@ public class DeleteTaskCommand extends DeleteCommand {
     public CommandResult execute() {
         assert model != null;
         
-        if(taskToDelete == null){
+        if(stockToDelete == null){
             UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
         
             if (outOfBounds(lastShownList.size())) {
                 indicateAttemptToExecuteIncorrectCommand();
-                return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                return new CommandResult(Messages.MESSAGE_INVALID_PURCHASED_STOCK_DISPLAYED_INDEX);
             }
     
-            taskToDelete = lastShownList.get(lastShownListIndex - 1);
+            stockToDelete = lastShownList.get(lastShownListIndex - 1);
         }
         
-        logger.info("-------[Executing DeleteTaskCommand] " + this.toString() );
+        logger.info("-------[Executing DeletePurchasedStockCommand] " + this.toString() );
         
         try {
-            model.deleteStock(taskToDelete);
+            model.deleteStock(stockToDelete);
         } catch (StockNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
         
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PURCHASED_STOCK_SUCCESS, stockToDelete));
     }
 
     private boolean outOfBounds(int listSize){
@@ -64,7 +63,7 @@ public class DeleteTaskCommand extends DeleteCommand {
 	
 	@Override
 	public CommandResult undo() {
-		BuyStockCommand reverseCommand = new BuyStockCommand(taskToDelete);
+		BuyStockCommand reverseCommand = new BuyStockCommand(stockToDelete);
 		reverseCommand.setData(model);
 		
 		return reverseCommand.execute();
@@ -72,7 +71,7 @@ public class DeleteTaskCommand extends DeleteCommand {
 	
 	@Override
 	public String toString() {
-		return COMMAND_WORD +" "+ this.taskToDelete.getAsText();
+		return COMMAND_WORD +" "+ this.stockToDelete.getAsText();
 	}
 
 }

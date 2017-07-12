@@ -92,7 +92,7 @@ public class EditTaskCommand extends EditCommand  {
         } catch (IndexOutOfBoundsException ie) {
             indicateAttemptToExecuteIncorrectCommand();
             logger.info("-------[Failed execution of EditTaskCommand]" + " Index out of bound");
-            return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            return new CommandResult(Messages.MESSAGE_INVALID_PURCHASED_STOCK_DISPLAYED_INDEX);
         } catch (IllegalValueException e) {
             indicateAttemptToExecuteIncorrectCommand();
             logger.info("-------[Failed execution of EditTaskCommand]" + " Illegal value");

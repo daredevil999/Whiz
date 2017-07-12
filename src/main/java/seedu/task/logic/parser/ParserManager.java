@@ -10,7 +10,7 @@ import seedu.task.logic.commands.BuyCommand;
 import seedu.task.logic.commands.CalendarCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.DeleteTaskCommand;
+import seedu.task.logic.commands.DeletePurchasedStockCommand;
 import seedu.task.logic.commands.EditTaskCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
@@ -61,7 +61,7 @@ public class ParserManager {
         case SelectCommand.COMMAND_WORD:
             return new SelectParser().prepare(arguments);
 
-        case DeleteTaskCommand.COMMAND_WORD:
+        case DeletePurchasedStockCommand.COMMAND_WORD:
             return new DeleteParser().prepare(arguments);
 
         case ClearCommand.COMMAND_WORD:

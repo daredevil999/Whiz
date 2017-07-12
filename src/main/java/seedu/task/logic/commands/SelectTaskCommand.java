@@ -30,7 +30,7 @@ public class SelectTaskCommand extends SelectCommand {
 		//validation for input index greater than list size
 		if (lastShownList.size() < targetIndex) { 
 			indicateAttemptToExecuteIncorrectCommand();
-			return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+			return new CommandResult(Messages.MESSAGE_INVALID_PURCHASED_STOCK_DISPLAYED_INDEX);
 		}
 		ReadOnlyStock targetTask = model.getFilteredStockList().get(targetIndex-1);
 		EventsCenter.getInstance().post(new JumpToStockListRequestEvent(targetTask, targetIndex - 1));

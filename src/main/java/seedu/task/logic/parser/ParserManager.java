@@ -50,7 +50,7 @@ public class ParserManager {
         switch (commandWord) {
         
         case BuyCommand.COMMAND_WORD:
-            return new AddParser().prepare(arguments);
+            return new BuyParser().prepare(arguments);
             
         case EditTaskCommand.COMMAND_WORD:
             return new EditParser().prepare(arguments);

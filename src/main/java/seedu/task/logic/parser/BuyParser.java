@@ -19,7 +19,7 @@ import seedu.task.storage.TxtStockCodeStorage;
  * @author kian ming
  */
 
-public class AddParser implements Parser {
+public class BuyParser implements Parser {
     
     private String name;
     private String price;
@@ -31,7 +31,7 @@ public class AddParser implements Parser {
     public static final String MESSAGE_MISSING_LOTS_VALUE = "Number of lots is missing!";
     public static final String MESSAGE_INCORRECT_STOCK_CODE_INPUT = "Incorrect stock code input!";
     
-    public AddParser() {}
+    public BuyParser() {}
     
     /**
      * Parses arguments in the context of the add task or event command.

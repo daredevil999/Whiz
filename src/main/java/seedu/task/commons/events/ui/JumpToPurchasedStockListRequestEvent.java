@@ -7,12 +7,12 @@ import seedu.task.model.item.ReadOnlyStock;
 /**
  * Indicates a request to jump to the list of items
  */
-public class JumpToStockListRequestEvent extends BaseEvent {
+public class JumpToPurchasedStockListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
     public final ReadOnlyStock targetStock;
 
-    public JumpToStockListRequestEvent(ReadOnlyStock stock, int targetIndex) {
+    public JumpToPurchasedStockListRequestEvent(ReadOnlyStock stock, int targetIndex) {
         this.targetIndex = targetIndex;
         this.targetStock = stock;
     }

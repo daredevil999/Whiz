@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.ui.JumpToStockListRequestEvent;
+import seedu.task.commons.events.ui.JumpToPurchasedStockListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
@@ -55,7 +55,7 @@ public class BuyStockCommand extends BuyCommand {
 		model.addStock(toAddStock);
 			
 		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
-		EventsCenter.getInstance().post(new JumpToStockListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));
+		EventsCenter.getInstance().post(new JumpToPurchasedStockListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));
 		return new CommandResult(String.format(MESSAGE_SUCCESS, toAddStock.getPurchasedStockAsText()));
 	}
 

@@ -143,13 +143,13 @@ public class Stock implements ReadOnlyStock {
         return getAsText();
     }
     
-//    //@@author A0144702N
-//	/**
-//	 * Sort deadline from earliest to latest
-//	 * @param o
-//	 * @return
-//	 */
-//	public static Comparator<Stock> getAscComparator() {
+    //@@author A0144702N
+	/**
+	 * Sort deadline from earliest to latest
+	 * @param o
+	 * @return
+	 */
+	public static Comparator<Stock> getAscComparator() {
 //		//first by deadline
 //		Comparator<Stock> byDeadline = (t1, t2) -> {
 //			if(!t1.getPurchaseDate().isPresent() && !t2.getPurchaseDate().isPresent())
@@ -163,30 +163,11 @@ public class Stock implements ReadOnlyStock {
 //			//if both are not floating tasks 
 //			return t1.getPurchaseDate().get().compareTo(t2.getPurchaseDate().get());
 //		};
-//		
-//		//then by name
-//		Comparator<Stock> byName = (t1, t2) -> t1.getStockName().compareTo(t2.getStockName());
-//		
-//		return byDeadline.thenComparing(byName);
-//	}
-//	
-//	/**
-//	 * Sort deadline from latest to earliest
-//	 * @param o
-//	 * @return
-//	 */
-//	public int sortDesc(Stock o) {
-//		if(!this.getPurchaseDate().isPresent() && !o.getPurchaseDate().isPresent())
-//			return 0;
-//		// if this is a floating task, it will be on the top
-//		if(!this.getPurchaseDate().isPresent())
-//			return 1;
-//		// if this is 
-//		if(!o.getPurchaseDate().isPresent()) 
-//			return -1;
-//		return this.getPurchaseDate().get().compareTo(o.getPurchaseDate().get())*(-1);
-//		
-//	}
-
+		
+		//sort by name
+		Comparator<Stock> byName = (t1, t2) -> t1.getStockName().compareTo(t2.getStockName());
+		
+		return byName;
+	}
 
 }

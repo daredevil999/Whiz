@@ -42,24 +42,24 @@
        </AnchorPane>
        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5"  orientation="HORIZONTAL" VBox.vgrow="ALWAYS">
          <items>
-          <VBox fx:id="stockList">
+          <VBox fx:id="pStockList">
             <children>
               <AnchorPane styleClass="list-panel-head" maxHeight="80" minHeight="40" prefHeight="60" VBox.vgrow="ALWAYS">
                 <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="event-panel-header" text="Purchased Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>
               </AnchorPane>
-              <AnchorPane fx:id="stockListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+              <AnchorPane fx:id="pStockListPanelPlaceholder" VBox.vgrow="ALWAYS" />
             </children>
           </VBox>
-          <VBox fx:id="eventList">
+          <VBox fx:id="tStockList">
             <children>
               <AnchorPane styleClass="list-panel-head" maxHeight="80" minHeight="40" prefHeight="60" VBox.vgrow="ALWAYS">
                 <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" styleClass="task-panel-header" text="Tracked Stocks" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 </children>
               </AnchorPane>
-              <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+              <AnchorPane fx:id="tStockListPanelPlaceholder" VBox.vgrow="ALWAYS" />
             </children>
           </VBox>
             <!-- <VBox fx:id="extended">

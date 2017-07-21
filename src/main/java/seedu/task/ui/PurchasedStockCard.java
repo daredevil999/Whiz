@@ -9,7 +9,7 @@ import seedu.task.model.item.ReadOnlyStock;
 
 public class PurchasedStockCard extends UiPart{
 
-    private static final String FXML = "StockListCard.fxml";
+    private static final String FXML = "PStockListCard.fxml";
 
     @FXML
     private HBox cardPane;

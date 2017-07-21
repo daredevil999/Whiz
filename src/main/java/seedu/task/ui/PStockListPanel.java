@@ -26,7 +26,7 @@ public class PStockListPanel extends UiPart {
     private AnchorPane placeHolderPane;
 
     @FXML
-    private ListView<ReadOnlyStock> stockListView;
+    private ListView<ReadOnlyStock> pStockListView;
 
     public PStockListPanel() {
         super();
@@ -49,8 +49,7 @@ public class PStockListPanel extends UiPart {
 
     public static PStockListPanel load(Stage primaryStage, AnchorPane pStockListPlaceHolder,
                                        ObservableList<ReadOnlyStock> pStockList) {
-        PStockListPanel pStockListPanel =
-                UiPartLoader.loadUiPart(primaryStage, pStockListPlaceHolder, new PStockListPanel());
+        PStockListPanel pStockListPanel = UiPartLoader.loadUiPart(primaryStage, pStockListPlaceHolder, new PStockListPanel());
         pStockListPanel.configure(pStockList);
         return pStockListPanel;
     }
@@ -61,8 +60,8 @@ public class PStockListPanel extends UiPart {
     }
 
     private void setConnections(ObservableList<ReadOnlyStock> pStockList) {
-        stockListView.setItems(pStockList);
-        stockListView.setCellFactory(listView -> new StockListViewCell());
+        pStockListView.setItems(pStockList);
+        pStockListView.setCellFactory(listView -> new StockListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -72,9 +71,9 @@ public class PStockListPanel extends UiPart {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        stockListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        pStockListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                logger.fine("Selection in stock list panel changed to : '" + newValue + "'");
+                logger.fine("Selection in purchased stock list panel changed to : '" + newValue + "'");
                 raise(new PStockPanelSelectionChangedEvent(newValue));
             }
         });
@@ -82,8 +81,8 @@ public class PStockListPanel extends UiPart {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            stockListView.scrollTo(index);
-            stockListView.getSelectionModel().clearAndSelect(index);
+            pStockListView.scrollTo(index);
+            pStockListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -110,6 +109,6 @@ public class PStockListPanel extends UiPart {
      *  used in focus traversal 
      */
     public Node getStockListView(){
-        return stockListView;
+        return pStockListView;
     }
 }

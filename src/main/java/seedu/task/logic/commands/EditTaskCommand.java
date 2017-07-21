@@ -78,7 +78,7 @@ public class EditTaskCommand extends EditCommand  {
     public CommandResult execute() {
         logger.info("-------[Executing EditTaskCommand]");
         try {
-            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();        
+            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredPStockList();        
             targetTask = lastShownList.get(getTargetIndex());
 
             editTask = editTask(targetTask);

@@ -29,7 +29,7 @@ public class LogicManager extends ComponentManager implements Logic {
         this.parser = new ParserManager();
         this.commandList = new UndoableCommandHistory();
     }
-    //@@author A0144702N
+    
     @Override
     public CommandResult execute(String commandText) {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
@@ -46,13 +46,24 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public ObservableList<ReadOnlyStock> getFilteredPStockList() {
-    	model.updateFilteredStockListToShowAll();
-        return model.getFilteredStockList();
+    	model.updateFilteredPStockListToShowAll();
+        return model.getFilteredPStockList();
     }
 	
     @Override
 	public List<ReadOnlyStock> getAllPStocks() {
-		return model.getStockManager().getStockList();
+		return model.getStockManager().getPStockList();
+	}
+
+	@Override
+	public ObservableList<ReadOnlyStock> getFilteredTStockList() {
+		model.updateFilteredTStockListToShowAll();
+        return model.getFilteredTStockList();
+	}
+
+	@Override
+	public List<ReadOnlyStock> getAllTStocks() {
+		return model.getStockManager().getPStockList();
 	}
     
     

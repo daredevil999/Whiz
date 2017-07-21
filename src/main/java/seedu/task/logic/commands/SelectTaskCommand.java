@@ -25,14 +25,14 @@ public class SelectTaskCommand extends SelectCommand {
 	@Override
 	public CommandResult execute() {
 
-		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
+		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredPStockList();
 		
 		//validation for input index greater than list size
 		if (lastShownList.size() < targetIndex) { 
 			indicateAttemptToExecuteIncorrectCommand();
 			return new CommandResult(Messages.MESSAGE_INVALID_PURCHASED_STOCK_DISPLAYED_INDEX);
 		}
-		ReadOnlyStock targetTask = model.getFilteredStockList().get(targetIndex-1);
+		ReadOnlyStock targetTask = model.getFilteredPStockList().get(targetIndex-1);
 		EventsCenter.getInstance().post(new JumpToPStockListRequestEvent(targetTask, targetIndex - 1));
 		return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 

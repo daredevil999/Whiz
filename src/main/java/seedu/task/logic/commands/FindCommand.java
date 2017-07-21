@@ -35,7 +35,7 @@ public class FindCommand extends Command {
         model.showFoundStockList(keywords, isPowerSearch);
         
         return new CommandResult(String.format(MESSAGE_SUCCESS_FIND, 
-        		getMessageForTaskListShownSummary(model.getFilteredStockList().size())));
+        		getMessageForTaskListShownSummary(model.getFilteredPStockList().size())));
     }
 
 }

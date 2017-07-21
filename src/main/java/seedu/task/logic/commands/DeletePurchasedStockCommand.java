@@ -36,7 +36,7 @@ public class DeletePurchasedStockCommand extends DeleteCommand {
         assert model != null;
         
         if(stockToDelete == null){
-            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
+            UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredPStockList();
         
             if (outOfBounds(lastShownList.size())) {
                 indicateAttemptToExecuteIncorrectCommand();

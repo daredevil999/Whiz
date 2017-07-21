@@ -23,4 +23,10 @@ public interface Logic {
     /** Convenient method returns all the purchased stocks*/
     List<ReadOnlyStock> getAllPStocks();
     
+    /** Returns the filtered list of tracked stocks */
+    ObservableList<ReadOnlyStock> getFilteredTStockList();
+    
+    /** Convenient method returns all the tracked stocks*/
+    List<ReadOnlyStock> getAllTStocks();
+    
 }

@@ -14,6 +14,6 @@ public class StockManagerChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "[number of stocks " + data.getStockList().size();
+        return "[number of stocks " + data.getPStockList().size();
     }
 }

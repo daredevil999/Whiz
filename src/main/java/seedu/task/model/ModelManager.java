@@ -45,7 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with stock manager: " + src + " and user prefs " + userPrefs);
 
         stockManager = new StockManager(src);
-        filteredStocks = new FilteredList<>(stockManager.getStocks());
+        filteredStocks = new FilteredList<>(stockManager.getPStocks());
     }
 
     public ModelManager() {
@@ -54,7 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
         stockManager = new StockManager(initialData);
-        filteredStocks = new FilteredList<>(stockManager.getStocks());
+        filteredStocks = new FilteredList<>(stockManager.getPStocks());
     }
 
 	@Override
@@ -94,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
                 assert false : "The target task cannot be missing";
             }
         }
-        updateFilteredStockListToShowAll();
+        updateFilteredPStockListToShowAll();
         indicateStockManagerChanged();
     }
 
@@ -109,15 +109,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addStock(Stock stock) {
-        stockManager.addStock(stock);
-        updateFilteredStockListToShowAll();
+        stockManager.addPStock(stock);
+        updateFilteredPStockListToShowAll();
         indicateStockManagerChanged();
     }
    
     @Override
     public synchronized void editStock(Stock editStock, ReadOnlyStock targetStock) {
         stockManager.editStock(editStock, targetStock);
-        updateFilteredStockListToShowAll();
+        updateFilteredPStockListToShowAll();
         indicateStockManagerChanged();   
     }
     //@@author 
@@ -127,13 +127,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0144702N
     @Override
-    public UnmodifiableObservableList<ReadOnlyStock> getFilteredStockList() {
+    public UnmodifiableObservableList<ReadOnlyStock> getFilteredPStockList() {
     	SortedList<Stock> sortedTasks = new SortedList<>(filteredStocks);
     	return new UnmodifiableObservableList<>(sortedTasks);
     }
 
     @Override
-    public void updateFilteredStockListToShowAll() {
+    public void updateFilteredPStockListToShowAll() {
         filteredStocks.setPredicate(null);
     }
 
@@ -145,7 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
 	public void updateFilteredStockListToShowWithStatus(Status status) {
     	if(status == Status.ALL) {
-    		updateFilteredStockListToShowAll();
+    		updateFilteredPStockListToShowAll();
     	} else {
     		updateFilteredTaskList(new PredicateExpression(new StatusQualifier(status)));
     	}
@@ -279,4 +279,16 @@ public class ModelManager extends ComponentManager implements Model {
 			targetStatus = true;
 		}    	
     }
+
+	@Override
+	public UnmodifiableObservableList<ReadOnlyStock> getFilteredTStockList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateFilteredTStockListToShowAll() {
+		// TODO Auto-generated method stub
+		
+	}
 }

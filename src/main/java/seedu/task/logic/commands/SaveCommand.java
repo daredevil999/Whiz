@@ -74,7 +74,7 @@ public class SaveCommand extends Command {
         }
         
         saveToConfigJson();
-        model.updateFilteredStockListToShowAll();
+        model.updateFilteredPStockListToShowAll();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

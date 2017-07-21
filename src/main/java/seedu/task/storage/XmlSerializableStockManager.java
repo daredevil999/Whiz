@@ -19,10 +19,14 @@ import seedu.task.model.item.UniqueStockList;
 public class XmlSerializableStockManager implements ReadOnlyStockManager {
 
     @XmlElement
-    private List<XmlAdaptedStock> stocks;
+    private List<XmlAdaptedStock> pStocks;
+    
+    @XmlElement
+    private List<XmlAdaptedStock> tStocks;
 
     {
-        stocks = new ArrayList<>();
+        pStocks = new ArrayList<>();
+        tStocks = new ArrayList<>();
     }
 
     /**
@@ -34,15 +38,16 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
      * Conversion
      */
     public XmlSerializableStockManager(ReadOnlyStockManager src) {
-        stocks.addAll(src.getStockList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
+        pStocks.addAll(src.getPStockList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
+        tStocks.addAll(src.getTStockList().stream().map(XmlAdaptedStock::new).collect(Collectors.toList()));
     }
 
     @Override
-    public UniqueStockList getUniqueStockList() {
+    public UniqueStockList getUniquePStockList() {
         UniqueStockList lists = new UniqueStockList();
-        for (XmlAdaptedStock t : stocks) {
+        for (XmlAdaptedStock p : pStocks) {
             try {
-                lists.add(t.toModelType());
+                lists.add(p.toModelType());
             } catch (IllegalValueException e) {
 
             }
@@ -51,8 +56,8 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
     }
 
     @Override
-    public List<ReadOnlyStock> getStockList() {
-        return stocks.stream().map(p -> {
+    public List<ReadOnlyStock> getPStockList() {
+        return pStocks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -61,4 +66,29 @@ public class XmlSerializableStockManager implements ReadOnlyStockManager {
             }
         }).collect(Collectors.toCollection(ArrayList::new));
     }
+
+	@Override
+	public UniqueStockList getUniqueTStockList() {
+		UniqueStockList lists = new UniqueStockList();
+        for (XmlAdaptedStock t : tStocks) {
+            try {
+                lists.add(t.toModelType());
+            } catch (IllegalValueException e) {
+
+            }
+        }
+        return lists;
+	}
+
+	@Override
+	public List<ReadOnlyStock> getTStockList() {
+		return tStocks.stream().map(t -> {
+            try {
+                return t.toModelType();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }).collect(Collectors.toCollection(ArrayList::new));
+	}
 }

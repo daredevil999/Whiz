@@ -49,7 +49,7 @@ public class TrackStockCommand extends TrackCommand {
 		logger.info("-------[Executing TrackStockCommand] " + this.toString() );
 		model.addStock(toTrackStock);
 			
-		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
+		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredPStockList();
 		EventsCenter.getInstance().post(new JumpToPStockListRequestEvent(toTrackStock, lastShownList.indexOf(toTrackStock)));
 		return new CommandResult(String.format(MESSAGE_SUCCESS, toTrackStock.getPurchasedStockAsText()));
 	}

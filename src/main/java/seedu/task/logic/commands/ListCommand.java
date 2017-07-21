@@ -51,10 +51,10 @@ public class ListCommand extends Command {
 		
 		switch (listTarget) {
 		case TASK:
-			model.updateFilteredStockListToShowAll();
+			model.updateFilteredPStockListToShowAll();
 			break;
 		case BOTH:
-			model.updateFilteredStockListToShowAll();
+			model.updateFilteredPStockListToShowAll();
 			break;
 		default:
 			return new CommandResult(MESSAGE_USAGE);

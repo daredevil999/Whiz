@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <stockmanager>
-    <stocks>
+    <pStocks>
         <name>DBS GROUP HOLDINGS LTD</name>
         <code>D05</code>
         <purchased>
-            <purchaseDate>30 Jun, 2017 7:00 PM</purchaseDate>
+            <purchaseDate>22 Jul, 2017 7:00 PM</purchaseDate>
             <purchasePrice>23.0</purchasePrice>
             <purchaseLots>1000</purchaseLots>
         </purchased>
         <purchased>
-            <purchaseDate>30 Jun, 2017 7:00 PM</purchaseDate>
-            <purchasePrice>23.0</purchasePrice>
-            <purchaseLots>1000</purchaseLots>
-        </purchased>
-        <purchased>
-            <purchaseDate>5 Jul, 2017 7:55 PM</purchaseDate>
-            <purchasePrice>22.985</purchasePrice>
-            <purchaseLots>1000</purchaseLots>
-        </purchased>
-        <purchased>
-            <purchaseDate>5 Jul, 2017 7:56 PM</purchaseDate>
-            <purchasePrice>22.985</purchasePrice>
+            <purchaseDate>22 Jul, 2017 7:00 PM</purchaseDate>
+            <purchasePrice>24.0</purchasePrice>
             <purchaseLots>2500</purchaseLots>
         </purchased>
-    </stocks>
+    </pStocks>
 </stockmanager>

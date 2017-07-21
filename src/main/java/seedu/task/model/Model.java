@@ -33,11 +33,17 @@ public interface Model {
     /** Marks the given stock */
     void markStock(ReadOnlyStock target);
 
-    /** Returns the filtered stock list as an {@code UnmodifiableObservableList<ReadOnlyStock>} */
-    UnmodifiableObservableList<ReadOnlyStock> getFilteredStockList();
+    /** Returns the filtered purchased stock list as an {@code UnmodifiableObservableList<ReadOnlyStock>} */
+    UnmodifiableObservableList<ReadOnlyStock> getFilteredPStockList();
 
-    /** Updates the filter of the filtered stock list to show all stocks */
-    void updateFilteredStockListToShowAll();
+    /** Updates the filter of the filtered purchased stock list to show all stocks */
+    void updateFilteredPStockListToShowAll();
+    
+    /** Returns the filtered tracked stock list as an {@code UnmodifiableObservableList<ReadOnlyStock>} */
+    UnmodifiableObservableList<ReadOnlyStock> getFilteredTStockList();
+
+    /** Updates the filter of the filtered tracked stock list to show all stocks */
+    void updateFilteredTStockListToShowAll();
 
     /** Updates the filter of the filtered stock list to filter by the given keywords*/
     void showFoundStockList(Set<String> keywords, boolean isPowerFind);

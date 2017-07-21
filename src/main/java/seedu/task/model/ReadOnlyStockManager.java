@@ -10,9 +10,15 @@ import seedu.task.model.item.UniqueStockList;
  */
 public interface ReadOnlyStockManager {
 
-    UniqueStockList getUniqueStockList();
+    UniqueStockList getUniquePStockList();
     /**
-     * Returns an unmodifiable view of stocks list
+     * Returns an unmodifiable view of purchased stocks list
      */
-    List<ReadOnlyStock> getStockList();
+    List<ReadOnlyStock> getPStockList();
+    
+    UniqueStockList getUniqueTStockList();
+    /**
+     * Returns an unmodifiable view of tracked stocks list
+     */
+    List<ReadOnlyStock> getTStockList();
 }

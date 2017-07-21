@@ -15,7 +15,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.StockManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
-import seedu.task.commons.events.ui.JumpToPurchasedStockListRequestEvent;
+import seedu.task.commons.events.ui.JumpToPStockListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpEvent;
 import seedu.task.commons.events.ui.UpdateCalendarEvent;
 import seedu.task.commons.exceptions.CalendarUnsyncException;
@@ -116,7 +116,7 @@ public class UiManager extends ComponentManager implements Ui {
 	}
 
 	@Subscribe
-	private void handleJumpToPSListRequestEvent(JumpToPurchasedStockListRequestEvent event) {
+	private void handleJumpToPSListRequestEvent(JumpToPStockListRequestEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
 		mainWindow.getStockListPanel().scrollTo(event.targetIndex);
 //		try {

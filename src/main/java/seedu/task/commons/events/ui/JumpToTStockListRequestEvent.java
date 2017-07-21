@@ -3,16 +3,15 @@ package seedu.task.commons.events.ui;
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.item.ReadOnlyStock;
 
-//@@author A0144702N
 /**
  * Indicates a request to jump to the list of items
  */
-public class JumpToPurchasedStockListRequestEvent extends BaseEvent {
+public class JumpToTStockListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
     public final ReadOnlyStock targetStock;
 
-    public JumpToPurchasedStockListRequestEvent(ReadOnlyStock stock, int targetIndex) {
+    public JumpToTStockListRequestEvent(ReadOnlyStock stock, int targetIndex) {
         this.targetIndex = targetIndex;
         this.targetStock = stock;
     }

@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.ui.JumpToPurchasedStockListRequestEvent;
+import seedu.task.commons.events.ui.JumpToPStockListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Candlestick;
 import seedu.task.model.item.Name;
@@ -50,7 +50,7 @@ public class TrackStockCommand extends TrackCommand {
 		model.addStock(toTrackStock);
 			
 		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredStockList();
-		EventsCenter.getInstance().post(new JumpToPurchasedStockListRequestEvent(toTrackStock, lastShownList.indexOf(toTrackStock)));
+		EventsCenter.getInstance().post(new JumpToPStockListRequestEvent(toTrackStock, lastShownList.indexOf(toTrackStock)));
 		return new CommandResult(String.format(MESSAGE_SUCCESS, toTrackStock.getPurchasedStockAsText()));
 	}
 

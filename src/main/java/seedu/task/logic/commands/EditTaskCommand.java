@@ -6,7 +6,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.ui.JumpToPurchasedStockListRequestEvent;
+import seedu.task.commons.events.ui.JumpToPStockListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Description;
@@ -83,7 +83,7 @@ public class EditTaskCommand extends EditCommand  {
 
             editTask = editTask(targetTask);
             model.editStock(editTask, targetTask);
-            EventsCenter.getInstance().post(new JumpToPurchasedStockListRequestEvent(editTask, getTargetIndex()));
+            EventsCenter.getInstance().post(new JumpToPStockListRequestEvent(editTask, getTargetIndex()));
             
             logger.info("-------[Executed EditTaskCommand]" + this.toString());
             

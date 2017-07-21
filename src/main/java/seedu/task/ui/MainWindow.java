@@ -34,7 +34,7 @@ public class MainWindow extends UiPart {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private StockListPanel stockListPanel;
+    private PStockListPanel stockListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -49,7 +49,7 @@ public class MainWindow extends UiPart {
     private String stockManagerName;
 
     @FXML
-    private AnchorPane eventListPanelPlaceholder;
+    private AnchorPane tStockListPanelPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -58,7 +58,7 @@ public class MainWindow extends UiPart {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane stockListPanelPlaceholder;
+    private AnchorPane pStockListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -158,7 +158,7 @@ public class MainWindow extends UiPart {
     void fillInnerParts() {
         //AquaFx.style();
 //    	calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder(), logic.getAllEvents(), logic.getAllTasks());
-        stockListPanel = StockListPanel.load(primaryStage, getStockListPlaceholder(), logic.getFilteredTaskList());
+        stockListPanel = PStockListPanel.load(primaryStage, getPStockListPlaceholder(), logic.getFilteredPStockList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getStockManagerFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -188,12 +188,12 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
 
-    public AnchorPane getStockListPlaceholder() {
-        return stockListPanelPlaceholder;
+    public AnchorPane getPStockListPlaceholder() {
+        return pStockListPanelPlaceholder;
     }
     
-    public AnchorPane getEventListPlaceholder() {
-        return eventListPanelPlaceholder;
+    public AnchorPane getTStockListPlaceholder() {
+        return tStockListPanelPlaceholder;
     }
 
     public void hide() {
@@ -247,7 +247,7 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public StockListPanel getStockListPanel() {
+    public PStockListPanel getStockListPanel() {
         return this.stockListPanel;
     }
     

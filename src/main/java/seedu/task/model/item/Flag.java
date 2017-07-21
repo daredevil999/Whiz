@@ -9,11 +9,9 @@ public class Flag {
     
     public static final String deadlineFlag = "/by";
     public static final String purchasedStockFlag = "/ps";
-    public static final String trackedStockFlag = "/ps";
-    public static final String eventFlag = "/e ";
+    public static final String trackedStockFlag = "/ts";
     public static final String stockPresenceFlag = "/s";
     public static final String eventPresenceFlag = "/e";
-    public static final String descriptionFlag = "/desc";
     public static final String priceFlag = "/p";
     public static final String lotsFlag = "/l";
     public static final String dateFlag = "/d";

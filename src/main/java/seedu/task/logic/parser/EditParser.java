@@ -23,11 +23,8 @@ public class EditParser implements Parser {
     private static final String INDEX_VALIDATION_REGEX = "[0-9]+";
     
     private Optional <String> taskIndex;
-    private Optional <String> eventIndex;
     private Optional <String> name;
     private Optional <String> description;
-    private Optional <String> startDuration;
-    private Optional <String> endDuration;
     private Optional <String> deadline;
     
     public EditParser() {}
@@ -46,8 +43,8 @@ public class EditParser implements Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(descriptionPrefix, deadlinePrefix, 
-                durationStartPrefix, durationEndPrefix, purchasedStockPrefix, eventPrefix, namePrefix);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(deadlinePrefix, 
+                durationStartPrefix, durationEndPrefix, purchasedStockPrefix, namePrefix);
        
         argsTokenizer.tokenize(args.trim());
         
@@ -72,11 +69,7 @@ public class EditParser implements Parser {
      */
     private void getTokenizerValue(ArgumentTokenizer argsTokenizer) throws EmptyValueException {
         taskIndex = argsTokenizer.getValue(purchasedStockPrefix);
-        eventIndex = argsTokenizer.getValue(eventPrefix);
         name = argsTokenizer.getValue(namePrefix);
-        description = argsTokenizer.getValue(descriptionPrefix);
-        startDuration = argsTokenizer.getValue(durationStartPrefix);
-        endDuration = argsTokenizer.getValue(durationEndPrefix);
         deadline = argsTokenizer.getValue(deadlinePrefix);
     }
     

@@ -45,13 +45,13 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyStock> getFilteredTaskList() {
+    public ObservableList<ReadOnlyStock> getFilteredPStockList() {
     	model.updateFilteredStockListToShowAll();
         return model.getFilteredStockList();
     }
 	
     @Override
-	public List<ReadOnlyStock> getAllTasks() {
+	public List<ReadOnlyStock> getAllPStocks() {
 		return model.getStockManager().getStockList();
 	}
     

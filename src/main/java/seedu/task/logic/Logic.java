@@ -17,10 +17,10 @@ public interface Logic {
      */
     CommandResult execute(String commandText);
 
-    /** Returns the filtered list of tasks */
-    ObservableList<ReadOnlyStock> getFilteredTaskList();
+    /** Returns the filtered list of purchased stocks */
+    ObservableList<ReadOnlyStock> getFilteredPStockList();
     
-    /** Convenient method returns all the tasks*/
-    List<ReadOnlyStock> getAllTasks();
+    /** Convenient method returns all the purchased stocks*/
+    List<ReadOnlyStock> getAllPStocks();
     
 }

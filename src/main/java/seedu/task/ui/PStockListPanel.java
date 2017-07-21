@@ -13,22 +13,22 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.events.ui.StockPanelSelectionChangedEvent;
+import seedu.task.commons.events.ui.PStockPanelSelectionChangedEvent;
 import seedu.task.model.item.ReadOnlyStock;
 
 /**
- * Panel containing the list of tasks.
+ * Panel containing the list of purchased stocks.
  */
-public class StockListPanel extends UiPart {
-    private final Logger logger = LogsCenter.getLogger(StockListPanel.class);
-    private static final String FXML = "StockListPanel.fxml";
+public class PStockListPanel extends UiPart {
+    private final Logger logger = LogsCenter.getLogger(PStockListPanel.class);
+    private static final String FXML = "PStockListPanel.fxml";
     private VBox panel;
     private AnchorPane placeHolderPane;
 
     @FXML
     private ListView<ReadOnlyStock> stockListView;
 
-    public StockListPanel() {
+    public PStockListPanel() {
         super();
     }
 
@@ -47,21 +47,21 @@ public class StockListPanel extends UiPart {
         this.placeHolderPane = pane;
     }
 
-    public static StockListPanel load(Stage primaryStage, AnchorPane stockListPlaceHolder,
-                                       ObservableList<ReadOnlyStock> stockList) {
-        StockListPanel stockListPanel =
-                UiPartLoader.loadUiPart(primaryStage, stockListPlaceHolder, new StockListPanel());
-        stockListPanel.configure(stockList);
-        return stockListPanel;
+    public static PStockListPanel load(Stage primaryStage, AnchorPane pStockListPlaceHolder,
+                                       ObservableList<ReadOnlyStock> pStockList) {
+        PStockListPanel pStockListPanel =
+                UiPartLoader.loadUiPart(primaryStage, pStockListPlaceHolder, new PStockListPanel());
+        pStockListPanel.configure(pStockList);
+        return pStockListPanel;
     }
 
-    private void configure(ObservableList<ReadOnlyStock> stockList) {
-        setConnections(stockList);
+    private void configure(ObservableList<ReadOnlyStock> pStockList) {
+        setConnections(pStockList);
         addToPlaceholder();
     }
 
-    private void setConnections(ObservableList<ReadOnlyStock> stockList) {
-        stockListView.setItems(stockList);
+    private void setConnections(ObservableList<ReadOnlyStock> pStockList) {
+        stockListView.setItems(pStockList);
         stockListView.setCellFactory(listView -> new StockListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -75,7 +75,7 @@ public class StockListPanel extends UiPart {
         stockListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in stock list panel changed to : '" + newValue + "'");
-                raise(new StockPanelSelectionChangedEvent(newValue));
+                raise(new PStockPanelSelectionChangedEvent(newValue));
             }
         });
     }

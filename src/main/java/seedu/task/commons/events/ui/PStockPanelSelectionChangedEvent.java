@@ -4,14 +4,14 @@ import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.item.ReadOnlyStock;
 
 /**
- * Represents a selection change in the Task List Panel
+ * Represents a selection change in the Purchased Stock List Panel
  */
-public class StockPanelSelectionChangedEvent extends BaseEvent {
+public class PStockPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final ReadOnlyStock newSelection;
 
-    public StockPanelSelectionChangedEvent(ReadOnlyStock newSelection){
+    public PStockPanelSelectionChangedEvent(ReadOnlyStock newSelection){
         this.newSelection = newSelection;
     }
 

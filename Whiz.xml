@@ -4,14 +4,15 @@
         <name>DBS GROUP HOLDINGS LTD</name>
         <code>D05</code>
         <purchased>
-            <purchaseDate>22 Jul, 2017 7:00 PM</purchaseDate>
+            <purchaseDate>26 Jul, 2017 7:00 PM</purchaseDate>
             <purchasePrice>23.0</purchasePrice>
             <purchaseLots>1000</purchaseLots>
         </purchased>
         <purchased>
-            <purchaseDate>22 Jul, 2017 7:00 PM</purchaseDate>
-            <purchasePrice>24.0</purchasePrice>
-            <purchaseLots>2500</purchaseLots>
+            <purchaseDate>26 Jul, 2017 7:00 PM</purchaseDate>
+            <purchasePrice>23.0</purchasePrice>
+            <purchaseLots>1000</purchaseLots>
         </purchased>
+        <candlesticks/>
     </pStocks>
 </stockmanager>

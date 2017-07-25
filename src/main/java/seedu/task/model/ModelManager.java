@@ -31,7 +31,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final StockManager stockManager;
-    private final FilteredList<Stock> filteredStocks;
+    private final FilteredList<Stock> filteredPStocks;
+    private final FilteredList<Stock> filteredTStocks;
 
     /**
      * Initializes a ModelManager with the given StockManager
@@ -45,7 +46,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with stock manager: " + src + " and user prefs " + userPrefs);
 
         stockManager = new StockManager(src);
-        filteredStocks = new FilteredList<>(stockManager.getPStocks());
+        filteredPStocks = new FilteredList<>(stockManager.getPStocks());
+        filteredTStocks = new FilteredList<>(stockManager.getTStocks());
     }
 
     public ModelManager() {
@@ -54,7 +56,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyStockManager initialData, UserPrefs userPrefs) {
         stockManager = new StockManager(initialData);
-        filteredStocks = new FilteredList<>(stockManager.getPStocks());
+        filteredPStocks = new FilteredList<>(stockManager.getPStocks());
+        filteredTStocks = new FilteredList<>(stockManager.getTStocks());
     }
 
 	@Override
@@ -86,12 +89,12 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void clearStocks() {
         
         updateFilteredStockListToShowWithStatus(ALL_STATUS);
-        while(!filteredStocks.isEmpty()){
-            ReadOnlyStock task = filteredStocks.get(0);
+        while(!filteredPStocks.isEmpty()){
+            ReadOnlyStock task = filteredPStocks.get(0);
             try {
                 stockManager.removeStock(task);
-            } catch (StockNotFoundException tnfe) {
-                assert false : "The target task cannot be missing";
+            } catch (StockNotFoundException snfe) {
+                assert false : "The target stock cannot be missing";
             }
         }
         updateFilteredPStockListToShowAll();
@@ -123,24 +126,36 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author 
         
    
-    //=========== Filtered Task List Accessors ===============================================================
+    //=========== Filtered List Accessors ===============================================================
 
     //@@author A0144702N
     @Override
     public UnmodifiableObservableList<ReadOnlyStock> getFilteredPStockList() {
-    	SortedList<Stock> sortedTasks = new SortedList<>(filteredStocks);
-    	return new UnmodifiableObservableList<>(sortedTasks);
+    	SortedList<Stock> sortedPStocks = new SortedList<>(filteredPStocks);
+    	return new UnmodifiableObservableList<>(sortedPStocks);
     }
 
     @Override
     public void updateFilteredPStockListToShowAll() {
-        filteredStocks.setPredicate(null);
+        filteredPStocks.setPredicate(null);
     }
 
     @Override
     public void showFoundStockList(Set<String> keywords, boolean isPowerSearch){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, isPowerSearch)));
     }
+    
+	@Override
+	public UnmodifiableObservableList<ReadOnlyStock> getFilteredTStockList() {
+    	SortedList<Stock> sortedTStocks = new SortedList<>(filteredTStocks);
+    	return new UnmodifiableObservableList<>(sortedTStocks);
+	}
+
+	@Override
+	public void updateFilteredTStockListToShowAll() {
+		filteredTStocks.setPredicate(null);
+		
+	}
     
     @Override
 	public void updateFilteredStockListToShowWithStatus(Status status) {
@@ -152,7 +167,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
     
     private void updateFilteredTaskList(Expression expression) {
-        filteredStocks.setPredicate(expression::satisfies);
+        filteredPStocks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering ==================================================
@@ -279,16 +294,4 @@ public class ModelManager extends ComponentManager implements Model {
 			targetStatus = true;
 		}    	
     }
-
-	@Override
-	public UnmodifiableObservableList<ReadOnlyStock> getFilteredTStockList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateFilteredTStockListToShowAll() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -1,6 +1,8 @@
 package seedu.task.model.item;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -13,8 +15,12 @@ public interface ReadOnlyStock {
 
     Name getStockName();
     StockCode getStockCode();
+    String getLatestDateString();
+    
     Optional<List<StockPurchaseInstance>> getStockPurchaseInstanceList();
-    Optional<List<Candlestick>> getCandlestickList();
+    Optional<Map<String,Candlestick>> getCandlestickMap();
+    Optional<Candlestick> getLatestCandlestick();
+    Optional<Candlestick> getCandlestickWithDateString (String dateString);
     
     //Optional<Description> getDescription();
     //Boolean getTaskStatus();

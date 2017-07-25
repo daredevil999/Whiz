@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,7 +22,8 @@ public class Stock implements ReadOnlyStock {
 	
 	private Name name;
     private StockCode code;
-    private List<Candlestick> candlesticks;
+    private String latestDateString;
+    private Map<String,Candlestick> candlesticks;
     private List<StockPurchaseInstance> purchasedStocksList;
     
     /*
@@ -34,15 +36,18 @@ public class Stock implements ReadOnlyStock {
         this.code = code;
         this.purchasedStocksList = null;
         this.candlesticks = null;
+        this.latestDateString = null;
     }
     
     public Stock (Name name, StockCode code, Candlestick input) {
     	assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.code = code;
-        this.candlesticks = new ArrayList<>();
-        this.candlesticks.add(input);
+        this.candlesticks = new HashMap<>();
+        String dateInput = input.getDate().toString();
+        this.candlesticks.put(dateInput, input);
         this.purchasedStocksList = null;
+        this.latestDateString = dateInput;
     }
     
     public Stock (Name name, StockCode code, StockPurchaseInstance input) {
@@ -52,14 +57,16 @@ public class Stock implements ReadOnlyStock {
         this.purchasedStocksList = new ArrayList<>();
         this.purchasedStocksList.add(input);
         this.candlesticks = null;
+        this.latestDateString = null;
     } 
     
-    public Stock (Name name, StockCode code, List<StockPurchaseInstance> purchaseInstanceListInput, List<Candlestick> candlestickListInput) {
+    public Stock (Name name, StockCode code, String latestDateInput, List<StockPurchaseInstance> purchaseInstanceListInput, Map<String,Candlestick> candlestickMapInput) {
     	assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.code = code;
         this.purchasedStocksList = purchaseInstanceListInput;
-        this.candlesticks = candlestickListInput;
+        this.candlesticks = candlestickMapInput;
+        this.latestDateString = latestDateInput;
     }
 
     /**
@@ -68,9 +75,10 @@ public class Stock implements ReadOnlyStock {
      */
     public Stock(ReadOnlyStock source) {
             this(source.getStockName(), 
-            		source.getStockCode(), 
+            		source.getStockCode(),
+            		source.getLatestDateString(),
             		source.getStockPurchaseInstanceList().orElse(null),
-            		source.getCandlestickList().orElse(null));
+            		source.getCandlestickMap().orElse(null));
 //            		, source.getDescription().orElse(null), source.getPurchaseDate().orElse(null) , source.getTaskStatus());
     }
     
@@ -95,6 +103,10 @@ public class Stock implements ReadOnlyStock {
     	return totalLots;
     }
     
+    public String getLatestDateString() {
+    	return this.latestDateString;
+    }
+    
     public Price getAverageStockPurchasePrice () {
     	int averagePrice = 0;
     	int totalLots = this.getTotalStockPurchaseLots();
@@ -116,8 +128,23 @@ public class Stock implements ReadOnlyStock {
 	}
 
 	@Override
-	public Optional<List<Candlestick>> getCandlestickList() {
+	public Optional<Map<String,Candlestick>> getCandlestickMap() {
 		return Optional.ofNullable(this.candlesticks);
+	}
+
+	@Override
+	public Optional<Candlestick> getLatestCandlestick() {
+		Candlestick stick = null;
+		if (this.latestDateString != null) {
+			 stick = this.candlesticks.get(latestDateString);
+		}
+		return Optional.ofNullable(stick);
+	}
+
+	@Override
+	public Optional<Candlestick> getCandlestickWithDateString(String dateString) {
+		Candlestick stick =  candlesticks.get(dateString);
+		return Optional.ofNullable(stick);
 	}
 
 	@Override

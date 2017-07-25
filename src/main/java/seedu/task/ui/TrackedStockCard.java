@@ -1,0 +1,117 @@
+package seedu.task.ui;
+
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import seedu.task.model.item.ReadOnlyStock;
+
+
+public class TrackedStockCard extends UiPart{
+
+    private static final String FXML = "TStockListCard.fxml";
+
+    @FXML
+    private HBox cardPane;
+    @FXML
+    private Label name;
+    @FXML
+    private Label code;
+    @FXML
+    private Label index;
+    @FXML
+    private Label absoluteChange;
+    @FXML
+    private Label percentageChange;
+    @FXML
+    private Label high;
+    @FXML
+    private Label low;
+    @FXML
+    private Label open;
+    @FXML
+    private Label close;
+
+    private ReadOnlyStock stock;
+    private int displayedIndex;
+
+    public TrackedStockCard(){
+
+    }
+
+    public static TrackedStockCard load(ReadOnlyStock stock, int displayedIndex){
+        TrackedStockCard card = new TrackedStockCard();
+        card.stock = stock;
+        card.displayedIndex = displayedIndex;
+        return UiPartLoader.loadUiPart(card);
+    }
+
+    //@@author-A0127570H
+    @FXML
+    public void initialize() {
+        name.setText(stock.getStockName().fullName + "  ");
+        code.setText("[" + stock.getStockCode().code + "]");
+        index.setText(displayedIndex + ". "); 
+        //setStyleClass();
+    }
+    
+//	private void initialiseDeadline() {
+//        deadline.setText(task.getDeadlineToString().trim());
+//        if (task.getPurchaseDate().isPresent()) {
+//            deadline.setManaged(true);
+//        } else {
+//            deadline.setManaged(false);
+//        }
+//    }
+//
+//    private void initialiseDescription() {
+//        description.setText(task.getDescriptionToString().trim());
+//        if (task.getDescription().isPresent()) {
+//            description.setManaged(true);
+//        } else {
+//            description.setManaged(false);
+//        }
+//    }
+
+    //Adds the lavender colour to the background if the task status is completed
+//    private void setStyleClass() {
+//    	//if status-complete
+//        if (task.getTaskStatus()) {
+//            cardPane.getStyleClass().add("status-complete");
+//        } else if (isOverdue(task)) {
+//        	cardPane.getStyleClass().add("status-overdue");
+//        }else if(isDueToday(task)) {
+//        	cardPane.getStyleClass().add("status-today");
+//        } 
+//
+//    }
+    //@@author
+    
+    //@@author A0144702N
+//    private boolean isOverdue(ReadOnlyStock task) {
+//		return task.getPurchaseDate().isPresent() 
+//				&& task.getPurchaseDate().get().getTime().isBefore(LocalDateTime.now());
+//	}
+//
+//	private boolean isDueToday(ReadOnlyStock task) {
+//		if(task.getTaskStatus() || !task.getPurchaseDate().isPresent()) {
+//			return false;
+//		}
+//		LocalDateTime taskDeadline = task.getPurchaseDate().get().getTime();
+//		return taskDeadline.getDayOfYear() == LocalDateTime.now().getDayOfYear();
+//	}
+
+	public HBox getLayout() {
+        return cardPane;
+    }
+
+    @Override
+    public void setNode(Node node) {
+        cardPane = (HBox)node;
+    }
+
+    @Override
+    public String getFxmlPath() {
+        return FXML;
+    }
+}

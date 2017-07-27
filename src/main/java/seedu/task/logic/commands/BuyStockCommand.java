@@ -52,7 +52,7 @@ public class BuyStockCommand extends BuyCommand {
 	public CommandResult execute() {
 		assert model != null;
 		logger.info("-------[Executing AddStockCommand] " + this.toString() );
-		model.addStock(toAddStock);
+		model.addPStock(toAddStock);
 			
 		UnmodifiableObservableList<ReadOnlyStock> lastShownList = model.getFilteredPStockList();
 		EventsCenter.getInstance().post(new JumpToPStockListRequestEvent(toAddStock, lastShownList.indexOf(toAddStock)));

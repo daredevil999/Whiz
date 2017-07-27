@@ -76,10 +76,18 @@ public class StockManager implements ReadOnlyStockManager {
 //// stock-level operations
 
     /**
-     * Adds a stock to the stock manager.
+     * Adds a purchased stock to the stock manager.
      *
      */
     public void addPStock(Stock pStock) {
+        pStocks.add(pStock);
+    }
+    
+    /**
+     * Adds a tracked stock to the stock manager.
+     *
+     */
+    public void addTStock(Stock pStock) {
         pStocks.add(pStock);
     }
 

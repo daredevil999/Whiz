@@ -111,11 +111,19 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0127570H
 
     @Override
-    public synchronized void addStock(Stock stock) {
+    public synchronized void addPStock(Stock stock) {
         stockManager.addPStock(stock);
         updateFilteredPStockListToShowAll();
         indicateStockManagerChanged();
     }
+
+	@Override
+	public synchronized void addTStock(Stock stock) {
+		stockManager.addTStock(stock);
+        updateFilteredTStockListToShowAll();
+        indicateStockManagerChanged();
+		
+	}
    
     @Override
     public synchronized void editStock(Stock editStock, ReadOnlyStock targetStock) {

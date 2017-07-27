@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import seedu.task.model.item.Candlestick;
+import seedu.task.model.item.PriceChange;
 import seedu.task.model.item.ReadOnlyStock;
 
 
@@ -20,10 +22,6 @@ public class TrackedStockCard extends UiPart{
     @FXML
     private Label index;
     @FXML
-    private Label absoluteChange;
-    @FXML
-    private Label percentageChange;
-    @FXML
     private Label high;
     @FXML
     private Label low;
@@ -31,6 +29,8 @@ public class TrackedStockCard extends UiPart{
     private Label open;
     @FXML
     private Label close;
+    @FXML
+    private Label absoluteChange;
 
     private ReadOnlyStock stock;
     private int displayedIndex;
@@ -52,8 +52,38 @@ public class TrackedStockCard extends UiPart{
         name.setText(stock.getStockName().fullName + "  ");
         code.setText("[" + stock.getStockCode().code + "]");
         index.setText(displayedIndex + ". "); 
-        //setStyleClass();
+        intialiseLatestCandlestick();
     }
+    
+    private void intialiseLatestCandlestick() {
+    	if (stock.getLatestCandlestick().isPresent()) {
+    		Candlestick stick = stock.getLatestCandlestick().get();
+    		
+    		high.setText("High: " + stick.getHighPrice());
+    		low.setText("Low: " + stick.getLowPrice());
+    		open.setText("Open: " + stick.getOpenPrice());
+    		close.setText("Close: " + stick.getClosePrice());
+    		absoluteChange.setText("Change: " + stick.getPriceChange());
+    		setPriceChangeStyleClass(stick.getPriceChange());
+    		
+    		high.setManaged(true);    		
+    		low.setManaged(true);
+    		open.setManaged(true);
+    		close.setManaged(true);
+    		absoluteChange.setManaged(true);
+	    } else {
+	    	high.setText("");
+	    	high.setManaged(false);
+	    	low.setText("");
+	    	low.setManaged(false);
+	    	open.setText("");
+    		open.setManaged(false);
+    		close.setText("");
+    		close.setManaged(false);
+    		absoluteChange.setText("");
+    		absoluteChange.setManaged(false);    		
+	    }	
+	}
     
 //	private void initialiseDeadline() {
 //        deadline.setText(task.getDeadlineToString().trim());
@@ -73,18 +103,13 @@ public class TrackedStockCard extends UiPart{
 //        }
 //    }
 
-    //Adds the lavender colour to the background if the task status is completed
-//    private void setStyleClass() {
-//    	//if status-complete
-//        if (task.getTaskStatus()) {
-//            cardPane.getStyleClass().add("status-complete");
-//        } else if (isOverdue(task)) {
-//        	cardPane.getStyleClass().add("status-overdue");
-//        }else if(isDueToday(task)) {
-//        	cardPane.getStyleClass().add("status-today");
-//        } 
-//
-//    }
+    private void setPriceChangeStyleClass(PriceChange change) {
+        if (change.getSign()) {
+        	absoluteChange.getStyleClass().add("cell_normal_green_label");
+        } else {
+        	absoluteChange.getStyleClass().add("cell_normal_red_label");
+        }
+    }
     //@@author
     
     //@@author A0144702N

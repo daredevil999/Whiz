@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import seedu.task.storage.XmlAdaptedCandlestick;
+
 /**
  * A read-only immutable interface for a task in the task book.
  * Implementations should guarantee: 
@@ -56,7 +58,7 @@ public interface ReadOnlyStock {
     }
     
     /**
-     * Formats the stock as text, showing all stock details.
+     * Formats the purchased stock as text, showing all stock details.
      */
     default String getPurchasedStockAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -69,6 +71,40 @@ public interface ReadOnlyStock {
 //                .append(getFormalDeadlineToString())
 //                .append(getTaskStatusToString())
         return builder.toString();
+    }
+    
+    /**
+     * Formats the tracked stock as text, showing latest stock details.
+     */
+    default String getTrackedStockAsText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(" Name: ")
+                .append(getStockName())
+                .append(" | ")
+                .append(getStockCode())
+                .append(getAllCandlestickToString());
+        return builder.toString();
+    }
+    
+    default String getAllCandlestickToString() {
+    	final StringBuilder builder = new StringBuilder();
+    	if (getCandlestickMap().isPresent()) {
+    		for (Map.Entry<String, Candlestick> entry : getCandlestickMap().get().entrySet()) {
+            	Candlestick stick = entry.getValue();
+            	builder.append(System.getProperty("line.separator"));
+            	builder.append(stick.getAsText());
+            } 
+        }
+    	return builder.toString();
+    }
+    
+    default String getLatestCandlestickToString() {
+    	final StringBuilder builder = new StringBuilder();
+    	if (getCandlestickMap().isPresent() && getLatestCandlestick().isPresent()) {
+    		Candlestick stick = getLatestCandlestick().get();
+    		builder.append(stick.getAsText());
+        }
+    	return builder.toString();
     }
     
     default String getNewStockPurchaseInstanceToString() {

@@ -6,6 +6,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.item.Candlestick;
 import seedu.task.model.item.Date;
 import seedu.task.model.item.Price;
+import seedu.task.model.item.PriceChange;
 import seedu.task.model.item.StockPurchaseInstance;
 
 /**
@@ -27,6 +28,9 @@ public class XmlAdaptedCandlestick {
 	
 	@XmlElement(required = true)
 	private String date;
+	
+	@XmlElement(required = true)
+	private String change;
 
     /**
      * No-arg constructor for JAXB use.
@@ -39,6 +43,7 @@ public class XmlAdaptedCandlestick {
     	low = source.getLowPrice().toString();
     	high = source.getHighPrice().toString();
     	date = source.getDate().toString();
+    	change = source.getPriceChange().toString();
     }
 
     /**
@@ -53,8 +58,9 @@ public class XmlAdaptedCandlestick {
         final Price close = new Price(this.close);
         final Price low = new Price(this.low);
         final Price high = new Price(this.high);
+        final PriceChange change = new PriceChange(this.change);
         
-        return new Candlestick(date,open,close,low,high);
+        return new Candlestick(date,open,close,low,high,change);
     }
 
 }

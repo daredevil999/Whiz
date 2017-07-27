@@ -40,7 +40,7 @@ public class Stock implements ReadOnlyStock {
     }
     
     public Stock (Name name, StockCode code, Candlestick input) {
-    	assert !CollectionUtil.isAnyNull(name);
+    	assert !CollectionUtil.isAnyNull(name, input);
         this.name = name;
         this.code = code;
         this.candlesticks = new HashMap<>();
@@ -51,7 +51,7 @@ public class Stock implements ReadOnlyStock {
     }
     
     public Stock (Name name, StockCode code, StockPurchaseInstance input) {
-    	assert !CollectionUtil.isAnyNull(name);
+    	assert !CollectionUtil.isAnyNull(name, input);
         this.name = name;
         this.code = code;
         this.purchasedStocksList = new ArrayList<>();

@@ -8,14 +8,16 @@ public class Candlestick {
     private Price close;
     private Price low;
     private Price high;
+    private PriceChange change;
     //private BasicStickType type;
 
-    public Candlestick(Date dateInput, Price open, Price close, Price low, Price high) throws IllegalValueException {
+    public Candlestick(Date dateInput, Price open, Price close, Price low, Price high, PriceChange change) throws IllegalValueException {
     	this.date = dateInput;
     	this.open = open;
         this.close = close;
         this.low = low;
         this.high = high;
+        this.change = change;
     }
     
     public Date getDate () {
@@ -38,6 +40,10 @@ public class Candlestick {
 		return high;
 	}
 	
+	public PriceChange getPriceChange() {
+		return change;
+	}
+	
 //	public BasicStickType getCandleStickType() {
 //		return type;
 //	}
@@ -57,7 +63,9 @@ public class Candlestick {
                 .append(" High: ")
                 .append(getHighPrice())
                 .append(" Low: ")
-                .append(getLowPrice());
+                .append(getLowPrice())
+                .append(" Change: ")
+                .append(getPriceChange());
         return builder.toString();
     }
 

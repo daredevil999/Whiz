@@ -24,8 +24,11 @@ public interface Model {
     /** Clears the list of stocks. */
     void clearStocks();
 
-    /** Adds the given stock */
-    void addStock(Stock stock);
+    /** Adds the given purchased stock */
+    void addPStock(Stock stock);
+    
+    /** Adds the given tracked stock */
+    void addTStock(Stock stock);
     
     /** Edits the given stock */
     void editStock(Stock editStock, ReadOnlyStock targetTask);

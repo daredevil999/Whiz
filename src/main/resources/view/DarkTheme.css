@@ -49,6 +49,21 @@
   	 -fx-background-size: 15px;
 }
 
+.cell_normal_green_label {
+    -fx-font-size: 14px !important;
+    -fx-text-fill: #ecf0f1;
+}
+
+.cell_normal_red_label {
+    -fx-font-size: 14px !important;
+    -fx-text-fill: #1abc9c;
+}
+
+.cell_normal_black_label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #010504;
+}
+
 .cell_small_label {
     -fx-font-size: 10px;
     -fx-text-fill: #1abc9c;

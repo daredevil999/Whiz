@@ -16,6 +16,7 @@ public class PriceChange {
 	    public PriceChange(String input) throws IllegalValueException {
 	        input = input.trim();
 	        String signInput = String.valueOf(input.charAt(0));
+	        System.out.println(signInput);
 	        String priceInput = input.substring(1);
 	        
 	    	if (!isValidPriceChangeSign(signInput)) {
@@ -29,15 +30,16 @@ public class PriceChange {
 	     * Returns true if a given string is a valid task name.
 	     */
 	    public static boolean isValidPriceChangeSign(String test) {
-	    	return (test == "+" || test == "-");
+	    	return (test.equals("+") || test.equals("-"));
 	    }
 	    
 	    public Price getPriceChange() { 
 	    	return this.change;
 	    }
 	    
-	    public boolean getSign() {
-	    	return sign == "+";
+	    //returns true if positive
+	    public boolean isSignPositive() {
+	    	return sign.equals("+");
 	    }
 
 	    @Override

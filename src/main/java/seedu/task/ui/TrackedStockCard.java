@@ -66,23 +66,27 @@ public class TrackedStockCard extends UiPart{
     		absoluteChange.setText("Change: " + stick.getPriceChange());
     		setPriceChangeStyleClass(stick.getPriceChange());
     		
-    		high.setManaged(true);    		
-    		low.setManaged(true);
-    		open.setManaged(true);
-    		close.setManaged(true);
-    		absoluteChange.setManaged(true);
+    		setCandlestickManaged(true);
 	    } else {
-	    	high.setText("");
-	    	high.setManaged(false);
-	    	low.setText("");
-	    	low.setManaged(false);
-	    	open.setText("");
-    		open.setManaged(false);
-    		close.setText("");
-    		close.setManaged(false);
-    		absoluteChange.setText("");
-    		absoluteChange.setManaged(false);    		
+	    	setCandlestickEmpty();
+    		setCandlestickManaged(false);
 	    }	
+	}
+
+	private void setCandlestickEmpty() {
+		high.setText("");
+		low.setText("");
+		open.setText("");
+		close.setText("");
+		absoluteChange.setText("");
+	}
+
+	private void setCandlestickManaged(boolean value) {
+		high.setManaged(value);    		
+		low.setManaged(value);
+		open.setManaged(value);
+		close.setManaged(value);
+		absoluteChange.setManaged(value);
 	}
     
 //	private void initialiseDeadline() {
@@ -104,7 +108,7 @@ public class TrackedStockCard extends UiPart{
 //    }
 
     private void setPriceChangeStyleClass(PriceChange change) {
-        if (change.getSign()) {
+        if (change.isSignPositive()) {
         	absoluteChange.getStyleClass().add("cell_normal_green_label");
         } else {
         	absoluteChange.getStyleClass().add("cell_normal_red_label");
